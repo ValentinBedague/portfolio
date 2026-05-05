@@ -14,13 +14,10 @@ export default function Preloader({ onDone }) {
   const topRef     = useRef(null)
   const botRef     = useRef(null)
   const linesRef   = useRef([])
-  const counterRef = useRef(null)
   const tagRef     = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-
-    const counter = { val: 0 }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -29,32 +26,15 @@ export default function Preloader({ onDone }) {
         },
       })
 
-      /* ── 1. Tag + counter fade in ───────────────────────── */
+      /* ── 1. Tag fade in ─────────────────────────────────── */
       tl.fromTo(
-        [tagRef.current, counterRef.current],
+        tagRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.5, ease: 'power2.out' },
         0
       )
 
-      /* ── 2. Counter counts 0 → 100 (runs throughout reveal) */
-      tl.to(
-        counter,
-        {
-          val: 100,
-          duration: 2.2,
-          ease: 'power1.inOut',
-          onUpdate() {
-            if (counterRef.current) {
-              counterRef.current.textContent =
-                String(Math.round(counter.val)).padStart(3, '0')
-            }
-          },
-        },
-        0
-      )
-
-      /* ── 3. Lines enter from bottom (masked) ────────────── */
+      /* ── 2. Lines enter from bottom (masked) ────────────── */
       tl.from(
         linesRef.current,
         {
@@ -78,7 +58,7 @@ export default function Preloader({ onDone }) {
       })
 
       tl.to(
-        [tagRef.current, counterRef.current],
+        tagRef.current,
         { opacity: 0, duration: 0.25, ease: 'power2.in' },
         '<'
       )
@@ -91,6 +71,7 @@ export default function Preloader({ onDone }) {
           duration: 1.0,
           ease: 'power4.inOut',
           onStart() {
+            window.scrollTo(0, 0)
             document.body.style.overflow = ''
             onDone()
           },
@@ -136,7 +117,6 @@ export default function Preloader({ onDone }) {
         <span ref={tagRef} className="preloader__tag">
           Web Designer &amp; Developer
         </span>
-        <span ref={counterRef} className="preloader__counter">000</span>
       </div>
 
       {/* Center seam line — visible just before split */}

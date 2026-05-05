@@ -1,8 +1,10 @@
 import { useLanguage } from '../../i18n/LanguageContext'
+import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
 import './Hero.css'
 
 export default function Hero() {
   const { t } = useLanguage()
+  const { openDrawer } = useContactDrawer()
 
   return (
     <section className="hero">
@@ -43,7 +45,7 @@ export default function Hero() {
             >
               {t('hero_cta_work')}
             </a>
-            <a href="/about" className="btn-ghost">{t('hero_cta_contact')}</a>
+            <button onClick={openDrawer} className="btn-ghost">{t('hero_cta_contact')}</button>
           </div>
         </div>
 

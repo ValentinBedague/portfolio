@@ -77,9 +77,31 @@ export const translations = {
     pp_not_found:      'Project not found.',
     pp_back_home:      '← Back to home',
 
+    // — Scratch section
+    scratch_eyebrow:      '★ YOU WON ★',
+    scratch_title_1:      'The winning ticket for an',
+    scratch_title_2:      'unforgettable client experience',
+    scratch_sub:          'Every project is built to leave a lasting impression, rank in search engines, and turn visitors into loyal clients.',
+    scratch_p1_title:     'Iconic Design',
+    scratch_p1_desc:      'A visual identity that stands out and stays in people\'s minds',
+    scratch_p2_title:     'Max Performance',
+    scratch_p2_desc:      'Core Web Vitals in the green, lightning-fast load times',
+    scratch_p3_title:     'Guaranteed ROI',
+    scratch_p3_desc:      'Every element designed to convert visitors into customers',
+    scratch_cta:          'Claim my project →',
+    scratch_note:         'Reply guaranteed within 24h',
+    scratch_overlay_1:    'YOUR WINNING',
+    scratch_overlay_2:    'TICKET',
+    scratch_instruction:  '← Scratch to reveal →',
+
     // — Footer
-    footer_about:      'About',
-    footer_role:       'Web Designer & Full Stack Developer',
+    footer_about:         'About',
+    footer_role:          'Web Designer & Full Stack Developer',
+    footer_cta_line1:     "LET'S",
+    footer_cta_line2:     'CREATE',
+    footer_cta_line3:     'SOMETHING',
+    footer_available:     'Available for new projects',
+    footer_cta_btn:       'Get in touch',
 
     // — Meta (SEO)
     meta_title:        'VB — Web Developer & Designer',
@@ -164,9 +186,31 @@ export const translations = {
     pp_not_found:      'Projet introuvable.',
     pp_back_home:      "← Retour à l'accueil",
 
+    // — Scratch section
+    scratch_eyebrow:      '★ VOUS AVEZ GAGNÉ ★',
+    scratch_title_1:      'Le ticket gagnant pour une',
+    scratch_title_2:      'expérience client inoubliable',
+    scratch_sub:          'Chaque projet est pensé pour marquer les esprits, performer dans les moteurs de recherche et transformer vos visiteurs en clients fidèles.',
+    scratch_p1_title:     'Design Iconique',
+    scratch_p1_desc:      'Une identité visuelle qui frappe et reste gravée dans les mémoires',
+    scratch_p2_title:     'Performance Max',
+    scratch_p2_desc:      'Core Web Vitals au vert, temps de chargement instantané',
+    scratch_p3_title:     'Conversion Assurée',
+    scratch_p3_desc:      'Chaque élément conçu pour transformer les visiteurs en clients',
+    scratch_cta:          'Réclamer mon projet →',
+    scratch_note:         'Réponse garantie sous 24h',
+    scratch_overlay_1:    'VOTRE TICKET',
+    scratch_overlay_2:    'GAGNANT',
+    scratch_instruction:  '← Grattez pour révéler →',
+
     // — Footer
-    footer_about:      'À propos',
-    footer_role:       'Webdesigner & Développeur Full Stack',
+    footer_about:         'À propos',
+    footer_role:          'Webdesigner & Développeur Full Stack',
+    footer_cta_line1:     'CRÉONS',
+    footer_cta_line2:     'QUELQUE',
+    footer_cta_line3:     'CHOSE',
+    footer_available:     'Disponible pour de nouveaux projets',
+    footer_cta_btn:       'Me contacter',
 
     // — Meta (SEO)
     meta_title:        'VB — Développeur Web & Digital',

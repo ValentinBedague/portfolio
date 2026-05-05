@@ -8,7 +8,6 @@
   background: rgba(10, 10, 10, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
 }
 
 /* Full-width inner — edge to edge avec padding latéral */

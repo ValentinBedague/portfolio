@@ -1,6 +1,5 @@
 import PageTransition from '../components/PageTransition/PageTransition'
 import About   from '../sections/About/About'
-import Contact from '../sections/Contact/Contact'
 import { useLanguage } from '../i18n/LanguageContext'
 import './AboutPage.css'
 
@@ -18,9 +17,6 @@ export default function AboutPage() {
           </h1>
         </div>
         <About />
-        <div id="contact">
-          <Contact />
-        </div>
       </div>
     </PageTransition>
   )

@@ -1,7 +1,13 @@
 .hero {
   padding-top: calc(var(--nav-h) + 48px);
   padding-bottom: 48px;
-  border-bottom: 1px solid var(--border);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-fold:has(.hpr-card:hover) .hero {
+  opacity: 0.45;
+  transform: scale(0.82);
 }
 
 .hero__inner {
@@ -13,7 +19,7 @@
 
 /* ── Headline ──────────────────────────────────────────────── */
 .hero__headline {
-  font-size: clamp(52px, 7.5vw, 108px);
+  font-size: clamp(42px, 6vw, 88px);
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.02em;

@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
 import LangSwitcher from '../LangSwitcher/LangSwitcher'
 import './Nav.css'
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const { t } = useLanguage()
-  const navigate  = useNavigate()
-  const location  = useLocation()
+  const navigate       = useNavigate()
+  const location       = useLocation()
+  const { openDrawer } = useContactDrawer()
 
   const handleWork = (e) => {
     e.preventDefault()
@@ -32,9 +34,9 @@ export default function Nav() {
           <NavLink to="/" end className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}>
             {t('nav_home')}
           </NavLink>
-          <a href="/#projects" onClick={handleWork} className="nav__link">
+          <NavLink to="/work" className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}>
             {t('nav_work')}
-          </a>
+          </NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}>
             {t('nav_about')}
           </NavLink>
@@ -42,9 +44,9 @@ export default function Nav() {
 
         <div className="nav__actions">
           <LangSwitcher />
-          <Link to="/about#contact" className="nav__cta btn-ghost">
+          <button onClick={openDrawer} className="nav__cta btn-ghost">
             {t('nav_contact')}
-          </Link>
+          </button>
         </div>
 
         <button
@@ -59,11 +61,11 @@ export default function Nav() {
       {open && (
         <div className="nav__drawer">
           <Link    to="/"      className="nav__drawer-link" onClick={() => setOpen(false)}>{t('nav_home')}</Link>
-          <a href="/#projects" className="nav__drawer-link" onClick={handleWork}>{t('nav_work')}</a>
+          <Link to="/work" className="nav__drawer-link" onClick={() => setOpen(false)}>{t('nav_work')}</Link>
           <Link    to="/about" className="nav__drawer-link" onClick={() => setOpen(false)}>{t('nav_about')}</Link>
-          <Link    to="/about#contact" className="btn-primary" style={{ marginTop: 16 }} onClick={() => setOpen(false)}>
+          <button className="btn-primary" style={{ marginTop: 16 }} onClick={() => { setOpen(false); openDrawer() }}>
             {t('nav_contact')}
-          </Link>
+          </button>
         </div>
       )}
     </header>

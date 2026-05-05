@@ -19,6 +19,7 @@ export const projects = [
     accentColor: '#c9964a',
     gradient: 'linear-gradient(140deg, #120d00 0%, #2e1e00 55%, #4a3200 100%)',
     screenshot: '/projects/myshampouineuse.png',
+    video: '/projects/myshampouineuse.mp4',
   },
   {
     id: 2,
@@ -61,6 +62,7 @@ export const projects = [
     accentColor: '#e8b800',
     gradient: 'linear-gradient(140deg, #0d0c00 0%, #262200 55%, #403800 100%)',
     screenshot: '/projects/tcxa.png',
+    video: '/projects/tcxa.mp4',
   },
   {
     id: 4,

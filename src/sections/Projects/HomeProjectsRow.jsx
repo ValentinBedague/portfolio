@@ -1,34 +1,35 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { projects } from '../../data/projects'
 import { useLanguage } from '../../i18n/LanguageContext'
 import './HomeProjectsRow.css'
 
-function Card({ project, index }) {
-  const navigate  = useNavigate()
-  const { lang, t } = useLanguage()
-  const cardRef   = useRef(null)
+function Card({ project, index, onEnter, onLeave }) {
+  const navigate       = useNavigate()
+  const { lang }       = useLanguage()
+  const cardRef        = useRef(null)
+  const videoRef       = useRef(null)
 
-  const go = () => navigate(`/work/${project.slug}`)
-
-  // category is now { en, fr } or a plain string
   const category = typeof project.category === 'object'
     ? project.category[lang] ?? project.category.en
     : project.category
 
-  const onMove = (e) => {
-    const bg = cardRef.current.querySelector('.hpr-card__bg')
-    if (!bg) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 12
-    const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 12
-    bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`
+  const go = () => navigate(`/work/${project.slug}`)
+
+  const handleEnter = () => {
+    onEnter()
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play().catch(() => {})
+    }
   }
 
-  const onLeave = () => {
-    const bg = cardRef.current.querySelector('.hpr-card__bg')
-    if (!bg) return
-    bg.style.transform = 'translate(0,0) scale(1.04)'
+  const handleLeave = () => {
+    onLeave()
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
   }
 
   return (
@@ -36,21 +37,28 @@ function Card({ project, index }) {
       ref={cardRef}
       className="hpr-card"
       onClick={go}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
       role="button"
       tabIndex={0}
       onKeyDown={e => e.key === 'Enter' && go()}
-      aria-label={`${project.title}`}
+      aria-label={project.title}
     >
       <div className="hpr-card__visual">
         {project.screenshot
           ? <img src={project.screenshot} alt={project.title} className="hpr-card__img" />
           : <div className="hpr-card__bg" style={{ background: project.gradient }} />
         }
-        <div className="hpr-card__overlay">
-          <span className="hpr-card__cta">{t('pp_view_live')} →</span>
-        </div>
+        {project.video && (
+          <video
+            ref={videoRef}
+            src={project.video}
+            className="hpr-card__video"
+            muted
+            loop
+            playsInline
+          />
+        )}
       </div>
 
       <div className="hpr-card__info">
@@ -65,11 +73,41 @@ function Card({ project, index }) {
 }
 
 export default function HomeProjectsRow() {
+  const { lang }    = useLanguage()
+  const sectionRef  = useRef(null)
+  const [cursor, setCursor] = useState({ visible: false, x: 0, y: 0 })
+
+  const label = lang === 'fr' ? 'Ouvrir le projet' : 'Open project'
+
+  const onMove = (e) => {
+    setCursor(s => ({ ...s, x: e.clientX, y: e.clientY }))
+  }
+
   return (
-    <section id="projects" className="hpr">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="hpr"
+      onMouseMove={onMove}
+    >
       {projects.map((p, i) => (
-        <Card key={p.id} project={p} index={i} />
+        <Card
+          key={p.id}
+          project={p}
+          index={i}
+          onEnter={() => setCursor(s => ({ ...s, visible: true }))}
+          onLeave={() => setCursor(s => ({ ...s, visible: false }))}
+        />
       ))}
+
+      {cursor.visible && (
+        <div
+          className="hpr__cursor"
+          style={{ transform: `translate(${cursor.x}px, ${cursor.y}px)` }}
+        >
+          {label}
+        </div>
+      )}
     </section>
   )
 }
