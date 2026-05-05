@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
+import { useLanguage } from '../../i18n/LanguageContext'
+import LangSwitcher from '../LangSwitcher/LangSwitcher'
 import './Nav.css'
-
-const links = [
-  { label: 'Home',   to: '/',      end: true  },
-  { label: 'Work',   to: '/#projects', work: true },
-  { label: 'About',  to: '/about', end: false },
-]
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const { t } = useLanguage()
   const navigate  = useNavigate()
   const location  = useLocation()
 
@@ -33,19 +30,22 @@ export default function Nav() {
 
         <nav className="nav__links" aria-label="Main navigation">
           <NavLink to="/" end className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}>
-            Home
+            {t('nav_home')}
           </NavLink>
           <a href="/#projects" onClick={handleWork} className="nav__link">
-            Work
+            {t('nav_work')}
           </a>
           <NavLink to="/about" className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}>
-            About
+            {t('nav_about')}
           </NavLink>
         </nav>
 
-        <Link to="/about#contact" className="nav__cta btn-ghost">
-          Contact
-        </Link>
+        <div className="nav__actions">
+          <LangSwitcher />
+          <Link to="/about#contact" className="nav__cta btn-ghost">
+            {t('nav_contact')}
+          </Link>
+        </div>
 
         <button
           className={`nav__burger ${open ? 'open' : ''}`}
@@ -58,11 +58,11 @@ export default function Nav() {
 
       {open && (
         <div className="nav__drawer">
-          <Link    to="/"      className="nav__drawer-link" onClick={() => setOpen(false)}>Home</Link>
-          <a href="/#projects" className="nav__drawer-link" onClick={handleWork}>Work</a>
-          <Link    to="/about" className="nav__drawer-link" onClick={() => setOpen(false)}>About</Link>
+          <Link    to="/"      className="nav__drawer-link" onClick={() => setOpen(false)}>{t('nav_home')}</Link>
+          <a href="/#projects" className="nav__drawer-link" onClick={handleWork}>{t('nav_work')}</a>
+          <Link    to="/about" className="nav__drawer-link" onClick={() => setOpen(false)}>{t('nav_about')}</Link>
           <Link    to="/about#contact" className="btn-primary" style={{ marginTop: 16 }} onClick={() => setOpen(false)}>
-            Contact
+            {t('nav_contact')}
           </Link>
         </div>
       )}

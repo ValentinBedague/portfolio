@@ -1,23 +1,34 @@
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { projects } from '../../data/projects'
+import { useLanguage } from '../../i18n/LanguageContext'
 import './HomeProjectsRow.css'
 
 function Card({ project, index }) {
-  const navigate = useNavigate()
-  const cardRef  = useRef(null)
+  const navigate  = useNavigate()
+  const { lang, t } = useLanguage()
+  const cardRef   = useRef(null)
 
   const go = () => navigate(`/work/${project.slug}`)
 
+  // category is now { en, fr } or a plain string
+  const category = typeof project.category === 'object'
+    ? project.category[lang] ?? project.category.en
+    : project.category
+
   const onMove = (e) => {
+    const bg = cardRef.current.querySelector('.hpr-card__bg')
+    if (!bg) return
     const rect = cardRef.current.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 12
     const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 12
-    cardRef.current.querySelector('.hpr-card__bg').style.transform =
-      `translate(${x}px, ${y}px) scale(1.08)`
+    bg.style.transform = `translate(${x}px, ${y}px) scale(1.08)`
   }
+
   const onLeave = () => {
-    cardRef.current.querySelector('.hpr-card__bg').style.transform = 'translate(0,0) scale(1.04)'
+    const bg = cardRef.current.querySelector('.hpr-card__bg')
+    if (!bg) return
+    bg.style.transform = 'translate(0,0) scale(1.04)'
   }
 
   return (
@@ -30,7 +41,7 @@ function Card({ project, index }) {
       role="button"
       tabIndex={0}
       onKeyDown={e => e.key === 'Enter' && go()}
-      aria-label={`Voir le projet ${project.title}`}
+      aria-label={`${project.title}`}
     >
       <div className="hpr-card__visual">
         {project.screenshot
@@ -38,14 +49,14 @@ function Card({ project, index }) {
           : <div className="hpr-card__bg" style={{ background: project.gradient }} />
         }
         <div className="hpr-card__overlay">
-          <span className="hpr-card__cta">Voir le projet →</span>
+          <span className="hpr-card__cta">{t('pp_view_live')} →</span>
         </div>
       </div>
 
       <div className="hpr-card__info">
         <span className="hpr-card__num">0{index + 1}</span>
         <div>
-          <p className="hpr-card__cat">{project.category}</p>
+          <p className="hpr-card__cat">{category}</p>
           <p className="hpr-card__title">{project.title}</p>
         </div>
       </div>

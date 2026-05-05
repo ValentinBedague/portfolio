@@ -1,27 +1,29 @@
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '../../i18n/LanguageContext'
 import './Contact.css'
 
 const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-const fields = [
-  { name: 'from_name',  label: 'Name',    type: 'text',     placeholder: 'John Smith',              span: 1 },
-  { name: 'from_email', label: 'Email',   type: 'email',    placeholder: 'john@example.com',        span: 1 },
-  { name: 'subject',    label: 'Subject', type: 'text',     placeholder: 'Website project…',        span: 2 },
-  { name: 'message',    label: 'Message', type: 'textarea', placeholder: 'Tell me about your project…', span: 2 },
-]
-
 export default function Contact() {
   const formRef = useRef(null)
   const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const { t } = useLanguage()
+
+  const fields = [
+    { name: 'from_name',  labelKey: 'field_name',    type: 'text',     phKey: 'ph_name',    span: 1 },
+    { name: 'from_email', labelKey: 'field_email',   type: 'email',    phKey: 'ph_email',   span: 1 },
+    { name: 'subject',    labelKey: 'field_subject',  type: 'text',     phKey: 'ph_subject', span: 2 },
+    { name: 'message',    labelKey: 'field_message',  type: 'textarea', phKey: 'ph_message', span: 2 },
+  ]
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!SERVICE_ID) {
-      alert('EmailJS not configured. See .env.example for instructions.')
+      alert(t('emailjs_alert'))
       return
     }
     setStatus('loading')
@@ -50,14 +52,12 @@ export default function Contact() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="section-label">Contact</span>
+            <span className="section-label">{t('contact_label')}</span>
             <h2 className="section-title contact__title">
-              Let's talk about<br />
-              <span className="contact__title-accent">your project</span>
+              {t('contact_title_1')}<br />
+              <span className="contact__title-accent">{t('contact_title_2')}</span>
             </h2>
-            <p className="contact__sub">
-              Have a project in mind? A question? Write to me and I'll get back to you within 24h.
-            </p>
+            <p className="contact__sub">{t('contact_sub')}</p>
 
             <div className="contact__links">
               <a href="mailto:contact@vbdev.fr" className="contact__link">
@@ -70,7 +70,6 @@ export default function Contact() {
               </a>
             </div>
 
-            {/* Decorative element */}
             <div className="contact__deco" aria-hidden="true">
               <div className="contact__deco-ring contact__deco-ring--1" />
               <div className="contact__deco-ring contact__deco-ring--2" />
@@ -93,12 +92,12 @@ export default function Contact() {
                     key={f.name}
                     className={`contact__field ${f.span === 2 ? 'contact__field--full' : ''}`}
                   >
-                    <label htmlFor={f.name} className="contact__label">{f.label}</label>
+                    <label htmlFor={f.name} className="contact__label">{t(f.labelKey)}</label>
                     {f.type === 'textarea' ? (
                       <textarea
                         id={f.name}
                         name={f.name}
-                        placeholder={f.placeholder}
+                        placeholder={t(f.phKey)}
                         required
                         rows={5}
                         className="contact__input contact__input--textarea"
@@ -108,7 +107,7 @@ export default function Contact() {
                         id={f.name}
                         name={f.name}
                         type={f.type}
-                        placeholder={f.placeholder}
+                        placeholder={t(f.phKey)}
                         required
                         className="contact__input"
                       />
@@ -126,9 +125,9 @@ export default function Contact() {
                   {status === 'loading' ? (
                     <>
                       <span className="contact__spinner" />
-                      Sending…
+                      {t('btn_sending')}
                     </>
-                  ) : 'Send message'}
+                  ) : t('btn_send')}
                 </button>
 
                 <AnimatePresence>
@@ -139,7 +138,7 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                     >
-                      ✓ Message sent! I'll get back to you shortly.
+                      {t('feedback_success')}
                     </motion.p>
                   )}
                   {status === 'error' && (
@@ -149,7 +148,7 @@ export default function Contact() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                     >
-                      ✕ Something went wrong. Try again or reach out directly.
+                      {t('feedback_error')}
                     </motion.p>
                   )}
                 </AnimatePresence>

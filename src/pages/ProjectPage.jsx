@@ -1,18 +1,20 @@
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import PageTransition from '../components/PageTransition/PageTransition'
+import { useLanguage } from '../i18n/LanguageContext'
 import './ProjectPage.css'
 
 export default function ProjectPage() {
-  const { slug }  = useParams()
-  const project   = projects.find(p => p.slug === slug)
+  const { slug }   = useParams()
+  const { t, lang } = useLanguage()
+  const project    = projects.find(p => p.slug === slug)
 
   if (!project) {
     return (
       <PageTransition>
         <div className="project-page project-page--404 container">
-          <p>Project not found.</p>
-          <Link to="/">← Back to home</Link>
+          <p>{t('pp_not_found')}</p>
+          <Link to="/">{t('pp_back_home')}</Link>
         </div>
       </PageTransition>
     )
@@ -21,6 +23,10 @@ export default function ProjectPage() {
   const idx  = projects.findIndex(p => p.slug === slug)
   const prev = projects[idx - 1]
   const next = projects[idx + 1]
+
+  // Support bilingual fields (object) or plain strings
+  const get = (field) =>
+    typeof project[field] === 'object' ? project[field][lang] ?? project[field].en : project[field]
 
   return (
     <PageTransition>
@@ -33,7 +39,7 @@ export default function ProjectPage() {
           )}
           <div className="pp-hero__overlay" />
           <div className="pp-hero__content container">
-            <span className="pp-hero__cat">{project.category}</span>
+            <span className="pp-hero__cat">{get('category')}</span>
             <h1 className="pp-hero__title">{project.title}</h1>
           </div>
         </div>
@@ -42,15 +48,15 @@ export default function ProjectPage() {
         <div className="pp-body container">
           <div className="pp-grid">
             <div className="pp-desc">
-              <h2 className="pp-desc__heading">About the project</h2>
-              <p className="pp-desc__text">{project.description}</p>
+              <h2 className="pp-desc__heading">{t('pp_about')}</h2>
+              <p className="pp-desc__text">{get('description')}</p>
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary pp-link"
               >
-                View live site
+                {t('pp_view_live')}
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -59,15 +65,15 @@ export default function ProjectPage() {
 
             <div className="pp-meta">
               <div className="pp-meta__block">
-                <span className="pp-meta__label">Services</span>
+                <span className="pp-meta__label">{t('pp_services')}</span>
                 <div className="pp-meta__tags">
-                  {project.tags.map(t => (
-                    <span key={t} className="pp-tag">{t}</span>
+                  {get('tags').map(tag => (
+                    <span key={tag} className="pp-tag">{tag}</span>
                   ))}
                 </div>
               </div>
               <div className="pp-meta__block">
-                <span className="pp-meta__label">Website</span>
+                <span className="pp-meta__label">{t('pp_website')}</span>
                 <a href={project.url} target="_blank" rel="noopener noreferrer" className="pp-meta__url">
                   {project.url.replace(/https?:\/\//, '')}
                 </a>
@@ -77,7 +83,7 @@ export default function ProjectPage() {
 
           {!project.screenshot && (
             <div className="pp-media-placeholder" style={{ background: project.gradient }}>
-              <span>Screenshots coming soon</span>
+              <span>{t('pp_screenshots')}</span>
             </div>
           )}
         </div>
@@ -87,16 +93,16 @@ export default function ProjectPage() {
           <div>
             {prev && (
               <Link to={`/work/${prev.slug}`} className="pp-nav__link pp-nav__link--prev">
-                <span className="pp-nav__dir">← Previous</span>
+                <span className="pp-nav__dir">{t('pp_prev')}</span>
                 <span className="pp-nav__name">{prev.title}</span>
               </Link>
             )}
           </div>
-          <Link to="/" className="pp-nav__all">All projects</Link>
+          <Link to="/" className="pp-nav__all">{t('pp_all')}</Link>
           <div>
             {next && (
               <Link to={`/work/${next.slug}`} className="pp-nav__link pp-nav__link--next">
-                <span className="pp-nav__dir">Next →</span>
+                <span className="pp-nav__dir">{t('pp_next')}</span>
                 <span className="pp-nav__name">{next.title}</span>
               </Link>
             )}

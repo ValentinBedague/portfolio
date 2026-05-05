@@ -1,0 +1,78 @@
+.lang-sw {
+  position: relative;
+}
+
+.lang-sw__btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.lang-sw__btn:hover,
+.lang-sw--open .lang-sw__btn {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.lang-sw__chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.lang-sw--open .lang-sw__chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.lang-sw__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.lang-sw--open .lang-sw__dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.lang-sw__option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.lang-sw__option:hover {
+  color: var(--text);
+  background: var(--bg-card);
+}

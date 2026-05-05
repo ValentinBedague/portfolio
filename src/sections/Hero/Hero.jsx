@@ -1,11 +1,14 @@
+import { useLanguage } from '../../i18n/LanguageContext'
 import './Hero.css'
 
 export default function Hero() {
+  const { t } = useLanguage()
+
   return (
     <section className="hero">
       <div className="hero__inner container">
 
-        {/* Gauche — headline */}
+        {/* Left — headline (brand slogan stays English) */}
         <h1 className="hero__headline" aria-label="Your website, iconic and effective">
           <span className="line-mask"><span className="hero__line">YOUR</span></span>
           <span className="line-mask"><span className="hero__line">WEBSITE</span></span>
@@ -15,24 +18,18 @@ export default function Hero() {
           <span className="line-mask"><span className="hero__line">EFFECTIVE</span></span>
         </h1>
 
-        {/* Droite — présentation */}
+        {/* Right — intro */}
         <div className="hero__right">
           <div className="hero__info">
             <span className="hero__available">
               <span className="hero__dot" />
-              Available for new projects
+              {t('hero_available')}
             </span>
             <p className="hero__intro">
-              Hi, I'm <strong>Val</strong>, web designer<br />
-              &amp; full stack developer.<br />
-              <span className="hero__location">
-                Based in Biarritz, France — Often elsewhere.
-              </span>
+              Hi, I'm <strong>{t('hero_intro_name')}</strong>, {t('hero_intro_role')}<br />
+              <span className="hero__location">{t('hero_location')}</span>
             </p>
-            <p className="hero__body">
-              I work with businesses, founders<br />
-              and creatives to bring their best ideas to life.
-            </p>
+            <p className="hero__body">{t('hero_body')}</p>
           </div>
 
           <div className="hero__cta">
@@ -44,9 +41,9 @@ export default function Hero() {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              View my work
+              {t('hero_cta_work')}
             </a>
-            <a href="/about" className="btn-ghost">Get in touch</a>
+            <a href="/about" className="btn-ghost">{t('hero_cta_contact')}</a>
           </div>
         </div>
 

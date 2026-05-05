@@ -61,9 +61,15 @@
 .nav__link:hover::after,
 .nav__link.active::after { width: 100%; }
 
-/* Right CTA */
-.nav__cta {
+/* Right group: lang switcher + CTA */
+.nav__actions {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav__cta {
   font-size: 11px;
   padding: 11px 22px;
 }
@@ -113,7 +119,7 @@
 .nav__drawer-link:hover { color: var(--text); }
 
 @media (max-width: 768px) {
-  .nav__links, .nav__cta { display: none; }
+  .nav__links, .nav__actions { display: none; }
   .nav__burger { display: flex; }
   .nav__inner  { padding: 0 24px; }
   .nav__drawer { padding: 0 24px 20px; }

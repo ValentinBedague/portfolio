@@ -10,54 +10,119 @@ const LINES = [
 ]
 
 export default function Preloader({ onDone }) {
-  const rootRef  = useRef(null)
-  const linesRef = useRef([])
+  const rootRef    = useRef(null)
+  const topRef     = useRef(null)
+  const botRef     = useRef(null)
+  const linesRef   = useRef([])
+  const counterRef = useRef(null)
+  const tagRef     = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
 
-    const tl = gsap.timeline()
+    const counter = { val: 0 }
 
-    /* ── 1. Lignes entrent depuis le bas ── */
-    tl.from(linesRef.current, {
-      y: '108%',
-      duration: 1.0,
-      stagger: 0.13,
-      ease: 'power4.out',
-    })
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          if (rootRef.current) rootRef.current.style.pointerEvents = 'none'
+        },
+      })
 
-    /* ── 2. Pause ── */
-    tl.to({}, { duration: 0.75 })
+      /* ── 1. Tag + counter fade in ───────────────────────── */
+      tl.fromTo(
+        [tagRef.current, counterRef.current],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: 'power2.out' },
+        0
+      )
 
-    /* ── 3. Lignes sortent vers le haut + overlay fond s'efface ── */
-    tl.to(linesRef.current, {
-      y: '-108%',
-      duration: 0.65,
-      stagger: 0.08,
-      ease: 'power3.in',
-      onStart: () => {
-        /* Le contenu commence à apparaître dès que les lignes partent */
-        onDone()
-        document.body.style.overflow = ''
-      },
-    })
+      /* ── 2. Counter counts 0 → 100 (runs throughout reveal) */
+      tl.to(
+        counter,
+        {
+          val: 100,
+          duration: 2.2,
+          ease: 'power1.inOut',
+          onUpdate() {
+            if (counterRef.current) {
+              counterRef.current.textContent =
+                String(Math.round(counter.val)).padStart(3, '0')
+            }
+          },
+        },
+        0
+      )
 
-    tl.to(rootRef.current, {
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.inOut',
-    }, '<0.25')
+      /* ── 3. Lines enter from bottom (masked) ────────────── */
+      tl.from(
+        linesRef.current,
+        {
+          y: '110%',
+          duration: 1.05,
+          stagger: 0.12,
+          ease: 'power4.out',
+        },
+        0.1
+      )
 
-    return () => { tl.kill(); document.body.style.overflow = '' }
+      /* ── 4. Pause while user reads ──────────────────────── */
+      tl.to({}, { duration: 0.5 })
+
+      /* ── 5. Lines exit fast upward ──────────────────────── */
+      tl.to(linesRef.current, {
+        y: '-110%',
+        duration: 0.55,
+        stagger: 0.06,
+        ease: 'power3.in',
+      })
+
+      tl.to(
+        [tagRef.current, counterRef.current],
+        { opacity: 0, duration: 0.25, ease: 'power2.in' },
+        '<'
+      )
+
+      /* ── 6. Split exit — screen opens in two ────────────── */
+      tl.to(
+        topRef.current,
+        {
+          yPercent: -100,
+          duration: 1.0,
+          ease: 'power4.inOut',
+          onStart() {
+            document.body.style.overflow = ''
+            onDone()
+          },
+        },
+        '-=0.05'
+      )
+      tl.to(
+        botRef.current,
+        { yPercent: 100, duration: 1.0, ease: 'power4.inOut' },
+        '<'
+      )
+    }, rootRef)
+
+    return () => {
+      ctx.revert()
+      document.body.style.overflow = ''
+    }
   }, [onDone])
 
   return (
     <div ref={rootRef} className="preloader" aria-hidden="true">
+
+      {/* Two panels that form the black backdrop */}
+      <div ref={topRef} className="preloader__panel preloader__panel--top" />
+      <div ref={botRef} className="preloader__panel preloader__panel--bot" />
+
+      {/* Text content — above panels */}
       <div className="preloader__inner">
         {LINES.map(({ text, outline }, i) => (
           <div key={i} className="preloader__mask">
             <div
-              ref={el => linesRef.current[i] = el}
+              ref={el => (linesRef.current[i] = el)}
               className={`preloader__line${outline ? ' preloader__line--outline' : ''}`}
             >
               {text}
@@ -66,8 +131,16 @@ export default function Preloader({ onDone }) {
         ))}
       </div>
 
-      {/* Compteur discret */}
-      <span className="preloader__label">Loading</span>
+      {/* Bottom meta */}
+      <div className="preloader__meta">
+        <span ref={tagRef} className="preloader__tag">
+          Web Designer &amp; Developer
+        </span>
+        <span ref={counterRef} className="preloader__counter">000</span>
+      </div>
+
+      {/* Center seam line — visible just before split */}
+      <div className="preloader__seam" />
     </div>
   )
 }
