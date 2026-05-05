@@ -1,0 +1,53 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+}
+
+.preloader__inner {
+  width: 100%;
+}
+
+/* Chaque ligne est masquée par overflow:hidden pour l'animation clip */
+.preloader__mask {
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  display: block;
+}
+
+.preloader__line {
+  display: block;
+  font-size: clamp(72px, 13vw, 200px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--text);
+  will-change: transform;
+}
+
+.preloader__line--outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4);
+}
+
+.preloader__label {
+  position: absolute;
+  bottom: 40px;
+  right: 48px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .preloader { padding: 0 24px; }
+  .preloader__label { right: 24px; bottom: 28px; }
+}

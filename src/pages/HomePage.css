@@ -1,0 +1,39 @@
+/* Home fold = exactly one viewport tall */
+.home-fold {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Footer */
+.home-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.home-footer__copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-right: auto;
+}
+.home-footer__links {
+  display: flex;
+  gap: 24px;
+}
+.home-footer__links a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.home-footer__links a:hover { color: var(--text); }

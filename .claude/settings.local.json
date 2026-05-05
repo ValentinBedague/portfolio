@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.myshampouineuse.com)",
+      "WebFetch(domain:www.undamassage.fr)",
+      "WebFetch(domain:www.tcxa.agency)",
+      "WebFetch(domain:www.sportofkings.eu)",
+      "Bash(npm create *)",
+      "Bash(npx --yes create-vite@5 . --template react)",
+      "Bash(node -e ' *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:www.eliotbesson.com)",
+      "Bash(npx vite *)",
+      "Read(//c/Users/valen/Desktop/VB webdev/Dev/Smash/BOOK VAL/**)",
+      "Bash(cp \"C:/Users/valen/Desktop/VB webdev/Dev/Smash/BOOK VAL/SVG/Fichier 1.svg\" \"C:/Users/valen/Desktop/VB webdev/Dev/Portfolio/public/logo-white.svg\")",
+      "Bash(cp \"C:/Users/valen/Desktop/VB webdev/Dev/Smash/BOOK VAL/SVG/Fichier 2.svg\" \"C:/Users/valen/Desktop/VB webdev/Dev/Portfolio/public/logo-dark.svg\")"
+    ]
+  }
+}

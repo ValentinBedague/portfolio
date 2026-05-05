@@ -1,0 +1,30 @@
+.about-page { padding-top: var(--nav-h); }
+
+.about-page__hero {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--border);
+}
+.about-page__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.about-page__title {
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.about-page__title--dim {
+  display: block;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(36px, 5.5vw, 74px);
+  color: var(--text-muted);
+  -webkit-text-stroke: 0;
+}

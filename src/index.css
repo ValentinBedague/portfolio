@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ──────────────────────────────────────────── */
+:root {
+  --bg:            #0a0a0a;
+  --bg-elevated:   #111111;
+  --bg-card:       rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text:          #ffffff;
+  --text-dim:      rgba(255, 255, 255, 0.68);
+  --text-muted:    rgba(255, 255, 255, 0.38);
+  --accent:        #ffffff;
+  --accent-rgb:    255, 255, 255;
+  --border:        rgba(255, 255, 255, 0.09);
+  --border-hover:  rgba(255, 255, 255, 0.25);
+  --font-display:  'IBM Plex Sans', sans-serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+  --radius:        3px;
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h:         88px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { max-width: 100%; display: block; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 1px; }
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection { background: rgba(255, 255, 255, 0.12); color: var(--text); }
+
+/* ─── Shared buttons ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  border: none;
+  transition: opacity 0.2s, transform 0.15s;
+  position: relative;
+  cursor: pointer;
+}
+.btn-primary:hover  { opacity: 0.88; }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--border-hover); }
+
+/* ─── Section shell ──────────────────────────────────────────── */
+.section { padding: 120px 0; position: relative; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ─── Section label ──────────────────────────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--text-muted);
+}
+
+/* ─── Type scale (IBM Plex Sans brand guide) ─────────────────── */
+/* H1 display : Bold 140px  →  clamp(64px, 10vw, 140px)         */
+/* H2         : Bold 74px   →  clamp(40px,  6vw,  74px)         */
+/* H3 italic  : ExtraLight Italic 47px → clamp(28px, 4vw, 47px) */
+/* Body       : Regular 30px → clamp(15px, 2vw, 20px)           */
+
+.section-title {
+  font-size: clamp(40px, 6vw, 74px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.title-italic {
+  font-size: clamp(28px, 4vw, 47px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--text-dim);
+}
+
+/* ─── Logo ───────────────────────────────────────────────────── */
+.logo-mark {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 4px rgba(34, 197, 94, 0.5); }
+  50%       { box-shadow: 0 0 12px rgba(34, 197, 94, 0.9); }
+}
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section   { padding: 80px 0; }
+  .container { padding: 0 20px; }
+}
