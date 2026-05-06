@@ -1,0 +1,258 @@
+/* ── Section ─────────────────────────────────────────────────── */
+.ccta-section {
+  padding: 200px 0 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle top separator glow */
+.ccta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.1) 70%,
+    transparent
+  );
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────── */
+.ccta-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 88px;
+}
+
+.ccta-eyebrow__line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.ccta-eyebrow__text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Staircase questions ─────────────────────────────────────── */
+.ccta-questions {
+  margin-bottom: 80px;
+}
+
+.ccta-q-wrap {
+  overflow: hidden; /* clip the y-translate animation */
+}
+
+.ccta-q {
+  font-size: clamp(36px, 5.5vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.ccta-q--1 {
+  color: var(--text);
+  padding-left: 0;
+}
+
+.ccta-q--2 {
+  color: rgba(255, 255, 255, 0.38);
+  padding-left: 6vw;
+}
+
+.ccta-q--3 {
+  color: rgba(255, 255, 255, 0.18);
+  padding-left: 12vw;
+}
+
+/* ── Giant CTA ───────────────────────────────────────────────── */
+.ccta-main {
+  border-top: 1px solid var(--border);
+  padding-top: 56px;
+}
+
+.ccta-main__btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  /* Prevent mobile tap highlight */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ccta-main__word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(68px, 11.5vw, 176px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  /* Ghost / outlined state */
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
+  transition:
+    color                    0.4s ease,
+    -webkit-text-stroke-color 0.4s ease;
+}
+
+.ccta-main__arrow {
+  font-size: clamp(32px, 5.5vw, 84px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.22);
+  margin-top: 0.12em;
+  display: block;
+  transition:
+    color     0.4s ease,
+    transform 0.45s var(--ease-out);
+}
+
+/* Hover: fill text + slide arrow */
+.ccta-main__btn:hover .ccta-main__word {
+  color: var(--text);
+  -webkit-text-stroke-color: transparent;
+}
+
+.ccta-main__btn:hover .ccta-main__arrow {
+  color: var(--text);
+  transform: translate(10px, -10px);
+}
+
+/* ── Bottom strip ────────────────────────────────────────────── */
+.ccta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.ccta-strip__avail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ccta-strip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+.ccta-strip__reply {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Light mode ──────────────────────────────────────────────── */
+
+/* Add smooth transitions to every colour-bearing element */
+.ccta-eyebrow__line,
+.ccta-eyebrow__text,
+.ccta-q,
+.ccta-main,
+.ccta-main__word,
+.ccta-main__arrow,
+.ccta-strip,
+.ccta-strip__avail,
+.ccta-strip__reply {
+  transition:
+    color                     0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color              0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    background                0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-text-stroke-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light .ccta-section::before {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0.1) 70%,
+    transparent
+  );
+}
+
+body.site-light .ccta-eyebrow__line {
+  background: rgba(0, 0, 0, 0.3);
+}
+body.site-light .ccta-eyebrow__text {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+body.site-light .ccta-q--1 { color: #000000; }
+body.site-light .ccta-q--2 { color: rgba(0, 0, 0, 0.38); }
+body.site-light .ccta-q--3 { color: rgba(0, 0, 0, 0.18); }
+
+body.site-light .ccta-main {
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+body.site-light .ccta-main__word {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.45);
+}
+body.site-light .ccta-main__btn:hover .ccta-main__word {
+  color: #000000;
+  -webkit-text-stroke-color: transparent;
+}
+body.site-light .ccta-main__arrow {
+  color: rgba(0, 0, 0, 0.2);
+}
+body.site-light .ccta-main__btn:hover .ccta-main__arrow {
+  color: #000000;
+}
+
+body.site-light .ccta-strip {
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+body.site-light .ccta-strip__avail,
+body.site-light .ccta-strip__reply {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ccta-section    { padding: 140px 0 100px; }
+  .ccta-eyebrow    { margin-bottom: 56px; }
+  .ccta-questions  { margin-bottom: 56px; }
+  .ccta-q--2       { padding-left: 4vw; }
+  .ccta-q--3       { padding-left: 8vw; }
+  .ccta-main       { padding-top: 40px; }
+}
+
+@media (max-width: 480px) {
+  .ccta-section    { padding: 100px 0 80px; }
+  .ccta-eyebrow    { margin-bottom: 40px; }
+  .ccta-questions  { margin-bottom: 40px; }
+  .ccta-q--2       { padding-left: 0; color: rgba(255,255,255,0.35); }
+  .ccta-q--3       { padding-left: 0; color: rgba(255,255,255,0.2); }
+  .ccta-main       { padding-top: 32px; }
+  .ccta-strip      { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

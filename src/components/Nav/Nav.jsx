@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../../i18n/LanguageContext'
@@ -35,9 +35,27 @@ export default function Nav() {
   const { t }          = useLanguage()
   const location       = useLocation()
   const { openDrawer } = useContactDrawer()
+  const headerRef = useRef(null)
 
   // Close menu on route change
   useEffect(() => { setOpen(false) }, [location.pathname])
+
+  // Slide nav up in sync with footer reveal (scroll-driven, no CSS transition delay)
+  useEffect(() => {
+    const nav = headerRef.current
+    if (!nav) return
+    const update = () => {
+      const appBody = document.querySelector('.app-body')
+      if (!appBody) return
+      const threshold = appBody.offsetHeight - window.innerHeight
+      const reveal = Math.max(0, window.scrollY - threshold)
+      nav.style.transform = reveal > 0 ? `translateY(${-reveal}px)` : ''
+      nav.style.pointerEvents = reveal > 0 ? 'none' : ''
+    }
+    window.addEventListener('scroll', update, { passive: true })
+    update()
+    return () => window.removeEventListener('scroll', update)
+  }, [])
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -55,7 +73,7 @@ export default function Nav() {
 
   return (
     <>
-      <header className={`nav${open ? ' nav--open' : ''}`}>
+      <header ref={headerRef} className={`nav${open ? ' nav--open' : ''}`}>
         <div className="nav__inner">
 
           <Link to="/" className="nav__logo" aria-label="Valentin Bedague — Home" onClick={close}>

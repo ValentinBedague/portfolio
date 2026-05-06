@@ -253,3 +253,65 @@
 @media (hover: none) and (pointer: coarse) {
   .nav__burger { width: 48px; height: 48px; }
 }
+
+/* ── Light mode ──────────────────────────────────────────────── */
+/* Nav transform is scroll-driven (see Nav.jsx) — no CSS transition on transform */
+.nav {
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav__logo-img {
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav__link,
+.nav__burger-line {
+  transition: color 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.35s cubic-bezier(0.76, 0, 0.24, 1),
+              transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+body.site-light .nav {
+  background: rgba(255, 255, 255, 0.92);
+}
+body.site-light .nav--open {
+  background: #ffffff;
+}
+body.site-light .nav__logo-img {
+  filter: invert(1);
+}
+body.site-light .nav__link {
+  color: rgba(0, 0, 0, 0.4);
+}
+body.site-light .nav__link:hover,
+body.site-light .nav__link.active {
+  color: #000000;
+}
+body.site-light .nav__link::after {
+  background: #000000;
+}
+body.site-light .nav__burger-line {
+  background: #000000;
+}
+/* Full-screen mobile overlay */
+body.site-light .nav__overlay {
+  background: #ffffff;
+}
+body.site-light .nav__overlay-deco {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.04);
+}
+body.site-light .nav__overlay-row {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body.site-light .nav__overlay-num {
+  color: rgba(0, 0, 0, 0.3);
+}
+body.site-light .nav__overlay-link {
+  color: rgba(0, 0, 0, 0.22);
+}
+body.site-light .nav__overlay-link:hover,
+body.site-light .nav__overlay-link.active {
+  color: #000000;
+}
+body.site-light .nav__overlay-arrow {
+  color: #000000;
+}

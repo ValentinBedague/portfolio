@@ -28,3 +28,11 @@
   color: var(--text-muted);
   -webkit-text-stroke: 0;
 }
+
+@media (max-width: 768px) {
+  .about-page__hero { padding-top: 48px; padding-bottom: 48px; }
+}
+
+@media (max-width: 480px) {
+  .about-page__hero { padding-top: 32px; padding-bottom: 32px; }
+}

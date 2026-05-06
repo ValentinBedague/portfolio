@@ -3,6 +3,7 @@ import Hero            from '../sections/Hero/Hero'
 import HomeProjectsRow from '../sections/Projects/HomeProjectsRow'
 import ScratchSection  from '../sections/Scratch/ScratchSection'
 import TechCarousel    from '../sections/Tech/TechCarousel'
+import ContactCTA      from '../sections/ContactCTA/ContactCTA'
 import './HomePage.css'
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
       </div>
       <ScratchSection />
       <TechCarousel />
+      <ContactCTA />
     </PageTransition>
   )
 }

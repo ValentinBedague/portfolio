@@ -99,14 +99,25 @@ export const translations = {
     scratch_overlay_2:    'TICKET',
     scratch_instruction:  '← Scratch to reveal →',
 
+    // — Contact CTA section
+    ccta_eyebrow:   '— New project',
+    ccta_q1:        'Need a showcase website?',
+    ccta_q2:        'An e-commerce store?',
+    ccta_q3:        'A custom project?',
+    ccta_word:      "Let's talk",
+    ccta_available: 'Available for new projects',
+    ccta_reply:     'Reply guaranteed within 24h',
+
     // — Footer
-    footer_about:         'About',
-    footer_role:          'Web Designer & Full Stack Developer',
-    footer_cta_line1:     "LET'S",
-    footer_cta_line2:     'CREATE',
-    footer_cta_line3:     'SOMETHING',
-    footer_available:     'Available for new projects',
-    footer_cta_btn:       'Get in touch',
+    footer_lbl_brand:   'Brand',
+    footer_lbl_nav:     'Navigation',
+    footer_lbl_status:  'Status',
+    footer_role:        'Web Designer & Full Stack Developer',
+    footer_available:   'Available for new projects',
+    footer_sleeping:    'Probably sleeping',
+    footer_local_time:  'Local time',
+    footer_location:    'Based in Biarritz, France',
+    footer_made:        'Made by me :)',
 
     // — Meta (SEO)
     meta_title:        'VB — Web Developer & Designer',
@@ -213,14 +224,25 @@ export const translations = {
     scratch_overlay_2:    'GAGNANT',
     scratch_instruction:  '← Grattez pour révéler →',
 
+    // — Contact CTA section
+    ccta_eyebrow:   '— Nouveau projet',
+    ccta_q1:        'Vous avez besoin d\'un site vitrine ?',
+    ccta_q2:        'D\'un e-commerce ?',
+    ccta_q3:        'D\'un projet custom ?',
+    ccta_word:      'Parlons-en',
+    ccta_available: 'Disponible pour de nouveaux projets',
+    ccta_reply:     'Réponse garantie sous 24h',
+
     // — Footer
-    footer_about:         'À propos',
-    footer_role:          'Webdesigner & Développeur Full Stack',
-    footer_cta_line1:     'CRÉONS',
-    footer_cta_line2:     'QUELQUE',
-    footer_cta_line3:     'CHOSE',
-    footer_available:     'Disponible pour de nouveaux projets',
-    footer_cta_btn:       'Me contacter',
+    footer_lbl_brand:   'Identité',
+    footer_lbl_nav:     'Navigation',
+    footer_lbl_status:  'Statut',
+    footer_role:        'Webdesigner & Développeur Full Stack',
+    footer_available:   'Disponible pour de nouveaux projets',
+    footer_sleeping:    'Sûrement en train de dormir',
+    footer_local_time:  'Heure locale',
+    footer_location:    'Basé à Biarritz, France',
+    footer_made:        'Made by me :)',
 
     // — Meta (SEO)
     meta_title:        'VB — Développeur Web & Digital',

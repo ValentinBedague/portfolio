@@ -185,3 +185,50 @@ img, video { max-width: 100%; display: block; }
 @supports (padding: env(safe-area-inset-bottom)) {
   body { padding-bottom: env(safe-area-inset-bottom); }
 }
+
+/* ─── Footer reveal layout ───────────────────────────────────── */
+.app-body {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  margin-bottom: 100vh; /* transparent margin exposes the fixed footer */
+  border-radius: 0 0 32px 32px;
+  overflow: hidden;
+  transition: background 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light .app-body {
+  background: #ffffff;
+}
+
+.footer-sentinel {
+  height: 0;
+  pointer-events: none;
+}
+
+/* ─── Light mode (scroll-triggered on ContactCTA) ────────────── */
+body {
+  transition:
+    background-color 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    color            0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Shared buttons in light mode */
+body.site-light .btn-primary {
+  background: #000000;
+  color: #ffffff;
+}
+body.site-light .btn-ghost {
+  color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+body.site-light .btn-ghost:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.5);
+}
+

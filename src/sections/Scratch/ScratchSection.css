@@ -39,6 +39,37 @@
   border-radius: 8px;
   overflow: hidden;
   isolation: isolate;
+
+  /* Crénelé (battlements) on all four edges via CSS mask */
+  -webkit-mask-image:
+    repeating-linear-gradient(to right,  black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to right,  black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to bottom, black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to bottom, black 0 9px, transparent 9px 18px),
+    linear-gradient(#000, #000);
+  -webkit-mask-size:
+    100% 11px,
+    100% 11px,
+    11px 100%,
+    11px 100%,
+    calc(100% - 22px) calc(100% - 22px);
+  -webkit-mask-position: 0 0, 0 100%, 0 0, 100% 0, center;
+  -webkit-mask-repeat:   no-repeat;
+
+  mask-image:
+    repeating-linear-gradient(to right,  black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to right,  black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to bottom, black 0 9px, transparent 9px 18px),
+    repeating-linear-gradient(to bottom, black 0 9px, transparent 9px 18px),
+    linear-gradient(#000, #000);
+  mask-size:
+    100% 11px,
+    100% 11px,
+    11px 100%,
+    11px 100%,
+    calc(100% - 22px) calc(100% - 22px);
+  mask-position: 0 0, 0 100%, 0 0, 100% 0, center;
+  mask-repeat:   no-repeat;
 }
 
 /* ── Ticket card ────────────────────────────────────────────── */
@@ -197,6 +228,15 @@
 .scratch-canvas--out {
   opacity: 0;
   pointer-events: none;
+}
+
+/* ── Light mode ─────────────────────────────────────────────── */
+.scratch-section {
+  transition: background-color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light .scratch-section {
+  background-color: #ffffff;
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */

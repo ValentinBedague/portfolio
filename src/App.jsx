@@ -1,15 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation, BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { LanguageProvider } from './i18n/LanguageContext'
 import { ContactDrawerProvider } from './components/ContactDrawer/ContactDrawerContext'
 import ContactDrawer from './components/ContactDrawer/ContactDrawer'
 import Nav         from './components/Nav/Nav'
+import Footer      from './components/Footer/Footer'
 import Preloader   from './components/Preloader/Preloader'
 import HomePage    from './pages/HomePage'
 import WorkPage    from './pages/WorkPage'
 import ProjectPage from './pages/ProjectPage'
 import AboutPage   from './pages/AboutPage'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -30,6 +37,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <LanguageProvider>
         <ContactDrawerProvider>
           {!loaded && <Preloader onDone={() => setLoaded(true)} />}
@@ -40,8 +48,12 @@ export default function App() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             style={{ pointerEvents: loaded ? 'auto' : 'none' }}
           >
-            <Nav />
-            <AnimatedRoutes />
+            <Footer />
+            <div className="app-body">
+              <Nav />
+              <AnimatedRoutes />
+              <div className="footer-sentinel" aria-hidden="true" />
+            </div>
           </motion.div>
 
           <ContactDrawer />

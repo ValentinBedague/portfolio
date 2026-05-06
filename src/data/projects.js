@@ -41,6 +41,7 @@ export const projects = [
     accentColor: '#ff6b35',
     gradient: 'linear-gradient(140deg, #120600 0%, #2e1000 55%, #4a1e00 100%)',
     screenshot: '/projects/undamassage.png',
+    video:      '/projects/undamassage.mp4',
   },
   {
     id: 3,

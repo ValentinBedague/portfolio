@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import PageTransition from '../components/PageTransition/PageTransition'
@@ -52,13 +52,20 @@ function ProjectRow({ project, index, lang }) {
 }
 
 export default function WorkPage() {
-  const { lang } = useLanguage()
+  const { lang }    = useLanguage()
   const [hovered, setHovered] = useState(null)
+  const videoRef    = useRef(null)
 
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
   const x = useSpring(rawX, { stiffness: 260, damping: 30 })
   const y = useSpring(rawY, { stiffness: 260, damping: 30 })
+
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.play().catch(() => {})
+  }, [hovered])
 
   const onMouseMove = (e) => {
     rawX.set(e.clientX)
@@ -133,10 +140,22 @@ export default function WorkPage() {
               exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.16 } }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              {hovered.screenshot ? (
+              {hovered.screenshot && (
                 <img src={hovered.screenshot} alt={hovered.title} className="work-preview__img" />
-              ) : (
+              )}
+              {!hovered.screenshot && (
                 <div className="work-preview__gradient" style={{ background: hovered.gradient }} />
+              )}
+              {hovered.video && (
+                <video
+                  key={hovered.slug}
+                  ref={videoRef}
+                  src={hovered.video}
+                  className="work-preview__video"
+                  muted
+                  loop
+                  playsInline
+                />
               )}
               <div
                 className="work-preview__tint"

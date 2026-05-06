@@ -57,11 +57,11 @@
 /* ── Parallelogram cell ────────────────────────────────────── */
 .tc-cell {
   position: relative;
-  width: 250px;
+  width: 330px;
   height: 100%;
   flex-shrink: 0;
   background: #ffffff;
-  margin-right: 16px;
+  margin-right: 20px;
   transform: skewX(var(--sk));
   transition: background 0.2s;
 }
@@ -95,13 +95,45 @@
   opacity: 1;
 }
 
+/* ── Light mode ────────────────────────────────────────────── */
+.tc-title,
+.tc-icon {
+  transition: color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tc-cell {
+  transition: background 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tc-band {
+  transition: border-color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light .tc-title {
+  color: #000000;
+}
+body.site-light .tc-band {
+  border-top-color:    rgba(0, 0, 0, 0.1);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+body.site-light .tc-cell {
+  background: #000000;
+}
+body.site-light .tc-cell:hover {
+  background: #000000;
+}
+body.site-light .tc-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+body.site-light .tc-cell:hover .tc-icon {
+  color: #ffffff;
+}
+
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .tc-cell  { width: 200px; margin-right: 12px; }
+  .tc-cell  { width: 260px; margin-right: 16px; }
 }
 
 @media (max-width: 768px) {
-  .tc-cell  { width: 180px; }
+  .tc-cell  { width: 220px; }
   .tc-title { padding-left: 20px; }
 }
 
@@ -109,10 +141,11 @@
   .tech-section { padding: 60px 0 80px; }
   .tc-title     { margin-bottom: 28px; }
   .tc-band      { height: 130px; }
-  .tc-cell      { width: 150px; }
+  .tc-cell      { width: 170px; margin-right: 12px; }
   .tc-icon      { height: 30px; }
 }
 
 @media (max-width: 480px) {
   .tc-title { padding-left: 16px; }
+  .tc-cell  { width: 150px; }
 }

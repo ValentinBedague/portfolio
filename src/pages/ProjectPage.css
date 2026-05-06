@@ -186,3 +186,19 @@
   .pp-nav  { grid-template-columns: 1fr 1fr; }
   .pp-nav__all { display: none; }
 }
+
+@media (max-width: 600px) {
+  .pp-body              { padding-top: 48px; padding-bottom: 48px; }
+  .pp-grid              { gap: 28px; }
+  .pp-desc__text        { font-size: 15px; }
+  .pp-media-placeholder { height: 280px; }
+}
+
+@media (max-width: 480px) {
+  .pp-hero              { height: 44vh; min-height: 240px; }
+  .pp-body              { padding-top: 32px; padding-bottom: 32px; }
+  .pp-desc__text        { font-size: 14px; line-height: 1.7; }
+  .pp-media-placeholder { height: 220px; }
+  .pp-nav               { gap: 12px; padding-top: 24px; }
+  .pp-nav__name         { font-size: 14px; }
+}

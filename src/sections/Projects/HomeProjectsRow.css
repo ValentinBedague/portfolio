@@ -381,8 +381,12 @@
   .hpr-mobile { display: block; padding-top: 32px; padding-bottom: 20px; }
 }
 
+@media (max-width: 640px) {
+  .hpr-slide { height: 340px; }
+}
+
 @media (max-width: 480px) {
-  .hpr-slide { width: 86vw; height: 320px; }
+  .hpr-slide            { width: 86vw; height: clamp(260px, 72vw, 320px); }
   .hpr-slide:last-child { margin-right: 7vw; }
   .hpr-mobile__slider   { padding: 0 7vw; scroll-padding-inline: 7vw; }
   .hpr-mobile__controls { padding: 16px 7vw 0; }

@@ -1,0 +1,370 @@
+/* ── Base ─────────────────────────────────────────────────────── */
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── Dark variant (Home page) ────────────────────────────────── */
+.site-footer--dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Force dark even when body.site-light is active */
+body.site-light .site-footer--dark {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* ── Light variant (all other pages) ─────────────────────────── */
+.site-footer--light {
+  background-color: #f5f4f0;
+  color: #111111;
+}
+
+/* ── CSS custom props per variant ────────────────────────────── */
+.site-footer--dark {
+  --footer-border:    rgba(255, 255, 255, 0.14);
+  --footer-muted:     rgba(255, 255, 255, 0.6);
+  --footer-dim:       rgba(255, 255, 255, 0.4);
+  --footer-faint:     rgba(255, 255, 255, 0.22);
+  --footer-nav-color: rgba(255, 255, 255, 0.5);
+  --footer-nav-hover: #ffffff;
+  --footer-bar-logo:  0.55;
+  --footer-wm-op:     0.06;
+}
+
+.site-footer--light {
+  --footer-border:    rgba(0, 0, 0, 0.14);
+  --footer-muted:     rgba(0, 0, 0, 0.65);
+  --footer-dim:       rgba(0, 0, 0, 0.48);
+  --footer-faint:     rgba(0, 0, 0, 0.28);
+  --footer-nav-color: rgba(0, 0, 0, 0.55);
+  --footer-nav-hover: #111111;
+  --footer-bar-logo:  0.55;
+  --footer-wm-op:     0.055;
+}
+
+/* ── 3-column blocks grid ─────────────────────────────────────── */
+.footer-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--footer-border);
+}
+
+.footer-block {
+  padding: 48px 40px 64px;
+}
+
+/* Vertical separators between blocks */
+.footer-block--nav,
+.footer-block--status {
+  border-left: 1px solid var(--footer-border);
+}
+
+/* ── Block label ──────────────────────────────────────────────── */
+.footer-block__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+  margin-bottom: 24px;
+}
+
+/* ── Block 1 — Brand ──────────────────────────────────────────── */
+.footer-brand-text {
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: currentColor;
+}
+
+.footer-brand-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--footer-dim);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.footer-brand-loc {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--footer-dim);
+  margin-top: 10px;
+}
+
+/* ── Block 2 — Navigation ─────────────────────────────────────── */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--footer-border);
+  text-decoration: none;
+  color: var(--footer-nav-color);
+  /* reset button */
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.footer-nav__row:hover {
+  color: var(--footer-nav-hover);
+}
+
+.footer-nav__row:hover .footer-nav__arrow {
+  opacity: 1;
+  transform: translate(4px, -4px);
+}
+
+.footer-nav__num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.footer-nav__label {
+  font-size: clamp(13px, 1.6vw, 18px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+
+.footer-nav__arrow {
+  font-size: 13px;
+  opacity: 0.4;
+  transition:
+    opacity   0.25s ease,
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+/* Contact row — italic accent */
+.footer-nav__row--cta .footer-nav__label {
+  font-style: italic;
+}
+
+/* ── Block 3 — Status ─────────────────────────────────────────── */
+.footer-avail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-avail__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: footer-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes footer-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.5; transform: scale(0.82); }
+}
+
+.footer-avail__text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+}
+
+.footer-status-loc {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--footer-dim);
+  margin-bottom: 10px;
+}
+
+.footer-status-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--footer-dim);
+}
+
+/* ── Socials ──────────────────────────────────────────────────── */
+.footer-socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.footer-social__link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--footer-dim);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-social__link:hover {
+  color: var(--footer-nav-hover);
+}
+
+/* ── Local time ───────────────────────────────────────────────── */
+.footer-localtime {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+
+.footer-localtime__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--footer-dim);
+  flex-shrink: 0;
+}
+
+.footer-localtime__value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--footer-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Sleeping dot variant */
+.footer-avail__dot--sleeping {
+  background: #f97316;
+}
+
+/* ── Giant logo watermark ─────────────────────────────────────── */
+.footer-watermark {
+  border-top: 1px solid var(--footer-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 32px;
+  overflow: hidden;
+}
+
+.footer-watermark__img {
+  height: clamp(64px, 10vw, 140px);
+  width: auto;
+  opacity: var(--footer-wm-op);
+  pointer-events: none;
+  user-select: none;
+  filter: blur(0.5px);
+}
+
+/* ── Bottom bar ───────────────────────────────────────────────── */
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0 32px;
+  border-top: 1px solid var(--footer-border);
+}
+
+.footer-bar__logo {
+  height: 18px;
+  width: auto;
+  opacity: var(--footer-bar-logo);
+  flex-shrink: 0;
+}
+
+.footer-bar__credit {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+}
+
+.footer-bar__name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--footer-dim);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer-blocks {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Third block goes to second row, full width */
+  .footer-block--status {
+    grid-column: 1 / -1;
+    border-left: none;
+    border-top: 1px solid var(--footer-border);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-blocks {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-block {
+    padding: 36px 0 40px;
+  }
+
+  /* Remove all vertical separators when stacked */
+  .footer-block--nav,
+  .footer-block--status {
+    border-left: none;
+    border-top: 1px solid var(--footer-border);
+  }
+
+  .footer-watermark {
+    padding: 36px 0 32px;
+  }
+
+  .footer-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 24px;
+  }
+
+  .footer-bar__name {
+    width: 100%;
+  }
+}
