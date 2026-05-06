@@ -150,9 +150,10 @@ function TechBand() {
   const { scrollY } = useScroll()
   const scrollVelocity = useVelocity(scrollY)
   const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 300 })
-  const extraSpeed     = useTransform(smoothVelocity, [-2500, 0, 2500], [110, 0, -110])
 
-  // Skew target: -SKEW = "/" parallelograms (default, rightward), +SKEW = "\" on scroll up
+  const dirRef = useRef(1) // 1 = right (default), -1 = left
+
+  // Skew target: -SKEW = "/" oriented right, +SKEW = "\" oriented left
   const skewTarget = useMotionValue(-SKEW)
   const skewSpring = useSpring(skewTarget, { stiffness: 80, damping: 25 })
 
@@ -165,8 +166,8 @@ function TechBand() {
     })
     // Set initial values
     if (trackRef.current) {
-      trackRef.current.style.setProperty('--sk', `${SKEW}deg`)
-      trackRef.current.style.setProperty('--sk-neg', `${-SKEW}deg`)
+      trackRef.current.style.setProperty('--sk', `${-SKEW}deg`)
+      trackRef.current.style.setProperty('--sk-neg', `${SKEW}deg`)
     }
     return unsub
   }, [skewSpring])
@@ -177,10 +178,12 @@ function TechBand() {
     if (!oneWidth) return
 
     const v = smoothVelocity.get()
-    if (v >  20) skewTarget.set( SKEW)  // scroll down → "\" shape (rightward)
-    if (v < -20) skewTarget.set(-SKEW)  // scroll up   → "/" shape (leftward)
+    if (v >  20) { dirRef.current =  1; skewTarget.set(-SKEW) }
+    if (v < -20) { dirRef.current = -1; skewTarget.set( SKEW) }
 
-    const velocity = 70 - extraSpeed.get()
+    const boost    = Math.min(Math.abs(v) * 0.06, 130)
+    const velocity = dirRef.current * (70 + boost)
+
     let newX = x.get() + velocity * (delta / 1000)
     if (newX < -oneWidth) newX += oneWidth
     if (newX > 0)         newX -= oneWidth

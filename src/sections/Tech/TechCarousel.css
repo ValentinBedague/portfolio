@@ -97,7 +97,12 @@
 
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .tc-cell { width: 200px; margin-right: 12px; }
+  .tc-cell  { width: 200px; margin-right: 12px; }
+}
+
+@media (max-width: 768px) {
+  .tc-cell  { width: 180px; }
+  .tc-title { padding-left: 20px; }
 }
 
 @media (max-width: 600px) {
@@ -106,4 +111,8 @@
   .tc-band      { height: 130px; }
   .tc-cell      { width: 150px; }
   .tc-icon      { height: 30px; }
+}
+
+@media (max-width: 480px) {
+  .tc-title { padding-left: 16px; }
 }

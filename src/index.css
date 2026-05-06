@@ -169,10 +169,12 @@ img, video { max-width: 100%; display: block; }
 
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  :root      { --nav-h: 72px; }
   .section   { padding: 80px 0; }
   .container { padding: 0 20px; }
 }
 @media (max-width: 480px) {
+  :root      { --nav-h: 64px; }
   .section   { padding: 60px 0; }
   .container { padding: 0 16px; }
   .btn-primary,

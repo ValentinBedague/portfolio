@@ -90,7 +90,7 @@
 /* ── Tablet ────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero__inner    { grid-template-columns: 1fr; gap: 32px; }
-  .hero__headline { font-size: clamp(52px, 13vw, 96px); }
+  .hero__headline { font-size: clamp(46px, 8.5vw, 80px); }
   .hero           { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 32px; }
 }
 
