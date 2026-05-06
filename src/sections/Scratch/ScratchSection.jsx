@@ -159,6 +159,20 @@ export default function ScratchSection() {
     }
   }, [fading, revealed])
 
+  // Non-passive touch listener — React's onTouchMove is passive, so
+  // e.preventDefault() has no effect there and the page scrolls instead of scratching.
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const handle = (e) => { e.preventDefault(); doScratch(e) }
+    canvas.addEventListener('touchstart', handle, { passive: false })
+    canvas.addEventListener('touchmove',  handle, { passive: false })
+    return () => {
+      canvas.removeEventListener('touchstart', handle)
+      canvas.removeEventListener('touchmove',  handle)
+    }
+  }, [doScratch])
+
   const prizes = [
     { num: '01', title: t('scratch_p1_title'), desc: t('scratch_p1_desc') },
     { num: '02', title: t('scratch_p2_title'), desc: t('scratch_p2_desc') },
@@ -223,7 +237,6 @@ export default function ScratchSection() {
               ref={canvasRef}
               className={`scratch-canvas${fading ? ' scratch-canvas--out' : ''}`}
               onMouseMove={doScratch}
-              onTouchMove={(e) => { e.preventDefault(); doScratch(e) }}
             />
           )}
         </motion.div>
