@@ -6,8 +6,11 @@ import './ScratchSection.css'
 
 function drawOverlay(canvas, t) {
   const ctx = canvas.getContext('2d')
-  const w = canvas.width
-  const h = canvas.height
+  const dpr = window.devicePixelRatio || 1
+  // canvas.width/height are in physical pixels; after ctx.scale(dpr) the drawing
+  // context expects logical (CSS) pixels, so divide back here.
+  const w = canvas.width  / dpr
+  const h = canvas.height / dpr
 
   ctx.clearRect(0, 0, w, h)
 
@@ -113,11 +116,12 @@ export default function ScratchSection() {
   const getXY = (e) => {
     const canvas = canvasRef.current
     const rect   = canvas.getBoundingClientRect()
-    const dpr    = window.devicePixelRatio || 1
     const src    = e.touches ? e.touches[0] : e
+    // Return logical (CSS) pixels — the context is already scale(dpr) so
+    // drawing commands must use logical coords, not physical ones.
     return {
-      x: (src.clientX - rect.left) * dpr,
-      y: (src.clientY - rect.top)  * dpr,
+      x: src.clientX - rect.left,
+      y: src.clientY - rect.top,
     }
   }
 
@@ -127,8 +131,7 @@ export default function ScratchSection() {
 
     const ctx  = canvas.getContext('2d')
     const { x, y } = getXY(e)
-    const dpr  = window.devicePixelRatio || 1
-    const base = 64 * dpr
+    const base = 64 // logical pixels (matches the scaled context)
 
     ctx.globalCompositeOperation = 'destination-out'
     const blobs = [

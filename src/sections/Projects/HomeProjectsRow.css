@@ -378,7 +378,7 @@
 /* ── Show slider on mobile ─────────────────────────────────── */
 @media (max-width: 768px) {
   .hpr        { display: none; }
-  .hpr-mobile { display: block; margin-top: auto; padding-top: 32px; padding-bottom: 20px; }
+  .hpr-mobile { display: block; padding-top: 32px; padding-bottom: 20px; }
 }
 
 @media (max-width: 480px) {

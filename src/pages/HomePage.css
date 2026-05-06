@@ -1,4 +1,4 @@
-/* Home fold = exactly one viewport tall */
+/* Home fold = exactly one viewport tall on desktop */
 .home-fold {
   height: 100vh;           /* fallback for older browsers */
   height: 100dvh;          /* dynamic viewport height — fixes iOS Safari address bar */
@@ -7,3 +7,13 @@
   overflow: visible;
 }
 
+/* On mobile the hero + slider stack taller than 100dvh on small devices,
+   so let the fold be its natural height (keeps overflow from bleeding into
+   the scratch section below). */
+@media (max-width: 768px) {
+  .home-fold {
+    height: auto;
+    min-height: 100dvh;
+    min-height: 100vh;
+  }
+}
