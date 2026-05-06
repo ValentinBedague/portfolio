@@ -12,7 +12,7 @@
 
 .hero__inner {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr min(380px, 38%);
   gap: 48px;
   align-items: flex-end;
 }
@@ -87,8 +87,30 @@
 
 .hero__cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-/* ── Mobile ────────────────────────────────────────────────── */
+/* ── Tablet ────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .hero__inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero__inner    { grid-template-columns: 1fr; gap: 32px; }
   .hero__headline { font-size: clamp(52px, 13vw, 96px); }
+  .hero           { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 32px; }
+}
+
+/* ── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero__headline { font-size: clamp(40px, 14vw, 72px); line-height: 0.92; }
+  .hero           { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 24px; }
+  .hero__intro    { font-size: 15px; }
+  .hero__body     { font-size: 12px; }
+  .hero__right    { gap: 20px; }
+}
+
+@media (max-width: 480px) {
+  .hero__headline { font-size: clamp(36px, 13vw, 56px); }
+}
+
+/* ── Touch: disable scale effect that hides hero content ───── */
+@media (hover: none) {
+  .home-fold:has(.hpr-card:hover) .hero {
+    opacity: 1;
+    transform: none;
+  }
 }

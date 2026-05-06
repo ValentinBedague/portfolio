@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
 import { useLanguage } from '../../i18n/LanguageContext'
 import './ScratchSection.css'
-
-const GOLD = '#c8a84b'
 
 function drawOverlay(canvas, t) {
   const ctx = canvas.getContext('2d')
@@ -12,19 +11,19 @@ function drawOverlay(canvas, t) {
 
   ctx.clearRect(0, 0, w, h)
 
-  // Silver gradient background
+  // Silver gradient
   const grad = ctx.createLinearGradient(0, 0, w, h)
   grad.addColorStop(0,    '#5a5a5a')
-  grad.addColorStop(0.25, '#a8a8a8')
-  grad.addColorStop(0.5,  '#d0d0d0')
-  grad.addColorStop(0.75, '#a8a8a8')
+  grad.addColorStop(0.3,  '#b0b0b0')
+  grad.addColorStop(0.5,  '#d4d4d4')
+  grad.addColorStop(0.7,  '#b0b0b0')
   grad.addColorStop(1,    '#5a5a5a')
   ctx.fillStyle = grad
   ctx.fillRect(0, 0, w, h)
 
   // Cross-hatch texture
   ctx.save()
-  ctx.globalAlpha = 0.1
+  ctx.globalAlpha = 0.09
   ctx.strokeStyle = '#000'
   ctx.lineWidth = 1
   for (let i = -h; i < w + h; i += 7) {
@@ -33,60 +32,65 @@ function drawOverlay(canvas, t) {
   }
   ctx.restore()
 
-  // Dashed border
+  // Dashed border inset
   ctx.save()
-  ctx.strokeStyle = 'rgba(0,0,0,0.25)'
-  ctx.lineWidth = 2
-  ctx.setLineDash([10, 5])
-  ctx.strokeRect(24, 24, w - 48, h - 48)
+  ctx.strokeStyle = 'rgba(0,0,0,0.2)'
+  ctx.lineWidth = 1.5
+  ctx.setLineDash([8, 5])
+  ctx.strokeRect(16, 16, w - 32, h - 32)
   ctx.restore()
 
   // Corner stars
-  const corners = [[50, 50], [w - 50, 50], [50, h - 50], [w - 50, h - 50]]
-  ctx.fillStyle = 'rgba(0,0,0,0.22)'
-  ctx.font = '18px serif'
+  ctx.fillStyle = 'rgba(0,0,0,0.2)'
+  ctx.font = '16px serif'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  corners.forEach(([x, y]) => ctx.fillText('★', x, y))
+  ;[[36, 36], [w - 36, 36], [36, h - 36], [w - 36, h - 36]].forEach(([x, y]) =>
+    ctx.fillText('★', x, y)
+  )
 
-  // Stars row top & bottom
-  const stars = 7
-  for (let i = 0; i < stars; i++) {
-    const x = w * 0.15 + (i * w * 0.7) / (stars - 1)
-    ctx.fillText('✦', x, 56)
-    ctx.fillText('✦', x, h - 56)
-  }
-
-  // Main text — line 1
-  const fs1 = Math.min(w / 8, 64)
+  // Main overlay text
+  const fs = Math.min(w / 7, 56)
   ctx.save()
-  ctx.fillStyle = 'rgba(0,0,0,0.6)'
+  ctx.fillStyle = 'rgba(0,0,0,0.55)'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  ctx.font = `700 ${fs1}px "IBM Plex Sans", sans-serif`
-  ctx.fillText(t('scratch_overlay_1'), w / 2, h / 2 - fs1 * 0.6)
-  ctx.fillText(t('scratch_overlay_2'), w / 2, h / 2 + fs1 * 0.55)
+  ctx.font = `700 ${fs}px "IBM Plex Sans", sans-serif`
+  ctx.fillText(t('scratch_overlay_1'), w / 2, h / 2 - fs * 0.55)
+  ctx.fillText(t('scratch_overlay_2'), w / 2, h / 2 + fs * 0.55)
   ctx.restore()
 
   // Instruction
   ctx.save()
-  ctx.fillStyle = 'rgba(0,0,0,0.38)'
+  ctx.fillStyle = 'rgba(0,0,0,0.35)'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  ctx.font = `13px "IBM Plex Mono", monospace`
-  ctx.fillText(t('scratch_instruction'), w / 2, h - 44)
+  ctx.font = `12px "IBM Plex Mono", monospace`
+  ctx.fillText(t('scratch_instruction'), w / 2, h - 28)
   ctx.restore()
 }
 
 export default function ScratchSection() {
-  const canvasRef    = useRef(null)
-  const scratchingRef = useRef(false)
-  const [revealed, setRevealed]   = useState(false)
-  const [fading,   setFading]     = useState(false)
+  const sectionRef = useRef(null)
+  const canvasRef  = useRef(null)
+  const [revealed, setRevealed] = useState(false)
+  const [fading,   setFading]   = useState(false)
   const { openDrawer } = useContactDrawer()
   const { t } = useLanguage()
 
-  // Init / resize canvas
+  // Scroll-driven animations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 0.9', 'start 0.1'],
+  })
+
+  const smooth = useSpring(scrollYProgress, { stiffness: 60, damping: 18, mass: 0.8 })
+
+  const titleY       = useTransform(smooth, [0, 0.45], [80, 0])
+  const titleOpacity = useTransform(smooth, [0, 0.45], [0, 1])
+  const ticketY      = useTransform(smooth, [0.4, 0.85], [80, 0])
+  const ticketOpacity = useTransform(smooth, [0.4, 0.85], [0, 1])
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -108,9 +112,9 @@ export default function ScratchSection() {
 
   const getXY = (e) => {
     const canvas = canvasRef.current
-    const rect = canvas.getBoundingClientRect()
-    const dpr  = window.devicePixelRatio || 1
-    const src  = e.touches ? e.touches[0] : e
+    const rect   = canvas.getBoundingClientRect()
+    const dpr    = window.devicePixelRatio || 1
+    const src    = e.touches ? e.touches[0] : e
     return {
       x: (src.clientX - rect.left) * dpr,
       y: (src.clientY - rect.top)  * dpr,
@@ -121,34 +125,29 @@ export default function ScratchSection() {
     const canvas = canvasRef.current
     if (!canvas || fading || revealed) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx  = canvas.getContext('2d')
     const { x, y } = getXY(e)
-    const dpr = window.devicePixelRatio || 1
-    const base = 72 * dpr
+    const dpr  = window.devicePixelRatio || 1
+    const base = 64 * dpr
 
     ctx.globalCompositeOperation = 'destination-out'
-
-    // Irregular shape: central blob + random satellite blobs
     const blobs = [
-      { dx: 0,              dy: 0,              r: base },
-      { dx:  base * 0.55,   dy: -base * 0.35,   r: base * 0.75 },
-      { dx: -base * 0.5,    dy:  base * 0.4,    r: base * 0.7  },
-      { dx:  base * 0.3,    dy:  base * 0.6,    r: base * 0.65 },
-      { dx: -base * 0.65,   dy: -base * 0.25,   r: base * 0.6  },
-      { dx:  base * 0.7,    dy:  base * 0.2,    r: base * 0.5  },
-      { dx: -base * 0.2,    dy:  base * 0.72,   r: base * 0.45 },
-      { dx:  base * 0.15,   dy: -base * 0.7,    r: base * 0.5  },
+      { dx: 0,            dy: 0,            r: base        },
+      { dx:  base * 0.55, dy: -base * 0.35, r: base * 0.75 },
+      { dx: -base * 0.5,  dy:  base * 0.4,  r: base * 0.7  },
+      { dx:  base * 0.3,  dy:  base * 0.6,  r: base * 0.65 },
+      { dx: -base * 0.65, dy: -base * 0.25, r: base * 0.6  },
+      { dx:  base * 0.7,  dy:  base * 0.2,  r: base * 0.5  },
+      { dx: -base * 0.2,  dy:  base * 0.72, r: base * 0.45 },
+      { dx:  base * 0.15, dy: -base * 0.7,  r: base * 0.5  },
     ]
-
     blobs.forEach(({ dx, dy, r }) => {
       ctx.beginPath()
       ctx.arc(x + dx, y + dy, r, 0, Math.PI * 2)
       ctx.fill()
     })
-
     ctx.globalCompositeOperation = 'source-over'
 
-    // Sample every 20th pixel to keep perf smooth
     const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data
     let transparent = 0
     for (let i = 3; i < data.length; i += 80) {
@@ -160,8 +159,6 @@ export default function ScratchSection() {
     }
   }, [fading, revealed])
 
-  const onTouchMove = (e) => { e.preventDefault(); doScratch(e) }
-
   const prizes = [
     { num: '01', title: t('scratch_p1_title'), desc: t('scratch_p1_desc') },
     { num: '02', title: t('scratch_p2_title'), desc: t('scratch_p2_desc') },
@@ -169,49 +166,69 @@ export default function ScratchSection() {
   ]
 
   return (
-    <section className="scratch-section">
+    <section ref={sectionRef} className="scratch-section">
+      <div className="container">
 
-      {/* ── Revealed content ──────────────────────────────────── */}
-      <div className="scratch-content container">
-        <div className="scratch-content__header">
-          <span className="scratch-eyebrow">{t('scratch_eyebrow')}</span>
-          <h2 className="scratch-title">
-            {t('scratch_title_1')}<br />
-            <span className="scratch-title__accent">{t('scratch_title_2')}</span>
-          </h2>
-          <p className="scratch-sub">{t('scratch_sub')}</p>
-        </div>
+        {/* ── Always-visible header ────────────────────────────── */}
+        <motion.div
+          className="scratch-header"
+          style={{ y: titleY, opacity: titleOpacity }}
+        >
+          <span className="scratch-header__label">{t('scratch_header_label')}</span>
+          <h2 className="scratch-header__title">{t('scratch_header_title')}</h2>
+        </motion.div>
 
-        <div className="scratch-prizes">
-          {prizes.map((p) => (
-            <div key={p.num} className="scratch-prize">
-              <span className="scratch-prize__num">{p.num}</span>
-              <div className="scratch-prize__stars">★★★★★</div>
-              <h3 className="scratch-prize__title">{p.title}</h3>
-              <p className="scratch-prize__desc">{p.desc}</p>
+        {/* ── Ticket card ──────────────────────────────────────── */}
+        <motion.div
+          className="scratch-ticket-wrap"
+          style={{ y: ticketY, opacity: ticketOpacity }}
+        >
+
+          {/* Content inside ticket */}
+          <div className="scratch-ticket">
+            <div className="scratch-ticket__top">
+              <span className="scratch-ticket__won">{t('scratch_won')}</span>
+              <span className="scratch-ticket__num">N° {new Date().getFullYear()}-001</span>
             </div>
-          ))}
-        </div>
 
-        <div className="scratch-actions">
-          <button onClick={openDrawer} className="btn-primary">
-            {t('scratch_cta')}
-          </button>
-          <span className="scratch-note">{t('scratch_note')}</span>
-        </div>
+            <div className="scratch-ticket__headline">
+              <p className="scratch-ticket__an">{t('scratch_an')}</p>
+              <p className="scratch-ticket__experience">{t('scratch_experience')}</p>
+            </div>
+
+            <div className="scratch-ticket__divider" />
+
+            <div className="scratch-ticket__prizes">
+              {prizes.map((p) => (
+                <div key={p.num} className="scratch-ticket__prize">
+                  <span className="scratch-ticket__prize-num">{p.num}</span>
+                  <span className="scratch-ticket__prize-stars">★★★★★</span>
+                  <strong className="scratch-ticket__prize-title">{p.title}</strong>
+                  <span className="scratch-ticket__prize-desc">{p.desc}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="scratch-ticket__footer">
+              <button onClick={openDrawer} className="btn-primary">
+                {t('scratch_cta')}
+              </button>
+              <span className="scratch-ticket__note">{t('scratch_note')}</span>
+            </div>
+          </div>
+
+          {/* Canvas overlay — only on the ticket */}
+          {!revealed && (
+            <canvas
+              ref={canvasRef}
+              className={`scratch-canvas${fading ? ' scratch-canvas--out' : ''}`}
+              onMouseMove={doScratch}
+              onTouchMove={(e) => { e.preventDefault(); doScratch(e) }}
+            />
+          )}
+        </motion.div>
+
       </div>
-
-      {/* ── Canvas overlay ────────────────────────────────────── */}
-      {!revealed && (
-        <canvas
-          ref={canvasRef}
-          className={`scratch-canvas${fading ? ' scratch-canvas--out' : ''}`}
-          onMouseMove={doScratch}
-          onTouchStart={() => { scratchingRef.current = true }}
-          onTouchEnd={()   => { scratchingRef.current = false }}
-          onTouchMove={onTouchMove}
-        />
-      )}
     </section>
   )
 }

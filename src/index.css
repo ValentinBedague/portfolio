@@ -172,3 +172,14 @@ img, video { max-width: 100%; display: block; }
   .section   { padding: 80px 0; }
   .container { padding: 0 20px; }
 }
+@media (max-width: 480px) {
+  .section   { padding: 60px 0; }
+  .container { padding: 0 16px; }
+  .btn-primary,
+  .btn-ghost { padding: 11px 20px; font-size: 10px; }
+}
+
+/* ─── iOS safe area (notch / home indicator) ─────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
+}

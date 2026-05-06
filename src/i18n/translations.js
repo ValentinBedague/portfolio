@@ -77,11 +77,16 @@ export const translations = {
     pp_not_found:      'Project not found.',
     pp_back_home:      '← Back to home',
 
+    // — Tech carousel
+    tech_title_1: 'Technologies',
+    tech_title_2: "I'm working on:",
+
     // — Scratch section
-    scratch_eyebrow:      '★ YOU WON ★',
-    scratch_title_1:      'The winning ticket for an',
-    scratch_title_2:      'unforgettable client experience',
-    scratch_sub:          'Every project is built to leave a lasting impression, rank in search engines, and turn visitors into loyal clients.',
+    scratch_header_label: '— Limited offer',
+    scratch_header_title: 'The Winning Ticket',
+    scratch_won:          '★  YOU WON  ★',
+    scratch_an:           'an',
+    scratch_experience:   'unforgettable client experience',
     scratch_p1_title:     'Iconic Design',
     scratch_p1_desc:      'A visual identity that stands out and stays in people\'s minds',
     scratch_p2_title:     'Max Performance',
@@ -186,11 +191,16 @@ export const translations = {
     pp_not_found:      'Projet introuvable.',
     pp_back_home:      "← Retour à l'accueil",
 
+    // — Tech carousel
+    tech_title_1: 'Technologies',
+    tech_title_2: "que j'utilise :",
+
     // — Scratch section
-    scratch_eyebrow:      '★ VOUS AVEZ GAGNÉ ★',
-    scratch_title_1:      'Le ticket gagnant pour une',
-    scratch_title_2:      'expérience client inoubliable',
-    scratch_sub:          'Chaque projet est pensé pour marquer les esprits, performer dans les moteurs de recherche et transformer vos visiteurs en clients fidèles.',
+    scratch_header_label: '— Offre limitée',
+    scratch_header_title: 'Le Ticket Gagnant',
+    scratch_won:          '★  VOUS AVEZ GAGNÉ  ★',
+    scratch_an:           'une',
+    scratch_experience:   'expérience client inoubliable',
     scratch_p1_title:     'Design Iconique',
     scratch_p1_desc:      'Une identité visuelle qui frappe et reste gravée dans les mémoires',
     scratch_p2_title:     'Performance Max',

@@ -20,7 +20,11 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;   /* iOS smooth scroll */
+  overscroll-behavior: contain;        /* prevent scroll leak */
   padding: 40px 40px 48px;
+  /* Account for iOS home indicator */
+  padding-bottom: max(48px, calc(48px + env(safe-area-inset-bottom, 0px)));
   gap: 32px;
 }
 
@@ -175,6 +179,11 @@
 .cd-feedback--error   { color: #ef4444; }
 
 @media (max-width: 480px) {
-  .cd-panel { padding: 28px 24px 40px; }
+  .cd-panel {
+    padding: 24px 16px 32px;
+    padding-bottom: max(32px, calc(32px + env(safe-area-inset-bottom, 0px)));
+    gap: 24px;
+  }
   .cd-fields { grid-template-columns: 1fr; }
+  .cd-header__title { font-size: 20px; }
 }

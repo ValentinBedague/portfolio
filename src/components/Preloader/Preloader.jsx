@@ -15,6 +15,7 @@ export default function Preloader({ onDone }) {
   const botRef     = useRef(null)
   const linesRef   = useRef([])
   const tagRef     = useRef(null)
+  const counterRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -34,7 +35,23 @@ export default function Preloader({ onDone }) {
         0
       )
 
-      /* ── 2. Lines enter from bottom (masked) ────────────── */
+      /* ── 2. Counter 0 → 100 ─────────────────────────────── */
+      const obj = { val: 0 }
+      tl.to(
+        obj,
+        {
+          val: 100,
+          duration: 1.8,
+          ease: 'power2.inOut',
+          onUpdate() {
+            if (counterRef.current)
+              counterRef.current.textContent = Math.round(obj.val)
+          },
+        },
+        0
+      )
+
+      /* ── 3. Lines enter from bottom (masked) ────────────── */
       tl.from(
         linesRef.current,
         {
@@ -58,7 +75,7 @@ export default function Preloader({ onDone }) {
       })
 
       tl.to(
-        tagRef.current,
+        [tagRef.current, counterRef.current],
         { opacity: 0, duration: 0.25, ease: 'power2.in' },
         '<'
       )
@@ -118,6 +135,9 @@ export default function Preloader({ onDone }) {
           Web Designer &amp; Developer
         </span>
       </div>
+
+      {/* Counter */}
+      <div ref={counterRef} className="preloader__counter">0</div>
 
       {/* Center seam line — visible just before split */}
       <div className="preloader__seam" />

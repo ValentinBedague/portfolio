@@ -1,6 +1,7 @@
 /* Home fold = exactly one viewport tall */
 .home-fold {
-  height: 100vh;
+  height: 100vh;           /* fallback for older browsers */
+  height: 100dvh;          /* dynamic viewport height — fixes iOS Safari address bar */
   display: flex;
   flex-direction: column;
   overflow: visible;
