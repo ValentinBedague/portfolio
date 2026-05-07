@@ -53,14 +53,15 @@ function drawOverlay(canvas, t) {
   )
 
   // Main overlay text
-  const fs = Math.min(w / 7, 56)
+  const fs = Math.min(w / 9, 46)
+  const maxTxtW = w * 0.78
   ctx.save()
   ctx.fillStyle = 'rgba(0,0,0,0.55)'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.font = `700 ${fs}px "IBM Plex Sans", sans-serif`
-  ctx.fillText(t('scratch_overlay_1'), w / 2, h / 2 - fs * 0.55)
-  ctx.fillText(t('scratch_overlay_2'), w / 2, h / 2 + fs * 0.55)
+  ctx.fillText(t('scratch_overlay_1'), w / 2, h / 2 - fs * 0.55, maxTxtW)
+  ctx.fillText(t('scratch_overlay_2'), w / 2, h / 2 + fs * 0.55, maxTxtW)
   ctx.restore()
 
   // Instruction

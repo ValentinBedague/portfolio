@@ -8,7 +8,6 @@ import {
 import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { ArrowUpRight } from '../../components/ArrowIcon'
-import MagneticButton from '../../components/MagneticButton'
 import './ContactCTA.css'
 
 export default function ContactCTA() {
@@ -83,15 +82,14 @@ export default function ContactCTA() {
 
         {/* ── Giant CTA ──────────────────────────────────────── */}
         <motion.div className="ccta-main" style={{ y: ctaY, opacity: ctaO }}>
-          <MagneticButton
+          <button
             className="ccta-main__btn"
             onClick={openDrawer}
             aria-label="Open contact"
-            strength={0.18}
           >
             <span className="ccta-main__word">{t('ccta_word')}</span>
             <ArrowUpRight className="ccta-main__arrow" />
-          </MagneticButton>
+          </button>
         </motion.div>
 
         {/* ── Bottom strip ───────────────────────────────────── */}

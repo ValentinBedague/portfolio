@@ -312,10 +312,6 @@
   border-color: var(--text);
   transform: scale(1.04);
 }
-.work-story__btn:active {
-  transform: scale(0.96) !important;
-  transition-duration: 0.1s;
-}
 
 .work-story__btn-arrow {
   display: inline-block;

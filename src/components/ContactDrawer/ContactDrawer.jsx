@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { useContactDrawer } from './ContactDrawerContext'
@@ -14,6 +14,12 @@ export default function ContactDrawer() {
   const { t } = useLanguage()
   const formRef = useRef(null)
   const [status, setStatus] = useState('idle')
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
 
   const fields = [
     { name: 'from_name',  labelKey: 'field_name',    type: 'text',     phKey: 'ph_name',    span: 1 },
@@ -80,7 +86,7 @@ export default function ContactDrawer() {
                 <span className="cd-link__icon">✉</span>
                 contact@vbdev.fr
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="cd-link">
+              <a href="https://www.linkedin.com/in/valentinbedague" target="_blank" rel="noopener noreferrer" className="cd-link">
                 <span className="cd-link__icon">in</span>
                 LinkedIn
               </a>

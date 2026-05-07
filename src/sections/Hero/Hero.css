@@ -94,19 +94,23 @@
   .hero           { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 32px; }
 }
 
+/* ── ie-pair: transparent on desktop, flex row on mobile ───── */
+.hero__ie-pair { display: contents; }
+
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  /* 2-line centered headline: "YOUR WEBSITE" / "ICONIC & EFFECTIVE" */
+  .hero           { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 24px; }
   .hero__headline {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 0.2em;
     font-size: clamp(24px, 7.5vw, 36px);
     line-height: 0.92;
+    text-align: center;
   }
-  .hero           { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 24px; }
+  /* Force "ICONIC &" and "EFFECTIVE" on the same row */
+  .hero__ie-pair {
+    display: flex;
+    justify-content: center;
+    gap: 0.15em;
+  }
   .hero__intro    { font-size: 15px; }
   .hero__body     { font-size: 12px; }
   .hero__right    { gap: 20px; }
