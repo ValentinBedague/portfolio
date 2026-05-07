@@ -1,5 +1,6 @@
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
+import MagneticButton from '../../components/MagneticButton'
 import './Hero.css'
 
 export default function Hero() {
@@ -35,7 +36,8 @@ export default function Hero() {
           </div>
 
           <div className="hero__cta">
-            <a
+            <MagneticButton
+              as="a"
               href="#projects"
               className="btn-primary"
               onClick={e => {
@@ -44,8 +46,10 @@ export default function Hero() {
               }}
             >
               {t('hero_cta_work')}
-            </a>
-            <button onClick={openDrawer} className="btn-ghost">{t('hero_cta_contact')}</button>
+            </MagneticButton>
+            <MagneticButton className="btn-ghost" onClick={openDrawer}>
+              {t('hero_cta_contact')}
+            </MagneticButton>
           </div>
         </div>
 

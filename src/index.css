@@ -63,19 +63,46 @@ img, video { max-width: 100%; display: block; }
   text-transform: uppercase;
   border-radius: var(--radius);
   border: none;
-  transition: opacity 0.2s, transform 0.15s;
   position: relative;
+  overflow: hidden;
   cursor: pointer;
+  transition: box-shadow 0.35s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.btn-primary:hover  { opacity: 0.88; }
-.btn-primary:active { transform: scale(0.98); }
 
+/* Shimmer sweep — bande de lumière qui traverse le bouton au hover */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+  transition: transform 0s; /* reset instantané quand on quitte */
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 28px rgba(255, 255, 255, 0.16);
+}
+.btn-primary:hover::after {
+  transform: translateX(160%) skewX(-15deg);
+  transition: transform 0.55s ease; /* sweep au hover */
+}
+.btn-primary:active {
+  transform: scale(0.95) !important;
+  box-shadow: none !important;
+}
+
+/* ─── Ghost button ───────────────────────────────────────────── */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 26px;
-  background: transparent;
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -85,10 +112,26 @@ img, video { max-width: 100%; display: block; }
   text-transform: uppercase;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  transition: color 0.2s, border-color 0.2s;
   cursor: pointer;
+  position: relative;
+  /* Fill remontant du bas via background-size */
+  background-image: linear-gradient(var(--text), var(--text));
+  background-size: 100% 0%;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color 0.32s ease,
+              border-color 0.25s ease,
+              background-size 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.btn-ghost:hover { color: var(--text); border-color: var(--border-hover); }
+.btn-ghost:hover {
+  color: var(--bg);
+  border-color: var(--text);
+  background-size: 100% 100%;
+}
+.btn-ghost:active {
+  transform: scale(0.95) !important;
+}
 
 /* ─── Arrow SVG utility ──────────────────────────────────────── */
 /* SVG arrows inherit currentColor and 1em sizing. Flex containers
@@ -237,9 +280,10 @@ body.site-light .btn-primary {
 body.site-light .btn-ghost {
   color: rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 0, 0, 0.18);
+  background-image: linear-gradient(#000000, #000000);
 }
 body.site-light .btn-ghost:hover {
-  color: #000000;
-  border-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border-color: #000000;
 }
 
