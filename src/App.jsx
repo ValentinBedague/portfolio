@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { useLocation, BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { LanguageProvider } from './i18n/LanguageContext'
@@ -7,10 +7,14 @@ import ContactDrawer from './components/ContactDrawer/ContactDrawer'
 import Nav         from './components/Nav/Nav'
 import Footer      from './components/Footer/Footer'
 import Preloader   from './components/Preloader/Preloader'
-import HomePage    from './pages/HomePage'
-import WorkPage    from './pages/WorkPage'
-import ProjectPage from './pages/ProjectPage'
-import AboutPage   from './pages/AboutPage'
+
+// Code splitting — chaque page est un chunk séparé
+const HomePage      = lazy(() => import('./pages/HomePage'))
+const WorkPage      = lazy(() => import('./pages/WorkPage'))
+const ProjectPage   = lazy(() => import('./pages/ProjectPage'))
+const AboutPage     = lazy(() => import('./pages/AboutPage'))
+const NotFoundPage  = lazy(() => import('./pages/NotFoundPage'))
+const LegalPage     = lazy(() => import('./pages/LegalPage'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -22,12 +26,16 @@ function AnimatedRoutes() {
   const location = useLocation()
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/"            element={<HomePage />}    />
-        <Route path="/work"        element={<WorkPage />}    />
-        <Route path="/work/:slug"  element={<ProjectPage />} />
-        <Route path="/about"       element={<AboutPage />}   />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/"            element={<HomePage />}    />
+          <Route path="/work"        element={<WorkPage />}    />
+          <Route path="/work/:slug"  element={<ProjectPage />} />
+          <Route path="/about"       element={<AboutPage />}   />
+          <Route path="/legal"       element={<LegalPage />}    />
+          <Route path="*"            element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   )
 }

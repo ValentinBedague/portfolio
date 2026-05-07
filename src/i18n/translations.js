@@ -59,6 +59,7 @@ export const translations = {
     feedback_success:  "✓ Message sent! I'll get back to you shortly.",
     feedback_error:    '✕ Something went wrong. Try again or reach out directly.',
     emailjs_alert:     'EmailJS not configured. See .env.example for instructions.',
+    email_invalid:     'Please enter a valid email address.',
 
     // — About page
     about_page_eyebrow:  'About',
@@ -101,7 +102,7 @@ export const translations = {
 
     // — Contact CTA section
     ccta_eyebrow:   '— New project',
-    ccta_q1:        'Need a showcase website?',
+    ccta_q1:        'Need a showcase site?',
     ccta_q2:        'An e-commerce store?',
     ccta_q3:        'A custom project?',
     ccta_word:      "Let's talk",
@@ -118,6 +119,34 @@ export const translations = {
     footer_local_time:  'Local time',
     footer_location:    'Based in Biarritz, France',
     footer_made:        'Made by me :)',
+    footer_legal:       'Legal notice',
+
+    // — Legal page
+    legal_eyebrow:    'Legal',
+    legal_title:      'Legal Notice',
+    legal_meta_desc:  'Legal notice for valentinbedague.com — publisher, hosting, intellectual property and personal data.',
+    legal_updated:    'Last updated',
+    legal_s1_title:   'Site publisher',
+    legal_s1_name:    'Publisher:',
+    legal_s1_status:  'Sole trader (auto-entrepreneur)',
+    legal_s1_siret:   'SIRET: 98844520100011 — APE code: 62.01Z',
+    legal_s1_address: '79 Avenue de la Marne, 64200 Biarritz, France',
+    legal_s1_email:   'Email:',
+    legal_s1_site:    'Website:',
+    legal_s2_title:   'Hosting',
+    legal_s2_host:    'Vercel Inc.',
+    legal_s2_address: '340 Pine Street, Suite 701 — San Francisco, CA 94104, USA',
+    legal_s3_title:   'Intellectual property',
+    legal_s3_p1:      'All content on this website (texts, visuals, code, design) is the exclusive property of Valentin Bedague, unless otherwise stated.',
+    legal_s3_p2:      'Any reproduction, distribution or use without prior written permission is strictly prohibited.',
+    legal_s4_title:   'Personal data',
+    legal_s4_p1:      'This website does not use cookies or tracking analytics tools.',
+    legal_s4_p2:      'The contact form collects your name, email address and message solely for the purpose of responding to your enquiry. This data is not shared with any third party.',
+    legal_s4_contact: 'To exercise your rights (access, rectification, deletion), contact:',
+    legal_s5_title:   'Liability',
+    legal_s5_p1:      'The information on this site is provided for general information purposes only. Valentin Bedague cannot be held liable for any errors, omissions or results obtained from the use of this information.',
+    legal_s6_title:   'Applicable law',
+    legal_s6_p1:      'This site is governed by French law. Any dispute relating to its use falls under the exclusive jurisdiction of the competent French courts.',
 
     // — Work story
     story_1a: 'From the first pitch',
@@ -130,8 +159,19 @@ export const translations = {
     story_cta: "Let's talk",
 
     // — Meta (SEO)
-    meta_title:        'VB — Web Developer & Designer',
-    meta_desc:         'VB — Web Developer & Designer. I craft iconic, high-performance websites that convert.',
+    meta_title:        'Valentin Bedague — Web Designer & Full Stack Developer',
+    meta_desc:         'Valentin Bedague — Web designer & full stack developer based in Biarritz. I build iconic, high-performance websites that convert.',
+    // — 404
+    nf_message: "This page seems to have gone missing in action.",
+    nf_cta:     'Back to home',
+    nf_hint:    'Watch the logo hit a corner',
+
+    seo_home_title:    'Web Designer & Full Stack Developer',
+    seo_home_desc:     'Valentin Bedague — Web designer & full stack developer based in Biarritz. Iconic, high-performance websites that convert visitors into customers.',
+    seo_work_title:    'Work — Selected Projects',
+    seo_work_desc:     'Web projects by Valentin Bedague — showcase sites, e-commerce platforms and custom web applications built with React.',
+    seo_about_title:   'About — Valentin Bedague',
+    seo_about_desc:    'Web designer & full stack developer based in Biarritz, France. Passionate about design, performance and user experience.',
   },
 
   fr: {
@@ -194,6 +234,7 @@ export const translations = {
     feedback_success:  '✓ Message envoyé ! Je vous réponds rapidement.',
     feedback_error:    '✕ Une erreur est survenue. Réessayez ou écrivez-moi directement.',
     emailjs_alert:     'EmailJS non configuré. Voir .env.example pour les instructions.',
+    email_invalid:     'Veuillez saisir une adresse email valide.',
 
     // — About page
     about_page_eyebrow:  'À propos',
@@ -236,7 +277,7 @@ export const translations = {
 
     // — Contact CTA section
     ccta_eyebrow:   '— Nouveau projet',
-    ccta_q1:        'Vous avez besoin d\'un site vitrine ?',
+    ccta_q1:        'Besoin d\'un site vitrine ?',
     ccta_q2:        'D\'un e-commerce ?',
     ccta_q3:        'D\'un projet custom ?',
     ccta_word:      'Parlons-en',
@@ -253,6 +294,34 @@ export const translations = {
     footer_local_time:  'Heure locale',
     footer_location:    'Basé à Biarritz, France',
     footer_made:        'Made by me :)',
+    footer_legal:       'Mentions légales',
+
+    // — Mentions légales
+    legal_eyebrow:    'Légal',
+    legal_title:      'Mentions légales',
+    legal_meta_desc:  'Mentions légales de valentinbedague.com — éditeur, hébergement, propriété intellectuelle et données personnelles.',
+    legal_updated:    'Mis à jour en',
+    legal_s1_title:   'Éditeur du site',
+    legal_s1_name:    'Éditeur :',
+    legal_s1_status:  'Auto-entrepreneur',
+    legal_s1_siret:   'SIRET : 98844520100011 — Code APE : 62.01Z',
+    legal_s1_address: '79 Avenue de la Marne, 64200 Biarritz, France',
+    legal_s1_email:   'Email :',
+    legal_s1_site:    'Site :',
+    legal_s2_title:   'Hébergement',
+    legal_s2_host:    'Vercel Inc.',
+    legal_s2_address: '340 Pine Street, Suite 701 — San Francisco, CA 94104, États-Unis',
+    legal_s3_title:   'Propriété intellectuelle',
+    legal_s3_p1:      'L\'ensemble du contenu de ce site (textes, visuels, code, design) est la propriété exclusive de Valentin Bedague, sauf mention contraire.',
+    legal_s3_p2:      'Toute reproduction, diffusion ou utilisation sans autorisation écrite préalable est strictement interdite.',
+    legal_s4_title:   'Données personnelles',
+    legal_s4_p1:      'Ce site n\'utilise pas de cookies ni d\'outils de tracking analytique.',
+    legal_s4_p2:      'Le formulaire de contact collecte votre nom, adresse email et message dans le seul but de répondre à votre demande. Ces données ne sont transmises à aucun tiers.',
+    legal_s4_contact: 'Pour exercer vos droits (accès, rectification, suppression), contactez :',
+    legal_s5_title:   'Responsabilité',
+    legal_s5_p1:      'Les informations présentes sur ce site sont fournies à titre indicatif. Valentin Bedague ne saurait être tenu responsable d\'erreurs, d\'omissions ou des résultats obtenus de l\'utilisation de ces informations.',
+    legal_s6_title:   'Droit applicable',
+    legal_s6_p1:      'Le présent site est régi par le droit français. Tout litige relatif à son utilisation relève de la compétence exclusive des juridictions françaises.',
 
     // — Work story
     story_1a: 'Du premier pitch',
@@ -265,7 +334,18 @@ export const translations = {
     story_cta: 'Contactez-moi',
 
     // — Meta (SEO)
-    meta_title:        'VB — Développeur Web & Digital',
-    meta_desc:         'VB — Développeur Web & Digital. Je crée des expériences numériques sur-mesure alliant design, performance et conversion.',
+    meta_title:        'Valentin Bedague — Web Designer & Développeur Full Stack',
+    meta_desc:         'Valentin Bedague — Web designer & développeur full stack à Biarritz. Sites web iconiques, performants et qui convertissent.',
+    // — 404
+    nf_message: "Cette page semble s'être perdue quelque part.",
+    nf_cta:     "Retour à l'accueil",
+    nf_hint:    'Guettez le logo dans le coin',
+
+    seo_home_title:    'Web Designer & Développeur Full Stack',
+    seo_home_desc:     'Valentin Bedague — Web designer & développeur full stack à Biarritz. Sites iconiques, performants, qui convertissent les visiteurs en clients.',
+    seo_work_title:    'Travaux — Projets Sélectionnés',
+    seo_work_desc:     'Projets web réalisés par Valentin Bedague — sites vitrines, e-commerce et applications web sur-mesure développées avec React.',
+    seo_about_title:   'À Propos — Valentin Bedague',
+    seo_about_desc:    'Webdesigner & développeur full stack basé à Biarritz. Passionné par le design, la performance et l\'expérience utilisateur.',
   },
 }

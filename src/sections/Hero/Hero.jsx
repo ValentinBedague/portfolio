@@ -12,8 +12,10 @@ export default function Hero() {
 
         {/* Left — headline (brand slogan stays English) */}
         <h1 className="hero__headline" aria-label="Your website, iconic and effective">
-          <span className="line-mask"><span className="hero__line">YOUR</span></span>
-          <span className="line-mask"><span className="hero__line">WEBSITE</span></span>
+          <span className="hero__yw-pair">
+            <span className="line-mask"><span className="hero__line">YOUR</span></span>
+            <span className="line-mask"><span className="hero__line">WEBSITE</span></span>
+          </span>
           <span className="hero__ie-pair">
             <span className="line-mask"><span className="hero__line hero__line--outline">ICONIC &amp;</span></span>
             <span className="line-mask"><span className="hero__line">EFFECTIVE</span></span>

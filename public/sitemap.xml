@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://valentinbedague.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/work</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/work"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/work"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/legal</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/work/myshampouineuse</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/work/undamassage</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/work/tcxa</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://valentinbedague.com/work/sportofkings</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

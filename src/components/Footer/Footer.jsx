@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
 import { ArrowUpRight, ArrowRight } from '../ArrowIcon'
@@ -172,7 +172,10 @@ export default function Footer() {
       <div className="footer-bar container">
         <img src={logoSrc} alt="VB" className="footer-bar__logo" />
         <span className="footer-bar__credit">{t('footer_made')}</span>
-        <span className="footer-bar__name">Valentin Bedague</span>
+        <div className="footer-bar__right">
+          <span className="footer-bar__name">Valentin Bedague</span>
+          <Link to="/legal" className="footer-bar__legal">{t('footer_legal')}</Link>
+        </div>
       </div>
 
     </footer>

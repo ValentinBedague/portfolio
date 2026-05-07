@@ -25,12 +25,9 @@ export function LanguageProvider({ children }) {
     localStorage.setItem('vb-lang', newLang)
   }
 
-  // SEO: keep <html lang>, <title> and <meta description> in sync
+  // SEO: keep <html lang> in sync — title & meta sont gérés par le composant SEO
   useEffect(() => {
     document.documentElement.lang = lang
-    document.title = translations[lang].meta_title
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', translations[lang].meta_desc)
   }, [lang])
 
   return (

@@ -94,7 +94,8 @@
   .hero           { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 32px; }
 }
 
-/* ── ie-pair: transparent on desktop, flex row on mobile ───── */
+/* ── Pairs: transparent on desktop, flex rows on mobile ─────── */
+.hero__yw-pair,
 .hero__ie-pair { display: contents; }
 
 /* ── Mobile ────────────────────────────────────────────────── */
@@ -105,7 +106,8 @@
     line-height: 0.92;
     text-align: center;
   }
-  /* Force "ICONIC &" and "EFFECTIVE" on the same row */
+  /* Line 1 : YOUR WEBSITE — Line 2 : ICONIC & EFFECTIVE */
+  .hero__yw-pair,
   .hero__ie-pair {
     display: flex;
     justify-content: center;

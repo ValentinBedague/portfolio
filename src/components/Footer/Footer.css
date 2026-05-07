@@ -316,6 +316,12 @@ body.site-light .site-footer--dark {
   color: var(--footer-muted);
 }
 
+.footer-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .footer-bar__name {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -323,6 +329,17 @@ body.site-light .site-footer--dark {
   text-transform: uppercase;
   color: var(--footer-dim);
 }
+
+.footer-bar__legal {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--footer-faint);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-bar__legal:hover { color: var(--footer-muted); }
 
 /* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 900px) {

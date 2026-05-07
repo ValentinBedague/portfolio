@@ -194,6 +194,17 @@ svg[aria-hidden="true"] {
   .btn-ghost { padding: 11px 20px; font-size: 10px; }
 }
 
+/* ─── Reduced motion — respecte la préférence système ───────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:       0.01ms !important;
+    animation-iteration-count: 1     !important;
+    transition-duration:      0.01ms !important;
+    scroll-behavior:          auto   !important;
+  }
+  /* Framer Motion lit aussi cette media query nativement */
+}
+
 /* ─── iOS safe area (notch / home indicator) ─────────────────── */
 @supports (padding: env(safe-area-inset-bottom)) {
   body { padding-bottom: env(safe-area-inset-bottom); }

@@ -6,6 +6,7 @@ import { projects } from '../data/projects'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useContactDrawer } from '../components/ContactDrawer/ContactDrawerContext'
 import { ArrowRight } from '../components/ArrowIcon'
+import SEO, { SITE } from '../components/SEO/SEO'
 import './WorkPage.css'
 
 /* ─── WorkStory: scroll-driven storytelling section ─────────── */
@@ -137,8 +138,17 @@ function ProjectRow({ project, index, lang }) {
   )
 }
 
+const JSON_LD_WORK = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Selected Works — Valentin Bedague',
+  url: `${SITE}/work`,
+  description: 'Web projects by Valentin Bedague — showcase sites, e-commerce, custom applications.',
+  creator: { '@type': 'Person', name: 'Valentin Bedague', url: SITE },
+}
+
 export default function WorkPage() {
-  const { lang }    = useLanguage()
+  const { lang, t }    = useLanguage()
   const [hovered, setHovered] = useState(null)
   const videoRef    = useRef(null)
 
@@ -160,6 +170,13 @@ export default function WorkPage() {
 
   return (
     <PageTransition>
+      <SEO
+        title={t('seo_work_title')}
+        description={t('seo_work_desc')}
+        url="/work"
+        lang={lang}
+        jsonLd={JSON_LD_WORK}
+      />
       <div className="work-page" onMouseMove={onMouseMove}>
 
         {/* ── Header ─────────────────────────────────────────── */}
@@ -244,6 +261,7 @@ export default function WorkPage() {
                   muted
                   loop
                   playsInline
+                  preload="none"
                 />
               )}
               <div

@@ -1,0 +1,102 @@
+.legal-page {
+  padding-top: calc(var(--nav-h) + 80px);
+  padding-bottom: 120px;
+  min-height: 100vh;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.legal-inner {
+  max-width: 720px;
+}
+
+.legal-header {
+  margin-bottom: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.legal-h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.legal-updated {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* ── Body ──────────────────────────────────────────────────── */
+.legal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.legal-section {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legal-section:last-child {
+  border-bottom: none;
+}
+
+.legal-h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.legal-section p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.legal-section strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.legal-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-hover);
+  transition: text-decoration-color 0.2s ease;
+}
+.legal-link:hover {
+  text-decoration-color: var(--text);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .legal-page   { padding-top: calc(var(--nav-h) + 48px); padding-bottom: 80px; }
+  .legal-header { margin-bottom: 40px; }
+}
+
+@media (max-width: 480px) {
+  .legal-page   { padding-top: calc(var(--nav-h) + 32px); padding-bottom: 60px; }
+  .legal-section p { font-size: 14px; }
+}

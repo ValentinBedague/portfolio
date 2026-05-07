@@ -114,6 +114,17 @@ export default function ContactDrawer() {
 
             {/* Form */}
             <form ref={formRef} onSubmit={handleSubmit} className="cd-form" noValidate>
+
+              {/* Antibot — honeypot : invisible pour les humains, rempli par les bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+              />
+
               <div className="cd-fields">
                 {fields.map((f) => (
                   <div key={f.name} className={`cd-field ${f.span === 2 ? 'cd-field--full' : ''}`}>
@@ -134,8 +145,12 @@ export default function ContactDrawer() {
                         type={f.type}
                         placeholder={t(f.phKey)}
                         required
-                        className="cd-input"
+                        className={`cd-input${f.name === 'from_email' && emailError ? ' cd-input--error' : ''}`}
+                        {...(f.name === 'from_email' ? { onBlur: handleEmailBlur } : {})}
                       />
+                    )}
+                    {f.name === 'from_email' && emailError && (
+                      <span className="cd-field-error">{emailError}</span>
                     )}
                   </div>
                 ))}

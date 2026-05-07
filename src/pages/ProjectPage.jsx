@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import PageTransition from '../components/PageTransition/PageTransition'
+import SEO, { SITE } from '../components/SEO/SEO'
 import { useLanguage } from '../i18n/LanguageContext'
 import './ProjectPage.css'
 
@@ -28,14 +29,40 @@ export default function ProjectPage() {
   const get = (field) =>
     typeof project[field] === 'object' ? project[field][lang] ?? project[field].en : project[field]
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: get('description'),
+    url: project.url,
+    image: project.screenshot ? `${SITE}${project.screenshot}` : undefined,
+    creator: { '@type': 'Person', name: 'Valentin Bedague', url: SITE },
+    keywords: get('tags').join(', '),
+  }
+
   return (
     <PageTransition>
+      <SEO
+        title={project.title}
+        description={get('description')}
+        image={project.screenshot}
+        url={`/work/${project.slug}`}
+        type="article"
+        lang={lang}
+        jsonLd={jsonLd}
+      />
       <div className="project-page">
 
         {/* Hero visuel */}
         <div className="pp-hero" style={{ background: project.gradient }}>
           {project.screenshot && (
-            <img src={project.screenshot} alt={project.title} className="pp-hero__img" />
+            <img
+              src={project.screenshot}
+              alt={`${project.title} — aperçu du projet`}
+              className="pp-hero__img"
+              fetchpriority="high"
+              loading="eager"
+            />
           )}
           <div className="pp-hero__overlay" />
           <div className="pp-hero__content container">
