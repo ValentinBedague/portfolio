@@ -167,16 +167,16 @@
   display: flex;
   gap: 12px;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;   /* smooth momentum on older iOS */
+  overscroll-behavior-x: contain;      /* stop page scroll when slider hits edge */
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 9vw;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 0 9vw;
   padding-bottom: 4px; /* prevent clipping of scale transform */
-  cursor: grab;
 }
 .hpr-mobile__slider::-webkit-scrollbar { display: none; }
-.hpr-mobile__slider:active { cursor: grabbing; }
 
 /* ── Each slide ────────────────────────────────────────────── */
 .hpr-slide {
@@ -188,17 +188,18 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  will-change: transform, opacity;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity  0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Only transition after snap — no will-change on every slide (GPU memory) */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity  0.4s cubic-bezier(0.16, 1, 0.3, 1);
   /* Inactive state */
-  transform: scale(0.9);
-  opacity: 0.45;
+  transform: scale(0.92);
+  opacity: 0.5;
 }
 
 .hpr-slide--active {
   transform: scale(1);
   opacity: 1;
+  will-change: transform; /* only the active card needs a layer */
 }
 
 /* Ensure last card can fully center */

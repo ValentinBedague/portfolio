@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
+import { ArrowRight } from '../../components/ArrowIcon'
 
 export default function ProjectCard({ project, index }) {
   const cardRef = useRef(null)
@@ -90,7 +91,7 @@ export default function ProjectCard({ project, index }) {
             rel="noopener noreferrer"
             className="card__link"
           >
-            Voir →
+            Voir <ArrowRight className="card__link-arrow" />
           </a>
         </div>
       </div>

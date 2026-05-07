@@ -90,6 +90,17 @@ img, video { max-width: 100%; display: block; }
 }
 .btn-ghost:hover { color: var(--text); border-color: var(--border-hover); }
 
+/* ─── Arrow SVG utility ──────────────────────────────────────── */
+/* SVG arrows inherit currentColor and 1em sizing. Flex containers
+   need vertical-align on inline SVG children. */
+svg[aria-hidden="true"] {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  /* Belt-and-suspenders: prevent any emoji font substitution */
+  font-variant-emoji: text;
+}
+
 /* ─── Section shell ──────────────────────────────────────────── */
 .section { padding: 120px 0; position: relative; }
 
@@ -193,7 +204,7 @@ img, video { max-width: 100%; display: block; }
   background: var(--bg);
   margin-bottom: 100vh; /* transparent margin exposes the fixed footer */
   border-radius: 0 0 32px 32px;
-  overflow: hidden;
+  overflow: clip; /* clip = visual clipping only, doesn't trap position:sticky */
   transition: background 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

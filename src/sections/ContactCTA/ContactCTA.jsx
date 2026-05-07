@@ -7,6 +7,7 @@ import {
 } from 'framer-motion'
 import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { ArrowUpRight } from '../../components/ArrowIcon'
 import './ContactCTA.css'
 
 export default function ContactCTA() {
@@ -83,7 +84,7 @@ export default function ContactCTA() {
         <motion.div className="ccta-main" style={{ y: ctaY, opacity: ctaO }}>
           <button className="ccta-main__btn" onClick={openDrawer} aria-label="Open contact">
             <span className="ccta-main__word">{t('ccta_word')}</span>
-            <span className="ccta-main__arrow" aria-hidden="true">↗</span>
+            <ArrowUpRight className="ccta-main__arrow" />
           </button>
         </motion.div>
 

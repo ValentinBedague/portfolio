@@ -225,6 +225,12 @@
   transform: translateX(0);
 }
 
+/* Contact button arrow (inside .btn-primary) */
+.nav__contact-arrow {
+  font-size: 1em; /* inherits btn font-size */
+  margin-left: 2px;
+}
+
 /* Footer row */
 .nav__overlay-footer {
   display: flex;

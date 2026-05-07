@@ -1,10 +1,96 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import PageTransition from '../components/PageTransition/PageTransition'
 import { projects } from '../data/projects'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useContactDrawer } from '../components/ContactDrawer/ContactDrawerContext'
+import { ArrowRight } from '../components/ArrowIcon'
 import './WorkPage.css'
+
+/* ─── WorkStory: scroll-driven storytelling section ─────────── */
+function WorkStory() {
+  const storyRef = useRef(null)
+  const { lang, t } = useLanguage()
+  const { openDrawer } = useContactDrawer()
+
+  const { scrollYProgress } = useScroll({
+    target: storyRef,
+    offset: ['start start', 'end end'],
+  })
+
+  // Scene 1 — 0 → 0.25
+  const op1 = useTransform(scrollYProgress, [0, 0.05, 0.20, 0.25], [0, 1, 1, 0])
+  const y1  = useTransform(scrollYProgress, [0, 0.07], [60, 0])
+
+  // Scene 2 — 0.25 → 0.50
+  const op2 = useTransform(scrollYProgress, [0.23, 0.28, 0.43, 0.48], [0, 1, 1, 0])
+  const y2  = useTransform(scrollYProgress, [0.23, 0.30], [60, 0])
+
+  // Scene 3 — 0.50 → 0.75
+  const op3 = useTransform(scrollYProgress, [0.46, 0.51, 0.66, 0.71], [0, 1, 1, 0])
+  const y3  = useTransform(scrollYProgress, [0.46, 0.53], [60, 0])
+
+  // Scene 4 — 0.75 → 1.00 (stays)
+  const op4 = useTransform(scrollYProgress, [0.69, 0.75], [0, 1])
+  const y4  = useTransform(scrollYProgress, [0.69, 0.76], [60, 0])
+
+  // Progress bar
+  const progress = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+
+  const scenes = [
+    { op: op1, y: y1, num: '01', keys: ['story_1a', 'story_1b'] },
+    { op: op2, y: y2, num: '02', keys: ['story_2a', 'story_2b'] },
+    { op: op3, y: y3, num: '03', keys: ['story_3a', 'story_3b'] },
+    { op: op4, y: y4, num: '04', keys: ['story_4q'], isCta: true },
+  ]
+
+  return (
+    <section ref={storyRef} className="work-story">
+      <div className="work-story__sticky">
+
+        {scenes.map((scene, i) => (
+          <motion.div
+            key={i}
+            className={`work-story__scene${scene.isCta ? ' work-story__scene--cta' : ''}`}
+            style={{ opacity: scene.op, y: scene.y }}
+          >
+            {/* Ghost background number */}
+            <span className="work-story__ghost" aria-hidden="true">{scene.num}</span>
+
+            {/* Scene index */}
+            <span className="work-story__index">{scene.num} / 04</span>
+
+            {/* Text lines */}
+            <div className="work-story__lines">
+              {scene.keys.map((key, j) => (
+                <span
+                  key={j}
+                  className={`work-story__line${j === 1 ? ' work-story__line--outline' : ''}`}
+                >
+                  {t(key)}
+                </span>
+              ))}
+            </div>
+
+            {/* CTA button (scene 4 only) */}
+            {scene.isCta && (
+              <button className="work-story__btn" onClick={openDrawer}>
+                {t('story_cta')} <ArrowRight className="work-story__btn-arrow" />
+              </button>
+            )}
+          </motion.div>
+        ))}
+
+        {/* Scroll progress bar */}
+        <div className="work-story__bar">
+          <motion.div className="work-story__bar-fill" style={{ width: progress }} />
+        </div>
+
+      </div>
+    </section>
+  )
+}
 
 const maskReveal = {
   hidden: { y: '110%' },
@@ -46,7 +132,7 @@ function ProjectRow({ project, index, lang }) {
         ))}
       </div>
 
-      <span className="work-row__arrow">→</span>
+      <ArrowRight className="work-row__arrow" />
     </motion.div>
   )
 }
@@ -128,6 +214,9 @@ export default function WorkPage() {
             </div>
           ))}
         </div>
+
+        {/* ── Story scroll section ───────────────────────────── */}
+        <WorkStory />
 
         {/* ── Floating preview ───────────────────────────────── */}
         <AnimatePresence>

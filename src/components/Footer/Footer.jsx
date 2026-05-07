@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
+import { ArrowUpRight, ArrowRight } from '../ArrowIcon'
 import './Footer.css'
 
 const SOCIAL = {
@@ -127,13 +128,13 @@ export default function Footer() {
               >
                 <span className="footer-nav__num">{num}</span>
                 <span className="footer-nav__label">{label}</span>
-                <span className="footer-nav__arrow">↗</span>
+                <ArrowUpRight className="footer-nav__arrow" />
               </Link>
             ))}
             <button className="footer-nav__row footer-nav__row--cta" onClick={openDrawer}>
-              <span className="footer-nav__num">→</span>
+              <ArrowRight className="footer-nav__num" />
               <span className="footer-nav__label">{t('nav_contact')}</span>
-              <span className="footer-nav__arrow">↗</span>
+              <ArrowUpRight className="footer-nav__arrow" />
             </button>
           </nav>
         </div>

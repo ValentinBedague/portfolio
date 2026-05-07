@@ -75,9 +75,17 @@ function drawOverlay(canvas, t) {
 
 export default function ScratchSection() {
   const sectionRef = useRef(null)
-  const canvasRef  = useRef(null)
+  const canvasRef      = useRef(null)
+  const lastHapticRef  = useRef(0)          // throttle scratch vibrations
   const [revealed, setRevealed] = useState(false)
   const [fading,   setFading]   = useState(false)
+
+  // Vibration API wrapper — silently no-ops on desktop / unsupported browsers
+  const haptic = useCallback((pattern) => {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(pattern)
+    }
+  }, [])
   const { openDrawer } = useContactDrawer()
   const { t } = useLanguage()
 
@@ -151,16 +159,25 @@ export default function ScratchSection() {
     })
     ctx.globalCompositeOperation = 'source-over'
 
+    // Haptic scratch feedback — throttled to one tick every 55 ms
+    const now = Date.now()
+    if (now - lastHapticRef.current > 55) {
+      haptic(4)
+      lastHapticRef.current = now
+    }
+
     const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data
     let transparent = 0
     for (let i = 3; i < data.length; i += 80) {
       if (data[i] < 128) transparent++
     }
     if ((transparent / (data.length / 80)) > 0.45) {
+      // Celebratory double-pulse on reveal
+      haptic([50, 35, 80])
       setFading(true)
       setTimeout(() => setRevealed(true), 900)
     }
-  }, [fading, revealed])
+  }, [fading, revealed, haptic])
 
   // Non-passive touch listener — React's onTouchMove is passive, so
   // e.preventDefault() has no effect there and the page scrolls instead of scratching.

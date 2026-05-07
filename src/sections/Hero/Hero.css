@@ -96,7 +96,16 @@
 
 /* ── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .hero__headline { font-size: clamp(40px, 14vw, 72px); line-height: 0.92; }
+  /* 2-line centered headline: "YOUR WEBSITE" / "ICONIC & EFFECTIVE" */
+  .hero__headline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 0.2em;
+    font-size: clamp(24px, 7.5vw, 36px);
+    line-height: 0.92;
+  }
   .hero           { padding-top: calc(var(--nav-h) + 24px); padding-bottom: 24px; }
   .hero__intro    { font-size: 15px; }
   .hero__body     { font-size: 12px; }
@@ -104,7 +113,7 @@
 }
 
 @media (max-width: 480px) {
-  .hero__headline { font-size: clamp(36px, 13vw, 56px); }
+  .hero__headline { font-size: clamp(22px, 7vw, 30px); }
 }
 
 /* ── Touch: disable scale effect that hides hero content ───── */

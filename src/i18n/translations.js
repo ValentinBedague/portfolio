@@ -71,11 +71,11 @@ export const translations = {
     pp_services:       'Services',
     pp_website:        'Website',
     pp_screenshots:    'Screenshots coming soon',
-    pp_prev:           '← Previous',
-    pp_next:           'Next →',
+    pp_prev:           '←︎ Previous',
+    pp_next:           'Next →︎',
     pp_all:            'All projects',
     pp_not_found:      'Project not found.',
-    pp_back_home:      '← Back to home',
+    pp_back_home:      '←︎ Back to home',
 
     // — Tech carousel
     tech_title_1: 'Technologies',
@@ -93,7 +93,7 @@ export const translations = {
     scratch_p2_desc:      'Core Web Vitals in the green, lightning-fast load times',
     scratch_p3_title:     'Guaranteed ROI',
     scratch_p3_desc:      'Every element designed to convert visitors into customers',
-    scratch_cta:          'Claim my project →',
+    scratch_cta:          'Claim my project →︎',
     scratch_note:         'Reply guaranteed within 24h',
     scratch_overlay_1:    'YOUR WINNING',
     scratch_overlay_2:    'TICKET',
@@ -118,6 +118,16 @@ export const translations = {
     footer_local_time:  'Local time',
     footer_location:    'Based in Biarritz, France',
     footer_made:        'Made by me :)',
+
+    // — Work story
+    story_1a: 'From the first pitch',
+    story_1b: 'to the last pixel…',
+    story_2a: 'I guide you',
+    story_2b: 'every step of the way',
+    story_3a: 'To build',
+    story_3b: 'the perfect website',
+    story_4q: 'Have an idea?',
+    story_cta: "Let's talk",
 
     // — Meta (SEO)
     meta_title:        'VB — Web Developer & Designer',
@@ -196,11 +206,11 @@ export const translations = {
     pp_services:       'Services',
     pp_website:        'Site',
     pp_screenshots:    "Captures d'écran à venir",
-    pp_prev:           '← Précédent',
-    pp_next:           'Suivant →',
+    pp_prev:           '←︎ Précédent',
+    pp_next:           'Suivant →︎',
     pp_all:            'Tous les projets',
     pp_not_found:      'Projet introuvable.',
-    pp_back_home:      "← Retour à l'accueil",
+    pp_back_home:      "←︎ Retour à l'accueil",
 
     // — Tech carousel
     tech_title_1: 'Technologies',
@@ -218,7 +228,7 @@ export const translations = {
     scratch_p2_desc:      'Core Web Vitals au vert, temps de chargement instantané',
     scratch_p3_title:     'Conversion Assurée',
     scratch_p3_desc:      'Chaque élément conçu pour transformer les visiteurs en clients',
-    scratch_cta:          'Réclamer mon projet →',
+    scratch_cta:          'Réclamer mon projet →︎',
     scratch_note:         'Réponse garantie sous 24h',
     scratch_overlay_1:    'VOTRE TICKET',
     scratch_overlay_2:    'GAGNANT',
@@ -243,6 +253,16 @@ export const translations = {
     footer_local_time:  'Heure locale',
     footer_location:    'Basé à Biarritz, France',
     footer_made:        'Made by me :)',
+
+    // — Work story
+    story_1a: 'Du premier pitch',
+    story_1b: 'au dernier pixel…',
+    story_2a: 'Je vous accompagne',
+    story_2b: 'et vous conseille',
+    story_3a: 'Pour réaliser',
+    story_3b: 'le site parfait',
+    story_4q: 'Une idée ?',
+    story_cta: 'Contactez-moi',
 
     // — Meta (SEO)
     meta_title:        'VB — Développeur Web & Digital',

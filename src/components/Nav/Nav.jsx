@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
 import LangSwitcher from '../LangSwitcher/LangSwitcher'
+import { ArrowRight } from '../ArrowIcon'
 import './Nav.css'
 
 const overlayVariants = {
@@ -153,7 +154,7 @@ export default function Nav() {
                           onClick={close}
                         >
                           {label}
-                          <span className="nav__overlay-arrow">→</span>
+                          <ArrowRight className="nav__overlay-arrow" />
                         </NavLink>
                       </motion.div>
                     </div>
@@ -173,7 +174,7 @@ export default function Nav() {
                   className="btn-primary"
                   onClick={() => { close(); openDrawer() }}
                 >
-                  {t('nav_contact')} →
+                  {t('nav_contact')} <ArrowRight className="nav__contact-arrow" />
                 </button>
               </motion.div>
 

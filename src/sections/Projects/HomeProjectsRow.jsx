@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { projects } from '../../data/projects'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { ArrowUpRight } from '../../components/ArrowIcon'
 import './HomeProjectsRow.css'
 
 /* ── Desktop card ──────────────────────────────────────────────── */
@@ -58,52 +59,77 @@ function Card({ project, index, onEnter, onLeave }) {
 
 /* ── Mobile slider ─────────────────────────────────────────────── */
 function MobileSlider() {
-  const navigate    = useNavigate()
-  const { lang }    = useLanguage()
-  const sliderRef   = useRef(null)
-  const [activeIdx, setActiveIdx] = useState(0)
-  const [progress,  setProgress]  = useState(0)
+  const navigate      = useNavigate()
+  const { lang }      = useLanguage()
+  const sliderRef     = useRef(null)
+  const fillRef       = useRef(null)   // progress bar fill — updated via DOM
+  const idxLabelRef   = useRef(null)   // "01" counter — updated via DOM
+  const dotRefs       = useRef([])     // dot buttons — updated via DOM
+  const activeIdxRef  = useRef(0)      // current active index, no state
   const total = projects.length
 
-  // Track progress via scroll
-  const onScroll = useCallback(() => {
-    const el = sliderRef.current
-    if (!el) return
-    const max = el.scrollWidth - el.clientWidth
-    setProgress(max > 0 ? el.scrollLeft / max : 0)
-  }, [])
-
-  // Track active slide via IntersectionObserver
   useEffect(() => {
     const el = sliderRef.current
     if (!el) return
-    const slides = el.querySelectorAll('.hpr-slide')
+    const slides = Array.from(el.querySelectorAll('.hpr-slide'))
 
+    /* ── Direct DOM update — zero React re-renders during scroll ── */
+    const setActive = (idx) => {
+      if (idx === activeIdxRef.current) return
+      // Slide classes
+      slides[activeIdxRef.current]?.classList.remove('hpr-slide--active')
+      slides[idx]?.classList.add('hpr-slide--active')
+      // Dot classes
+      dotRefs.current[activeIdxRef.current]?.classList.remove('active')
+      dotRefs.current[idx]?.classList.add('active')
+      // Counter label
+      if (idxLabelRef.current)
+        idxLabelRef.current.textContent = String(idx + 1).padStart(2, '0')
+      activeIdxRef.current = idx
+    }
+
+    /* ── Progress bar — updated on every scroll tick via rAF ────── */
+    let rafId = null
+    const onScroll = () => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        const max = el.scrollWidth - el.clientWidth
+        const p   = max > 0 ? el.scrollLeft / max : 0
+        if (fillRef.current)
+          fillRef.current.style.transform = `scaleX(${p})`
+      })
+    }
+
+    /* ── IntersectionObserver — single threshold, fires rarely ─── */
     const io = new IntersectionObserver(
       (entries) => {
-        let best = { ratio: 0, idx: 0 }
+        let best = { ratio: -1, idx: 0 }
         entries.forEach(entry => {
-          const idx = [...slides].indexOf(entry.target)
-          if (entry.intersectionRatio > best.ratio) best = { ratio: entry.intersectionRatio, idx }
+          if (entry.intersectionRatio > best.ratio) {
+            best = { ratio: entry.intersectionRatio, idx: slides.indexOf(entry.target) }
+          }
         })
-        if (best.ratio > 0) setActiveIdx(best.idx)
+        if (best.ratio > 0.4) setActive(best.idx)
       },
-      { root: el, threshold: Array.from({ length: 11 }, (_, i) => i / 10) }
+      { root: el, threshold: 0.5 }
     )
-
     slides.forEach(s => io.observe(s))
     el.addEventListener('scroll', onScroll, { passive: true })
 
-    return () => { io.disconnect(); el.removeEventListener('scroll', onScroll) }
-  }, [onScroll])
+    return () => {
+      io.disconnect()
+      el.removeEventListener('scroll', onScroll)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }, [])
 
-  // Snap to a slide programmatically
-  const snapTo = (idx) => {
+  const snapTo = useCallback((idx) => {
     const el = sliderRef.current
     if (!el) return
-    const slide = el.querySelectorAll('.hpr-slide')[idx]
-    slide?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
-  }
+    el.querySelectorAll('.hpr-slide')[idx]
+      ?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+  }, [])
 
   return (
     <div className="hpr-mobile" id="projects">
@@ -118,7 +144,7 @@ function MobileSlider() {
           return (
             <article
               key={p.id}
-              className={`hpr-slide${activeIdx === i ? ' hpr-slide--active' : ''}`}
+              className={`hpr-slide${i === 0 ? ' hpr-slide--active' : ''}`}
               onClick={() => navigate(`/work/${p.slug}`)}
               aria-label={p.title}
             >
@@ -145,7 +171,7 @@ function MobileSlider() {
                 </div>
                 <div className="hpr-slide__bottom">
                   <p className="hpr-slide__title">{p.title}</p>
-                  <span className="hpr-slide__arrow">↗</span>
+                  <ArrowUpRight className="hpr-slide__arrow" />
                 </div>
               </div>
             </article>
@@ -158,14 +184,9 @@ function MobileSlider() {
 
         {/* Progress line + counter */}
         <div className="hpr-mobile__progress">
-          <span className="hpr-mobile__idx">
-            {String(activeIdx + 1).padStart(2, '0')}
-          </span>
+          <span ref={idxLabelRef} className="hpr-mobile__idx">01</span>
           <div className="hpr-mobile__track">
-            <div
-              className="hpr-mobile__fill"
-              style={{ transform: `scaleX(${progress})` }}
-            />
+            <div ref={fillRef} className="hpr-mobile__fill" />
           </div>
           <span className="hpr-mobile__total">
             {String(total).padStart(2, '0')}
@@ -177,7 +198,8 @@ function MobileSlider() {
           {projects.map((_, i) => (
             <button
               key={i}
-              className={`hpr-mobile__dot${activeIdx === i ? ' active' : ''}`}
+              ref={el => { dotRefs.current[i] = el }}
+              className={`hpr-mobile__dot${i === 0 ? ' active' : ''}`}
               onClick={() => snapTo(i)}
               aria-label={`Project ${i + 1}`}
             />

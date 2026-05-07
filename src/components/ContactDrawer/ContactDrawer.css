@@ -14,7 +14,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(480px, 100vw);
+  width: min(580px, 100vw);
   background: var(--bg-elevated);
   z-index: 201;
   display: flex;
@@ -22,7 +22,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;   /* iOS smooth scroll */
   overscroll-behavior: contain;        /* prevent scroll leak */
-  padding: 40px 40px 48px;
+  padding: 48px 52px 56px;
   /* Account for iOS home indicator */
   padding-bottom: max(48px, calc(48px + env(safe-area-inset-bottom, 0px)));
   gap: 32px;
