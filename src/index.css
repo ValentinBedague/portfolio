@@ -219,6 +219,12 @@ body.site-light .app-body {
   pointer-events: none;
 }
 
+/* Pages sans footer (ex. pages projet) */
+.app-body--no-footer {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
 /* ─── Light mode (scroll-triggered on ContactCTA) ────────────── */
 body {
   transition:

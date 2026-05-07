@@ -32,6 +32,27 @@ function AnimatedRoutes() {
   )
 }
 
+function AppLayout({ loaded }) {
+  const { pathname } = useLocation()
+  const isProjectPage = /^\/work\/.+/.test(pathname)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: loaded ? 1 : 0 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      style={{ pointerEvents: loaded ? 'auto' : 'none' }}
+    >
+      {!isProjectPage && <Footer />}
+      <div className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
+        <Nav />
+        <AnimatedRoutes />
+        <div className="footer-sentinel" aria-hidden="true" />
+      </div>
+    </motion.div>
+  )
+}
+
 export default function App() {
   const [loaded, setLoaded] = useState(false)
 
@@ -42,19 +63,7 @@ export default function App() {
         <ContactDrawerProvider>
           {!loaded && <Preloader onDone={() => setLoaded(true)} />}
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: loaded ? 1 : 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            style={{ pointerEvents: loaded ? 'auto' : 'none' }}
-          >
-            <Footer />
-            <div className="app-body">
-              <Nav />
-              <AnimatedRoutes />
-              <div className="footer-sentinel" aria-hidden="true" />
-            </div>
-          </motion.div>
+          <AppLayout loaded={loaded} />
 
           <ContactDrawer />
         </ContactDrawerProvider>

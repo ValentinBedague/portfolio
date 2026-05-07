@@ -9,15 +9,20 @@ const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
 export default function ContactDrawer() {
   const { open, closeDrawer } = useContactDrawer()
   const { t } = useLanguage()
-  const formRef = useRef(null)
-  const [status, setStatus] = useState('idle')
+  const formRef    = useRef(null)
+  const openedAtRef = useRef(null)          // antibot: timestamp d'ouverture
+  const [status,     setStatus]     = useState('idle')
+  const [emailError, setEmailError] = useState('')
 
-  // Lock body scroll when drawer is open
+  // Lock body scroll + reset timestamp when drawer opens
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+    if (open) openedAtRef.current = Date.now()
     return () => { document.body.style.overflow = '' }
   }, [open])
 
@@ -28,14 +33,41 @@ export default function ContactDrawer() {
     { name: 'message',    labelKey: 'field_message',  type: 'textarea', phKey: 'ph_message', span: 2 },
   ]
 
+  const handleEmailBlur = (e) => {
+    const val = e.target.value.trim()
+    if (val && !EMAIL_RE.test(val)) {
+      setEmailError(t('email_invalid'))
+    } else {
+      setEmailError('')
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!SERVICE_ID) { alert(t('emailjs_alert')); return }
+
+    const form = formRef.current
+    const data = new FormData(form)
+
+    // ── Antibot 1 : honeypot — champ caché rempli = bot
+    if (data.get('website')) return
+
+    // ── Antibot 2 : soumission trop rapide (< 3 s)
+    if (Date.now() - openedAtRef.current < 3000) return
+
+    // ── Antibot 3 : validation email côté JS
+    const email = data.get('from_email')?.trim() ?? ''
+    if (!EMAIL_RE.test(email)) {
+      setEmailError(t('email_invalid'))
+      return
+    }
+
     setStatus('loading')
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
       setStatus('success')
-      formRef.current.reset()
+      form.reset()
+      setEmailError('')
       setTimeout(() => setStatus('idle'), 6000)
     } catch {
       setStatus('error')
@@ -78,18 +110,6 @@ export default function ContactDrawer() {
                 <span />
                 <span />
               </button>
-            </div>
-
-            {/* Contact links */}
-            <div className="cd-links">
-              <a href="mailto:contact@vbdev.fr" className="cd-link">
-                <span className="cd-link__icon">✉</span>
-                contact@vbdev.fr
-              </a>
-              <a href="https://www.linkedin.com/in/valentinbedague" target="_blank" rel="noopener noreferrer" className="cd-link">
-                <span className="cd-link__icon">in</span>
-                LinkedIn
-              </a>
             </div>
 
             {/* Form */}
@@ -146,6 +166,18 @@ export default function ContactDrawer() {
                 )}
               </AnimatePresence>
             </form>
+
+            {/* Contact links */}
+            <div className="cd-links">
+              <a href="mailto:contact@valentinbedague.com" className="cd-link">
+                <span className="cd-link__icon">✉</span>
+                contact@valentinbedague.com
+              </a>
+              <a href="https://www.linkedin.com/in/valentin-bedague/" target="_blank" rel="noopener noreferrer" className="cd-link">
+                <span className="cd-link__icon">in</span>
+                LinkedIn
+              </a>
+            </div>
           </motion.aside>
         </>
       )}

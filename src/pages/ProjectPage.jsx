@@ -39,6 +39,11 @@ export default function ProjectPage() {
           )}
           <div className="pp-hero__overlay" />
           <div className="pp-hero__content container">
+            <nav className="pp-breadcrumb" aria-label="Breadcrumb">
+              <Link to="/" className="pp-breadcrumb__link">{t('nav_home')}</Link>
+              <span className="pp-breadcrumb__sep" aria-hidden="true">/</span>
+              <Link to="/work" className="pp-breadcrumb__link">{t('nav_work')}</Link>
+            </nav>
             <span className="pp-hero__cat">{get('category')}</span>
             <h1 className="pp-hero__title">{project.title}</h1>
           </div>
