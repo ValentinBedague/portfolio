@@ -16,6 +16,17 @@ const AboutPage     = lazy(() => import('./pages/AboutPage'))
 const NotFoundPage  = lazy(() => import('./pages/NotFoundPage'))
 const LegalPage     = lazy(() => import('./pages/LegalPage'))
 
+// Routes connues — la 404 n'a pas de preloader
+function isKnownRoute(pathname) {
+  return (
+    pathname === '/' ||
+    pathname === '/work' ||
+    pathname === '/about' ||
+    pathname === '/legal' ||
+    /^\/work\/.+/.test(pathname)
+  )
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
@@ -40,40 +51,45 @@ function AnimatedRoutes() {
   )
 }
 
-function AppLayout({ loaded }) {
+// Composant intérieur : a accès à useLocation() pour décider du preloader
+function AppController() {
   const { pathname } = useLocation()
   const isProjectPage = /^\/work\/.+/.test(pathname)
 
+  // Si on atterrit directement sur une 404, on passe loaded à true d'emblée
+  const [loaded, setLoaded] = useState(() => !isKnownRoute(pathname))
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: loaded ? 1 : 0 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      style={{ pointerEvents: loaded ? 'auto' : 'none' }}
-    >
-      {!isProjectPage && <Footer />}
-      <div className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
-        <Nav />
-        <AnimatedRoutes />
-        <div className="footer-sentinel" aria-hidden="true" />
-      </div>
-    </motion.div>
+    <>
+      <ScrollToTop />
+
+      {!loaded && <Preloader onDone={() => setLoaded(true)} />}
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        style={{ pointerEvents: loaded ? 'auto' : 'none' }}
+      >
+        {!isProjectPage && <Footer />}
+        <div className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
+          <Nav />
+          <AnimatedRoutes />
+          <div className="footer-sentinel" aria-hidden="true" />
+        </div>
+      </motion.div>
+
+      <ContactDrawer />
+    </>
   )
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
-
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <LanguageProvider>
         <ContactDrawerProvider>
-          {!loaded && <Preloader onDone={() => setLoaded(true)} />}
-
-          <AppLayout loaded={loaded} />
-
-          <ContactDrawer />
+          <AppController />
         </ContactDrawerProvider>
       </LanguageProvider>
     </BrowserRouter>
