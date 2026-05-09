@@ -48,7 +48,7 @@ export default function Nav() {
     const update = () => {
       const appBody = document.querySelector('.app-body')
       if (!appBody) return
-      const threshold = appBody.offsetHeight - window.innerHeight
+      const threshold = Math.max(0, appBody.offsetHeight - window.innerHeight)
       const reveal = Math.max(0, window.scrollY - threshold)
       nav.style.transform = reveal > 0 ? `translateY(${-reveal}px)` : ''
       nav.style.pointerEvents = reveal > 0 ? 'none' : ''

@@ -7,6 +7,7 @@ import ContactDrawer from './components/ContactDrawer/ContactDrawer'
 import Nav         from './components/Nav/Nav'
 import Footer      from './components/Footer/Footer'
 import Preloader   from './components/Preloader/Preloader'
+import ContactFAB  from './components/ContactFAB/ContactFAB'
 
 // Code splitting — chaque page est un chunk séparé
 const HomePage      = lazy(() => import('./pages/HomePage'))
@@ -65,8 +66,9 @@ function AppController() {
 
       {!loaded && <Preloader onDone={() => setLoaded(true)} />}
 
-      {/* Nav hors du fade-in — visible immédiatement après le preloader */}
+      {/* Nav & FAB hors du fade-in — visibles immédiatement après le preloader */}
       <Nav />
+      <ContactFAB />
 
       <motion.div
         initial={{ opacity: 0 }}
