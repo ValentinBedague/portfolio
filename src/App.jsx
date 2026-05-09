@@ -65,6 +65,9 @@ function AppController() {
 
       {!loaded && <Preloader onDone={() => setLoaded(true)} />}
 
+      {/* Nav hors du fade-in — visible immédiatement après le preloader */}
+      <Nav />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: loaded ? 1 : 0 }}
@@ -73,7 +76,6 @@ function AppController() {
       >
         {!isProjectPage && <Footer />}
         <div className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
-          <Nav />
           <AnimatedRoutes />
           <div className="footer-sentinel" aria-hidden="true" />
         </div>
