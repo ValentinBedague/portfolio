@@ -12,8 +12,8 @@ import { useLanguage } from '../../i18n/LanguageContext'
 import './TechCarousel.css'
 
 /* ─── Icônes fichier (monochrome noir — filter CSS pour le thème) ── */
-const Img = ({ src, alt }) => (
-  <img src={src} alt={alt} className="tc-icon tc-icon--img" />
+const Img = ({ src, alt, wide }) => (
+  <img src={src} alt={alt} className={`tc-icon tc-icon--img${wide ? ' tc-icon--wide' : ''}`} />
 )
 
 /* ─── Icônes inline (pas de fichier disponible) ────────────────── */
@@ -43,7 +43,7 @@ const ITEMS = [
   { id: 'html5',       Icon: () => <Img src="/icons/html5.svg"       alt="HTML5" />       },
   { id: 'css',         Icon: Css                                                           },
   { id: 'js',          Icon: () => <Img src="/icons/js.svg"          alt="JavaScript" />  },
-  { id: 'webflow',     Icon: () => <Img src="/icons/webflow.svg"     alt="Webflow" />     },
+  { id: 'webflow',     Icon: () => <Img src="/icons/webflow.svg"     alt="Webflow" wide /> },
   { id: 'shopify',     Icon: () => <Img src="/icons/shopify.svg"     alt="Shopify" />     },
   { id: 'illustrator', Icon: () => <Img src="/icons/illustrator.svg" alt="Illustrator" /> },
   { id: 'figma',       Icon: () => <Img src="/icons/figma.svg"       alt="Figma" />       },

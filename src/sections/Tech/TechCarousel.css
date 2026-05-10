@@ -58,7 +58,9 @@
 .tc-cell {
   position: relative;
   width: 330px;
-  height: 100%;
+  /* Dépasse au-dessus et en-dessous pour masquer les coins biseautés du skew */
+  height: calc(100% + 48px);
+  margin-top: -24px;
   flex-shrink: 0;
   background: #ffffff;
   margin-right: 20px;
@@ -82,10 +84,11 @@
 
 /* ── SVG icons ─────────────────────────────────────────────── */
 .tc-icon {
-  height: 40px;
+  height: 52px;
   width: auto;
-  max-width: 130px;
-  color: #2e2e2e;
+  max-width: 160px;
+  /* Icônes inline (CSS, GSAP, barba) — plus clair au repos pour amplifier le contraste hover */
+  color: rgba(0, 0, 0, 0.35);
   transition: color 0.25s;
   flex-shrink: 0;
 }
@@ -97,14 +100,18 @@
 
 /* Icônes fichier — noir sur fond blanc (dark mode) */
 .tc-icon--img {
-  height: 40px;
+  height: 52px;
   width: auto;
-  max-width: 130px;
+  max-width: 160px;
   flex-shrink: 0;
   object-fit: contain;
-  opacity: 0.75;
+  opacity: 0.55;
   filter: brightness(0);
   transition: opacity 0.25s ease, filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tc-icon--wide {
+  max-width: 200px;
+  height: 44px; /* wordmark horizontal → un peu moins haut */
 }
 .tc-cell:hover .tc-icon--img {
   opacity: 1;
@@ -164,9 +171,11 @@ body.site-light .tc-cell:hover .tc-icon--img {
 @media (max-width: 600px) {
   .tech-section { padding: 60px 0 80px; }
   .tc-title     { margin-bottom: 28px; }
-  .tc-band      { height: 130px; }
-  .tc-cell      { width: 170px; margin-right: 12px; }
-  .tc-icon      { height: 30px; }
+  .tc-band         { height: 130px; }
+  .tc-cell         { width: 170px; margin-right: 12px; }
+  .tc-icon         { height: 30px; }
+  .tc-icon--img    { height: 30px; }
+  .tc-icon--wide   { height: 26px; max-width: 150px; }
 }
 
 @media (max-width: 480px) {
