@@ -31,10 +31,14 @@
               background 0.3s;
 }
 
-.hpr:has(.hpr-card:hover) .hpr-card        { flex: 0.75; }
-.hpr:has(.hpr-card:hover) .hpr-card:hover  { flex: 1.35; height: 100%; }
+.hpr:has(.hpr-card:hover) .hpr-card        { flex: 0.55; opacity: 0.45; }
+.hpr:has(.hpr-card:hover) .hpr-card:hover  { flex: 1.6; height: 100%; opacity: 1; }
 .hpr-card:last-child { border-right: none; }
-.hpr-card:hover { background: rgba(255,255,255,0.015); }
+.hpr-card { transition: flex 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                         height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                         background 0.3s,
+                         opacity 0.35s ease; }
+.hpr-card:hover { background: rgba(255,255,255,0.03); }
 
 /* ── Visual ────────────────────────────────────────────────── */
 .hpr-card__visual {
@@ -150,7 +154,7 @@
 @media (hover: none) {
   .hpr__cursor { display: none !important; }
   .hpr:has(.hpr-card:hover) .hpr-card,
-  .hpr:has(.hpr-card:hover) .hpr-card:hover { flex: 1 1 auto; height: 200px; }
+  .hpr:has(.hpr-card:hover) .hpr-card:hover { flex: 1 1 auto; height: 200px; opacity: 1; }
 }
 
 
@@ -192,8 +196,8 @@
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               opacity  0.4s cubic-bezier(0.16, 1, 0.3, 1);
   /* Inactive state */
-  transform: scale(0.92);
-  opacity: 0.5;
+  transform: scale(0.88);
+  opacity: 0.32;
 }
 
 .hpr-slide--active {
