@@ -95,6 +95,21 @@
   opacity: 1;
 }
 
+/* Icônes fichier — noir sur fond blanc (dark mode) */
+.tc-icon--img {
+  height: 40px;
+  width: auto;
+  max-width: 130px;
+  flex-shrink: 0;
+  object-fit: contain;
+  opacity: 0.75;
+  filter: brightness(0);
+  transition: opacity 0.25s ease, filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tc-cell:hover .tc-icon--img {
+  opacity: 1;
+}
+
 /* ── Light mode ────────────────────────────────────────────── */
 .tc-title,
 .tc-icon {
@@ -125,6 +140,15 @@ body.site-light .tc-icon {
 }
 body.site-light .tc-cell:hover .tc-icon {
   color: #ffffff;
+}
+
+/* Mode clair : fond noir → icônes blanches */
+body.site-light .tc-icon--img {
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+body.site-light .tc-cell:hover .tc-icon--img {
+  opacity: 1;
 }
 
 /* ── Responsive ────────────────────────────────────────────── */
