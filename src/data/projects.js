@@ -3,6 +3,7 @@ export const projects = [
     id: 1,
     slug: 'myshampouineuse',
     title: 'My Shampouineuse',
+    year: 2024,
     category: {
       en: 'Home Services',
       fr: 'Services à domicile',
@@ -20,11 +21,13 @@ export const projects = [
     gradient: 'linear-gradient(140deg, #120d00 0%, #2e1e00 55%, #4a3200 100%)',
     screenshot: '/projects/myshampouineuse.png',
     video: '/projects/myshampouineuse.mp4',
+    clips: [],
   },
   {
     id: 2,
     slug: 'undamassage',
     title: 'Unda Massage',
+    year: 2024,
     category: {
       en: 'Wellness & Sport',
       fr: 'Bien-être & Sport',
@@ -42,11 +45,15 @@ export const projects = [
     gradient: 'linear-gradient(140deg, #120600 0%, #2e1000 55%, #4a1e00 100%)',
     screenshot: '/projects/undamassage.png',
     video:      '/projects/undamassage.mp4',
+    videoFit:   'contain',
+    videoScale: 1.18,
+    clips: [],
   },
   {
     id: 3,
     slug: 'tcxa',
     title: 'TCXA Agency',
+    year: 2024,
     category: {
       en: 'B2B Consulting',
       fr: 'Consulting B2B',
@@ -64,11 +71,13 @@ export const projects = [
     gradient: 'linear-gradient(140deg, #0d0c00 0%, #262200 55%, #403800 100%)',
     screenshot: '/projects/tcxa.png',
     video: '/projects/tcxa.mp4',
+    clips: [],
   },
   {
     id: 4,
     slug: 'sportofkings',
     title: 'Sport of Kings',
+    year: 2025,
     category: {
       en: 'Sustainable Fashion',
       fr: 'Mode durable',
@@ -85,5 +94,6 @@ export const projects = [
     accentColor: '#72a872',
     gradient: 'linear-gradient(140deg, #010d01 0%, #071507 55%, #0d2010 100%)',
     screenshot: '/projects/sportofkings.png',
+    clips: [],
   },
 ]

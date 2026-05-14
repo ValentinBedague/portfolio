@@ -114,8 +114,8 @@
   transition: opacity 0.25s ease, filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tc-icon--wide {
-  max-width: 200px;
-  height: 44px; /* wordmark horizontal → un peu moins haut */
+  height: 80px;
+  max-width: 280px;
 }
 .tc-cell:hover .tc-icon--img {
   opacity: 1;

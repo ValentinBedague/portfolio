@@ -43,7 +43,16 @@ function Card({ project, index, onEnter, onLeave }) {
           : <div className="hpr-card__bg" style={{ background: project.gradient }} />
         }
         {project.video && (
-          <video ref={videoRef} src={project.video} className="hpr-card__video" muted loop playsInline />
+          <video
+            ref={videoRef}
+            src={project.video}
+            className="hpr-card__video"
+            muted loop playsInline
+            style={{
+              ...(project.videoFit  ? { objectFit: project.videoFit } : {}),
+              ...(project.videoScale ? { transform: `scale(${project.videoScale})` } : {}),
+            }}
+          />
         )}
       </div>
       <div className="hpr-card__info">

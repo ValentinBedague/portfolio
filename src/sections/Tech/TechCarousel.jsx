@@ -62,7 +62,7 @@ function TechBand() {
 
   const { scrollY } = useScroll()
   const scrollVelocity = useVelocity(scrollY)
-  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 300 })
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 35, stiffness: 400 })
 
   const dirRef = useRef(1) // 1 = right (default), -1 = left
 
@@ -94,8 +94,8 @@ function TechBand() {
     if (v >  20) { dirRef.current =  1; skewTarget.set(-SKEW) }
     if (v < -20) { dirRef.current = -1; skewTarget.set( SKEW) }
 
-    const boost    = Math.min(Math.abs(v) * 0.06, 130)
-    const velocity = dirRef.current * (70 + boost)
+    const boost    = Math.min(Math.abs(v) * 0.18, 320)
+    const velocity = dirRef.current * (80 + boost)
 
     let newX = x.get() + velocity * (delta / 1000)
     if (newX < -oneWidth) newX += oneWidth
