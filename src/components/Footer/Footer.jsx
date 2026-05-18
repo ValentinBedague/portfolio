@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { useTheme }    from '../../i18n/ThemeContext'
 import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
 import { ArrowUpRight, ArrowRight } from '../ArrowIcon'
 import './Footer.css'
@@ -64,15 +65,16 @@ const IconLinkedin = () => (
 
 export default function Footer() {
   const { t }           = useLanguage()
+  const { theme }       = useTheme()
   const { openDrawer }  = useContactDrawer()
   const { pathname }    = useLocation()
   const year            = new Date().getFullYear()
-  const isHome          = pathname === '/'
   const { time, isSleeping } = useBiarritzTime()
 
-  const isDark       = isHome
-  const logoSrc      = isDark ? '/logo.svg' : '/logo-dark.svg'
-  const watermarkSrc = isDark ? '/logo.svg' : '/logo-dark.svg'
+  // Footer is always the inverse of the page theme
+  const footerDark = theme === 'light'   // dark footer on light page, light footer on dark page
+  const logoSrc      = footerDark ? '/logo.svg' : '/logo-dark.svg'
+  const watermarkSrc = footerDark ? '/logo.svg' : '/logo-dark.svg'
 
   const links = [
     { to: '/',      label: t('nav_home'),  num: '01', end: true  },
@@ -81,7 +83,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className={`site-footer${isHome ? ' site-footer--dark' : ' site-footer--light'}`}>
+    <footer className={`site-footer${footerDark ? ' site-footer--dark' : ' site-footer--light'}`}>
       {/* ── 3-column Nordic blocks ───────────────────────────────── */}
       <div className="footer-blocks container">
 

@@ -18,10 +18,10 @@
   color: #ffffff;
 }
 
-/* Force dark even when body.site-light is active */
-body.site-light .site-footer--dark {
-  background-color: #000000 !important;
-  color: #ffffff !important;
+/* Footer background transitions smoothly between variants */
+.site-footer {
+  transition: background-color 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              color            0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Light variant (all other pages) ─────────────────────────── */
@@ -33,24 +33,24 @@ body.site-light .site-footer--dark {
 /* ── CSS custom props per variant ────────────────────────────── */
 .site-footer--dark {
   --footer-border:    rgba(255, 255, 255, 0.14);
-  --footer-muted:     rgba(255, 255, 255, 0.6);
-  --footer-dim:       rgba(255, 255, 255, 0.4);
-  --footer-faint:     rgba(255, 255, 255, 0.22);
-  --footer-nav-color: rgba(255, 255, 255, 0.5);
+  --footer-muted:     rgba(255, 255, 255, 0.75);
+  --footer-dim:       rgba(255, 255, 255, 0.55);
+  --footer-faint:     rgba(255, 255, 255, 0.38);
+  --footer-nav-color: rgba(255, 255, 255, 0.65);
   --footer-nav-hover: #ffffff;
-  --footer-bar-logo:  0.55;
-  --footer-wm-op:     0.06;
+  --footer-bar-logo:  0.85;
+  --footer-wm-op:     0.10;
 }
 
 .site-footer--light {
   --footer-border:    rgba(0, 0, 0, 0.14);
-  --footer-muted:     rgba(0, 0, 0, 0.65);
-  --footer-dim:       rgba(0, 0, 0, 0.48);
-  --footer-faint:     rgba(0, 0, 0, 0.28);
-  --footer-nav-color: rgba(0, 0, 0, 0.55);
+  --footer-muted:     rgba(0, 0, 0, 0.75);
+  --footer-dim:       rgba(0, 0, 0, 0.58);
+  --footer-faint:     rgba(0, 0, 0, 0.38);
+  --footer-nav-color: rgba(0, 0, 0, 0.65);
   --footer-nav-hover: #111111;
-  --footer-bar-logo:  0.55;
-  --footer-wm-op:     0.055;
+  --footer-bar-logo:  0.85;
+  --footer-wm-op:     0.10;
 }
 
 /* ── 3-column blocks grid ─────────────────────────────────────── */
@@ -75,8 +75,8 @@ body.site-light .site-footer--dark {
 .footer-block__label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--footer-muted);
   margin-bottom: 24px;
@@ -93,7 +93,7 @@ body.site-light .site-footer--dark {
 
 .footer-brand-role {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: var(--footer-dim);
   margin-top: 12px;
@@ -102,7 +102,7 @@ body.site-light .site-footer--dark {
 
 .footer-brand-loc {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--footer-dim);
   margin-top: 10px;
@@ -145,9 +145,9 @@ body.site-light .site-footer--dark {
 
 .footer-nav__num {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.14em;
-  opacity: 0.6;
+  opacity: 0.8;
   flex-shrink: 0;
   width: 24px;
 }
@@ -197,7 +197,7 @@ body.site-light .site-footer--dark {
 
 .footer-avail__text {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--footer-muted);
@@ -205,7 +205,7 @@ body.site-light .site-footer--dark {
 
 .footer-status-loc {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--footer-dim);
   margin-bottom: 10px;
@@ -213,7 +213,7 @@ body.site-light .site-footer--dark {
 
 .footer-status-copy {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--footer-dim);
 }
@@ -230,7 +230,7 @@ body.site-light .site-footer--dark {
   align-items: center;
   gap: 7px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--footer-dim);
@@ -252,7 +252,7 @@ body.site-light .site-footer--dark {
 
 .footer-localtime__label {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--footer-dim);
@@ -261,7 +261,7 @@ body.site-light .site-footer--dark {
 
 .footer-localtime__value {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: var(--footer-muted);
   font-variant-numeric: tabular-nums;
@@ -310,7 +310,7 @@ body.site-light .site-footer--dark {
 
 .footer-bar__credit {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--footer-muted);
@@ -324,7 +324,7 @@ body.site-light .site-footer--dark {
 
 .footer-bar__name {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--footer-dim);
@@ -332,7 +332,7 @@ body.site-light .site-footer--dark {
 
 .footer-bar__legal {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--footer-faint);

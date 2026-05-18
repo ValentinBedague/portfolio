@@ -8,6 +8,7 @@ export const translations = {
 
     // — Hero
     hero_available:    'Available for new projects',
+    hero_intro_prefix: "Hi, I'm",
     hero_intro_name:   'Val',
     hero_intro_role:   'web designer & full stack developer.',
     hero_location:     'Based in Biarritz, France — Often elsewhere.',
@@ -81,8 +82,8 @@ export const translations = {
     pp_clips_label:    'In action',
 
     // — Tech carousel
-    tech_title_1: 'Technologies',
-    tech_title_2: "I'm working on:",
+    tech_title_1: 'My',
+    tech_title_2: 'toolbox',
 
     // — Scratch section
     scratch_header_label: '— Limited offer',
@@ -185,6 +186,7 @@ export const translations = {
 
     // — Hero
     hero_available:    'Disponible pour de nouveaux projets',
+    hero_intro_prefix: "Hello, moi c'est",
     hero_intro_name:   'Val',
     hero_intro_role:   'webdesigner & développeur full stack.',
     hero_location:     'Basé à Biarritz, France — Souvent ailleurs.',
@@ -258,8 +260,8 @@ export const translations = {
     pp_clips_label:    'En action',
 
     // — Tech carousel
-    tech_title_1: 'Technologies',
-    tech_title_2: "que j'utilise :",
+    tech_title_1: 'Ma boîte',
+    tech_title_2: 'à outils',
 
     // — Scratch section
     scratch_header_label: '— Offre limitée',

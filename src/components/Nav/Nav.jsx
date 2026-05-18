@@ -3,7 +3,8 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
-import LangSwitcher from '../LangSwitcher/LangSwitcher'
+import LangSwitcher  from '../LangSwitcher/LangSwitcher'
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher'
 import { ArrowRight } from '../ArrowIcon'
 import './Nav.css'
 
@@ -95,6 +96,7 @@ export default function Nav() {
           </nav>
 
           <div className="nav__actions">
+            <ThemeSwitcher />
             <LangSwitcher />
             <button onClick={openDrawer} className="nav__cta btn-ghost">
               {t('nav_contact')}
@@ -169,7 +171,10 @@ export default function Nav() {
                 initial="hidden"
                 animate="visible"
               >
-                <LangSwitcher />
+                <div className="nav__overlay-switches">
+                  <ThemeSwitcher />
+                  <LangSwitcher />
+                </div>
                 <button
                   className="btn-primary"
                   onClick={() => { close(); openDrawer() }}

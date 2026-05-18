@@ -15,7 +15,7 @@
   align-items: center;
   gap: 14px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -88,7 +88,7 @@
 
 .work-row__num {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   letter-spacing: 0.1em;
   transition: color 0.3s;
@@ -117,7 +117,7 @@
 
 .work-row__cat {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -138,7 +138,7 @@
 
 .work-row__tag {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -256,7 +256,7 @@
   top: clamp(32px, 5vw, 60px);
   right: clamp(24px, 6vw, 120px);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -374,4 +374,18 @@
 @media (hover: none) {
   .work-preview { display: none; }
   .work-list:has(.work-row-wrap:hover) .work-row-wrap:not(:hover) .work-row { opacity: 1; }
+}
+
+/* ── Light mode ────────────────────────────────────────────── */
+body.site-light .work-header__word--outline {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.2);
+}
+body.site-light .work-story__ghost {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.04);
+}
+body.site-light .work-story__line--outline {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.2);
+}
+body.site-light .work-story__btn {
+  border-color: rgba(0, 0, 0, 0.22);
 }

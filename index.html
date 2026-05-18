@@ -45,6 +45,18 @@
       rel="stylesheet" />
   </head>
   <body>
+    <!--
+      Inline theme init — runs before first paint to avoid flash of wrong theme.
+      Reads localStorage preference, falls back to system preference.
+    -->
+    <script>
+      (function () {
+        var s = localStorage.getItem('vb-theme')
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        var isLight = s === 'light' || (!s && !prefersDark)
+        if (isLight) document.body.classList.add('site-light')
+      })()
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

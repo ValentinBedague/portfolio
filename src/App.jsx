@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react'
 import { useLocation, BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { LanguageProvider } from './i18n/LanguageContext'
+import { ThemeProvider }    from './i18n/ThemeContext'
 import { ContactDrawerProvider } from './components/ContactDrawer/ContactDrawerContext'
 import ContactDrawer from './components/ContactDrawer/ContactDrawer'
 import Nav         from './components/Nav/Nav'
@@ -91,11 +92,13 @@ function AppController() {
 export default function App() {
   return (
     <BrowserRouter>
-      <LanguageProvider>
-        <ContactDrawerProvider>
-          <AppController />
-        </ContactDrawerProvider>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <ContactDrawerProvider>
+            <AppController />
+          </ContactDrawerProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

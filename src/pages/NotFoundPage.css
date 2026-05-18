@@ -74,6 +74,11 @@
   -webkit-text-stroke: 2px rgba(255, 255, 255, 0.2);
 }
 
+/* ── Light mode ──────────────────────────────────────────────────── */
+body.site-light .nf-code__digit--outline {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.2);
+}
+
 /* Message */
 .nf-msg {
   font-size: clamp(14px, 1.8vw, 18px);

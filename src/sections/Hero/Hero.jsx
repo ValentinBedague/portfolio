@@ -30,7 +30,7 @@ export default function Hero() {
               {t('hero_available')}
             </span>
             <p className="hero__intro">
-              Hi, I'm <strong>{t('hero_intro_name')}</strong>, {t('hero_intro_role')}<br />
+              {t('hero_intro_prefix')} <strong>{t('hero_intro_name')}</strong>, {t('hero_intro_role')}<br />
               <span className="hero__location">{t('hero_location')}</span>
             </p>
             <p className="hero__body">{t('hero_body')}</p>

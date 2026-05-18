@@ -199,3 +199,30 @@
   .cd-fields { grid-template-columns: 1fr; }
   .cd-header__title { font-size: 20px; }
 }
+
+/* ── Light mode ──────────────────────────────────────────────── */
+.cd-panel,
+.cd-input,
+.cd-close {
+  transition: background-color 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color     0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              color            0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.site-light .cd-panel {
+  background: var(--bg-elevated);
+}
+body.site-light .cd-backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+body.site-light .cd-input {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text);
+}
+body.site-light .cd-input::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+body.site-light .cd-close:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.05);
+}

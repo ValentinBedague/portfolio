@@ -1,0 +1,66 @@
+/* ── Theme toggle button ────────────────────────────────────────── */
+.theme-sw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  /* Smooth theme transitions */
+  transition:
+    color        0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-sw:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+/* ── Two icons: only one visible at a time ──────────────────────── */
+.theme-sw__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* Dark mode → show moon, hide sun */
+.theme-sw__icon--sun {
+  opacity: 0;
+  transform: translateY(7px) rotate(-45deg);
+}
+.theme-sw__icon--moon {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Light mode → show sun, hide moon */
+.theme-sw--light .theme-sw__icon--sun {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+.theme-sw--light .theme-sw__icon--moon {
+  opacity: 0;
+  transform: translateY(-7px) rotate(45deg);
+}
+
+/* ── Light mode overrides ───────────────────────────────────────── */
+body.site-light .theme-sw {
+  color: rgba(0, 0, 0, 0.55);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+body.site-light .theme-sw:hover {
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.45);
+}

@@ -9,8 +9,8 @@
   --bg-card:       rgba(255, 255, 255, 0.04);
   --bg-card-hover: rgba(255, 255, 255, 0.07);
   --text:          #ffffff;
-  --text-dim:      rgba(255, 255, 255, 0.68);
-  --text-muted:    rgba(255, 255, 255, 0.38);
+  --text-dim:      rgba(255, 255, 255, 0.75);
+  --text-muted:    rgba(255, 255, 255, 0.52);
   --accent:        #ffffff;
   --accent-rgb:    255, 255, 255;
   --border:        rgba(255, 255, 255, 0.09);
@@ -56,7 +56,7 @@ img, video { max-width: 100%; display: block; }
   background: var(--text);
   color: var(--bg);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -78,7 +78,7 @@ img, video { max-width: 100%; display: block; }
   padding: 12px 26px;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -118,8 +118,8 @@ svg[aria-hidden="true"] {
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
+  font-size: 12px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: 20px;
@@ -236,7 +236,7 @@ body.site-light .app-body {
   border-radius: 0;
 }
 
-/* ─── Light mode (scroll-triggered on ContactCTA) ────────────── */
+/* ─── Light mode ─────────────────────────────────────────────── */
 body {
   transition:
     background-color 0.75s cubic-bezier(0.16, 1, 0.3, 1),
@@ -244,22 +244,40 @@ body {
 }
 
 body.site-light {
-  background-color: #ffffff;
-  color: #000000;
+  /* ── Redefine ALL design tokens for light mode ── */
+  --bg:            #f2f1ef;
+  --bg-elevated:   #e8e7e4;
+  --bg-card:       rgba(0, 0, 0, 0.03);
+  --bg-card-hover: rgba(0, 0, 0, 0.06);
+  --text:          #111111;
+  --text-dim:      rgba(0, 0, 0, 0.75);
+  --text-muted:    rgba(0, 0, 0, 0.50);
+  --accent:        #111111;
+  --accent-rgb:    17, 17, 17;
+  --border:        rgba(0, 0, 0, 0.09);
+  --border-hover:  rgba(0, 0, 0, 0.28);
+
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 /* Shared buttons in light mode */
 body.site-light .btn-primary {
-  background: #000000;
-  color: #ffffff;
+  background: #111111;
+  color: #f2f1ef;
 }
 body.site-light .btn-ghost {
-  color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.18);
+  color: rgba(0, 0, 0, 0.52);
+  border-color: rgba(0, 0, 0, 0.15);
   background: transparent;
 }
 body.site-light .btn-ghost:hover {
   color: rgba(0, 0, 0, 0.9);
-  border-color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.45);
+}
+
+/* app-body background must follow the token */
+body.site-light .app-body {
+  background: var(--bg);
 }
 

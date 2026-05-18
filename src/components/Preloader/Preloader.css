@@ -61,6 +61,14 @@
   user-select: none;
 }
 
+/* ── Light mode ──────────────────────────────────────────────────── */
+body.site-light .preloader__line--outline {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.28);
+}
+body.site-light .preloader__counter {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.22);
+}
+
 @media (max-width: 768px) {
   .preloader         { padding: 0 24px; }
   .preloader__label  { right: 24px; bottom: 28px; }

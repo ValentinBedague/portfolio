@@ -236,7 +236,7 @@
 }
 
 body.site-light .scratch-section {
-  background-color: #ffffff;
+  background-color: var(--bg);
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */

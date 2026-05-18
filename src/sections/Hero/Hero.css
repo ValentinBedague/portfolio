@@ -129,3 +129,11 @@
     transform: none;
   }
 }
+
+/* ── Light mode ────────────────────────────────────────────── */
+.hero__line--outline {
+  transition: -webkit-text-stroke-color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body.site-light .hero__line--outline {
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.28);
+}

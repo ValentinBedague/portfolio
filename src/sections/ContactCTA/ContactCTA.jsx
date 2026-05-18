@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import {
   motion,
   useScroll,
@@ -30,26 +30,6 @@ export default function ContactCTA() {
   const q3O  = useTransform(smooth, [0.3,  0.7 ], [0,  1])
   const ctaY = useTransform(smooth, [0.5,  1   ], [72, 0])
   const ctaO = useTransform(smooth, [0.5,  1   ], [0,  1])
-
-  /* ── Scroll-triggered light-mode toggle ───────────────────── */
-  // Fire only when the TechCarousel's bottom has left the viewport top,
-  // guaranteeing both the carousel and scratch section are fully off-screen.
-  useEffect(() => {
-    const carousel = document.querySelector('.scratch-section')
-    if (!carousel) return
-
-    const check = () => {
-      const gone = carousel.getBoundingClientRect().bottom <= 0
-      document.body.classList.toggle('site-light', gone)
-    }
-
-    check()
-    window.addEventListener('scroll', check, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', check)
-      document.body.classList.remove('site-light')
-    }
-  }, [])
 
   return (
     <section ref={ref} className="ccta-section">

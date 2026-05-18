@@ -41,7 +41,7 @@
 
 .ccta-eyebrow__text {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -76,7 +76,7 @@
 }
 
 .ccta-q--3 {
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.58);
   padding-left: 12vw;
   padding-bottom: 0;
 }
@@ -151,7 +151,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -168,7 +168,7 @@
 
 .ccta-strip__reply {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -212,7 +212,7 @@ body.site-light .ccta-eyebrow__text {
 
 body.site-light .ccta-q--1 { color: #000000; }
 body.site-light .ccta-q--2 { color: rgba(0, 0, 0, 0.52); }
-body.site-light .ccta-q--3 { color: rgba(0, 0, 0, 0.32); }
+body.site-light .ccta-q--3 { color: rgba(0, 0, 0, 0.58); }
 
 body.site-light .ccta-main {
   border-top-color: rgba(0, 0, 0, 0.12);
@@ -254,7 +254,7 @@ body.site-light .ccta-strip__reply {
   .ccta-eyebrow    { margin-bottom: 40px; }
   .ccta-questions  { margin-bottom: 40px; }
   .ccta-q--2       { padding-left: 0; color: rgba(255,255,255,0.52); }
-  .ccta-q--3       { padding-left: 0; color: rgba(255,255,255,0.32); padding-bottom: 0; }
+  .ccta-q--3       { padding-left: 0; color: rgba(255,255,255,0.58); padding-bottom: 0; }
   .ccta-main       { padding-top: 32px; }
   .ccta-strip      { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
