@@ -2,6 +2,7 @@
 .project-page {
   padding-top: var(--nav-h);
   min-height: 100vh;
+  overflow-x: hidden;
   /* Per-project accent color injected via inline style */
   --pp-accent: #ffffff;
 }
@@ -104,8 +105,7 @@
   flex: 1;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 12px;
-  overflow: hidden;
+  padding: 0 40px 12px;
   will-change: transform, opacity;
 }
 
@@ -443,6 +443,15 @@
   left: 50%;
   transform: translateX(-50%);
   will-change: clip-path;
+}
+
+/* Sur mobile : on reste dans le container, pas de full-bleed */
+@media (max-width: 768px) {
+  .pp-slide__expander {
+    width: 100%;
+    left: 0;
+    transform: none;
+  }
 }
 
 .pp-slide__frame {
@@ -807,6 +816,7 @@ body.site-light .pp-section-line {
     margin-top: 32px;
   }
   .pp-hero__title { font-size: clamp(56px, 14vw, 120px); }
+  .pp-hero__title-wrap { padding: 0 20px 12px; }
   .pp-hero__bottom { padding-bottom: 32px; }
   .pp-about { padding: 60px 0; }
   .pp-about__desc { font-size: clamp(18px, 4vw, 26px); }
@@ -823,6 +833,7 @@ body.site-light .pp-section-line {
   .pp-gallery > .pp-section-head { padding-left: 16px; padding-right: 16px; }
   .pp-service-row__name { font-size: 14px; }
   .pp-stack-item { font-size: 13px; }
+  .pp-hero__title-wrap { padding: 0 16px 12px; }
   .pp-hero__bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
   .pp-hero__counter { display: none; }
   .pp-next { padding: 32px 0 48px; }

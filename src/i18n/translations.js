@@ -66,6 +66,14 @@ export const translations = {
     about_page_eyebrow:  'About',
     about_page_title_1:  'Turning your ideas',
     about_page_title_2:  'into exceptional websites.',
+    btz_tagline:         'Based in Biarritz, available everywhere',
+    vp_label:            '— What I offer',
+    vp_title_1:          'Full service.',
+    vp_title_2:          'Agency quality. Freelance price.',
+    vp_desc:             'From design to development, SEO to launch — everything handled. One point of contact, one clear vision, zero overhead.',
+    vp_p1:               'Design & Brand Identity',
+    vp_p2:               'Development & SEO',
+    vp_p3:               'Maintenance & Growth',
 
     // — Project page
     pp_about:          'About the project',
@@ -244,6 +252,14 @@ export const translations = {
     about_page_eyebrow:  'À propos',
     about_page_title_1:  'Transformer vos idées',
     about_page_title_2:  'en sites exceptionnels.',
+    btz_tagline:         'Basé à Biarritz, disponible partout',
+    vp_label:            '— Ce que je propose',
+    vp_title_1:          'Votre site de A à Z.',
+    vp_title_2:          "Le travail d'une agence, au tarif d'un freelance.",
+    vp_desc:             'Du design au développement, du SEO à la mise en ligne — tout est géré. Un seul interlocuteur, une vision claire, zéro surcharge.',
+    vp_p1:               'Design & Identité visuelle',
+    vp_p2:               'Développement & SEO',
+    vp_p3:               'Maintenance & Croissance',
 
     // — Project page
     pp_about:          'À propos du projet',

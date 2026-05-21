@@ -57,7 +57,7 @@ export default function HomePage() {
         <Hero />
         <HomeProjectsRow />
       </div>
-      <ScratchSection />
+      {/* <ScratchSection /> */}
       <TechCarousel />
       <ContactCTA />
     </PageTransition>

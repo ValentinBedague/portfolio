@@ -1,0 +1,36 @@
+.btz-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #111;
+  cursor: crosshair;
+}
+
+/* Le canvas remplit toute la zone hero — stretch intentionnel pour couvrir */
+.btz-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Overlay bas-gauche avec dégradé */
+.btz-hero__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(28px, 4vw, 56px) clamp(24px, 5vw, 64px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.btz-hero__tagline {
+  font-size: clamp(15px, 1.8vw, 24px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
