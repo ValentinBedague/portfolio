@@ -65,11 +65,7 @@
   padding: 48px 40px 64px;
 }
 
-/* Vertical separators between blocks */
-.footer-block--nav,
-.footer-block--status {
-  border-left: 1px solid var(--footer-border);
-}
+/* Pas de séparateurs verticaux entre les blocs */
 
 /* ── Block label ──────────────────────────────────────────────── */
 .footer-block__label {
@@ -272,6 +268,15 @@
   background: #f97316;
 }
 
+/* ── Logo dans le bloc status ─────────────────────────────────── */
+.footer-status-logo {
+  height: clamp(40px, 5.2vw, 72px);
+  width: auto;
+  display: block;
+  margin-top: 28px;
+  opacity: var(--footer-bar-logo);
+}
+
 /* ── Giant logo watermark ─────────────────────────────────────── */
 .footer-watermark {
   border-top: 1px solid var(--footer-border);
@@ -370,10 +375,9 @@
     padding: 20px 0 22px;
   }
 
-  /* Remove all vertical separators when stacked */
+  /* Séparateurs horizontaux entre blocs empilés */
   .footer-block--nav,
   .footer-block--status {
-    border-left: none;
     border-top: 1px solid var(--footer-border);
   }
 
@@ -384,6 +388,7 @@
   .footer-brand-loc     { display: none; }
   .footer-status-loc    { display: none; }
   .footer-status-copy   { display: none; }
+  .footer-status-logo   { display: none; }
 
   /* Socials plus compacts */
   .footer-socials { margin-top: 0; }

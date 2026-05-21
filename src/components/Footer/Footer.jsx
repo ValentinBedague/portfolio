@@ -154,6 +154,7 @@ export default function Footer() {
             <span className="footer-localtime__label">{t('footer_local_time')}</span>
             <span className="footer-localtime__value">{time}</span>
           </div>
+          <img src={logoSrc} alt="VB" className="footer-status-logo" />
           <p className="footer-status-loc">{t('footer_location')}</p>
           <p className="footer-status-copy">© {year}</p>
         </div>
@@ -172,12 +173,8 @@ export default function Footer() {
 
       {/* ── Bottom bar ───────────────────────────────────────────── */}
       <div className="footer-bar container">
-        <img src={logoSrc} alt="VB" className="footer-bar__logo" />
         <span className="footer-bar__credit">{t('footer_made')}</span>
-        <div className="footer-bar__right">
-          <span className="footer-bar__name">Valentin Bedague</span>
-          <Link to="/legal" className="footer-bar__legal">{t('footer_legal')}</Link>
-        </div>
+        <Link to="/legal" className="footer-bar__legal">{t('footer_legal')}</Link>
       </div>
 
     </footer>
