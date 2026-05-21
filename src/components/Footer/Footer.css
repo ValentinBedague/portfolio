@@ -356,12 +356,18 @@
 }
 
 @media (max-width: 600px) {
+  /* Pas de scroll dans le footer */
+  .site-footer {
+    overflow: hidden;
+  }
+
   .footer-blocks {
     grid-template-columns: 1fr;
   }
 
+  /* Padding réduit */
   .footer-block {
-    padding: 36px 0 40px;
+    padding: 20px 0 22px;
   }
 
   /* Remove all vertical separators when stacked */
@@ -371,14 +377,25 @@
     border-top: 1px solid var(--footer-border);
   }
 
-  .footer-watermark {
-    padding: 36px 0 32px;
-  }
+  /* Éléments masqués pour réduire la hauteur */
+  .footer-block__label  { display: none; }
+  .footer-brand-text    { display: none; }
+  .footer-brand-role    { display: none; }
+  .footer-brand-loc     { display: none; }
+  .footer-status-loc    { display: none; }
+  .footer-status-copy   { display: none; }
 
+  /* Socials plus compacts */
+  .footer-socials { margin-top: 0; }
+
+  /* Watermark masqué */
+  .footer-watermark { display: none; }
+
+  /* Bottom bar */
   .footer-bar {
     flex-wrap: wrap;
     gap: 8px;
-    padding-bottom: 24px;
+    padding: 16px 0 20px;
   }
 
   .footer-bar__name {
