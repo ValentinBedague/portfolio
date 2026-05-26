@@ -256,5 +256,8 @@ body.site-light .ccta-strip__reply {
   .ccta-q--2       { padding-left: 0; color: rgba(255,255,255,0.52); }
   .ccta-q--3       { padding-left: 0; color: rgba(255,255,255,0.58); padding-bottom: 0; }
   .ccta-main       { padding-top: 32px; }
+  /* Réduire la taille sur très petits écrans pour éviter le débordement */
+  .ccta-main__word  { font-size: clamp(44px, 12vw, 68px); }
+  .ccta-main__arrow { font-size: clamp(20px, 5.5vw, 32px); }
   .ccta-strip      { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
