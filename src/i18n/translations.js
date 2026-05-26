@@ -188,7 +188,7 @@ export const translations = {
   fr: {
     // — Nav
     nav_home:    'Accueil',
-    nav_work:    'Travaux',
+    nav_work:    'Projets',
     nav_about:   'À propos',
     nav_contact: 'Me contacter',
 
