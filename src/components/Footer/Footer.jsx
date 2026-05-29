@@ -79,6 +79,7 @@ export default function Footer() {
               {links.map(({ to, label }) => (
                 <Link key={to} to={to} className="footer-sitemap__link">
                   {label}
+                  <ArrowUpRight className="footer-sitemap__arrow" />
                 </Link>
               ))}
               <button
@@ -86,6 +87,7 @@ export default function Footer() {
                 onClick={openDrawer}
               >
                 {t('nav_contact')}
+                <ArrowUpRight className="footer-sitemap__arrow" />
               </button>
             </nav>
           </div>
