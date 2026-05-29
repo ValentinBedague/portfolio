@@ -131,6 +131,10 @@ export const translations = {
     footer_location:    'Based in Biarritz, France',
     footer_made:        'Made by me :)',
     footer_legal:       'Legal notice',
+    footer_hl_1:        'Have a project?',
+    footer_hl_2:        "Let's talk.",
+    footer_cta_eyebrow: '— Contact',
+    footer_cta_word:    "Let's work.",
 
     // — Legal page
     legal_eyebrow:    'Legal',
@@ -317,6 +321,10 @@ export const translations = {
     footer_location:    'Basé à Biarritz, France',
     footer_made:        'Made by me :)',
     footer_legal:       'Mentions légales',
+    footer_hl_1:        'Tu as un projet ?',
+    footer_hl_2:        'Parlons-en.',
+    footer_cta_eyebrow: '— Contact',
+    footer_cta_word:    'Travaillons.',
 
     // — Mentions légales
     legal_eyebrow:    'Légal',
