@@ -132,9 +132,9 @@ export const translations = {
     footer_made:        'Made by me :)',
     footer_legal:       'Legal notice',
     footer_hl_1:        'Have a project?',
-    footer_hl_2:        "Let's talk.",
+    footer_hl_2:        'An idea?',
     footer_cta_eyebrow: '— Contact',
-    footer_cta_word:    "Let's work.",
+    footer_cta_word:    "Let's talk.",
 
     // — Legal page
     legal_eyebrow:    'Legal',
@@ -322,9 +322,9 @@ export const translations = {
     footer_made:        'Made by me :)',
     footer_legal:       'Mentions légales',
     footer_hl_1:        'Tu as un projet ?',
-    footer_hl_2:        'Parlons-en.',
+    footer_hl_2:        'Une idée ?',
     footer_cta_eyebrow: '— Contact',
-    footer_cta_word:    'Travaillons.',
+    footer_cta_word:    'Parlons-en.',
 
     // — Mentions légales
     legal_eyebrow:    'Légal',

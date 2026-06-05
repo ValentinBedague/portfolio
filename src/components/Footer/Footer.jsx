@@ -55,19 +55,33 @@ export default function Footer() {
               {t('footer_hl_2')}
             </span>
           </div>
+          <div className="footer-socials">
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer"
+               className="footer-social" aria-label="Instagram">
+              <IconInstagram />
+            </a>
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer"
+               className="footer-social" aria-label="LinkedIn">
+              <IconLinkedin />
+            </a>
+          </div>
         </div>
 
         {/* ── Q2 — Contact CTA (top-right) ─────────────────────── */}
-        <div className="footer-q footer-q--cta">
+        {/* Toute la case est cliquable */}
+        <div
+          className="footer-q footer-q--cta"
+          onClick={openDrawer}
+          role="button"
+          tabIndex={0}
+          onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && openDrawer()}
+          aria-label={t('nav_contact')}
+        >
           <span className="footer-cta__eyebrow">{t('footer_cta_eyebrow')}</span>
-          <button
-            className="footer-cta__btn"
-            onClick={openDrawer}
-            aria-label={t('nav_contact')}
-          >
+          <div className="footer-cta__btn" aria-hidden="true">
             <span className="footer-cta__word">{t('footer_cta_word')}</span>
             <ArrowUpRight className="footer-cta__arrow" />
-          </button>
+          </div>
         </div>
 
         {/* ── Q3 — Sitemap + meta (bottom-left) ────────────────── */}
@@ -93,17 +107,8 @@ export default function Footer() {
           </div>
 
           <div className="footer-metabar">
-            <div className="footer-socials">
-              <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer"
-                 className="footer-social" aria-label="Instagram">
-                <IconInstagram />
-              </a>
-              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer"
-                 className="footer-social" aria-label="LinkedIn">
-                <IconLinkedin />
-              </a>
-            </div>
-            <span className="footer-credit">{t('footer_made')} © {year}</span>
+            <span className="footer-credit">VALENTIN BEDAGUE © {year}</span>
+            <span className="footer-made">Made by me :)</span>
             <Link to="/legal" className="footer-legal">{t('footer_legal')}</Link>
           </div>
 
