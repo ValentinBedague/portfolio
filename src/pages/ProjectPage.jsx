@@ -1,11 +1,12 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { projects } from '../data/projects'
 import PageTransition from '../components/PageTransition/PageTransition'
 import SEO, { SITE } from '../components/SEO/SEO'
 import { useLanguage } from '../i18n/LanguageContext'
-import { ArrowRight } from '../components/ArrowIcon'
+import { ArrowRight, ArrowUpRight } from '../components/ArrowIcon'
+import MagneticButton from '../components/MagneticButton'
 import './ProjectPage.css'
 
 const ease = [0.16, 1, 0.3, 1]
@@ -13,8 +14,33 @@ const ease = [0.16, 1, 0.3, 1]
 /* ── Word-by-word reveal ─────────────────────────────────────────── */
 function AnimatedTitle({ title }) {
   const words = title.split(' ')
+  const ref   = useRef(null)
+
+  /* Auto-fit : réduit la taille seulement si le mot le plus long déborde */
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const fit = () => {
+      el.style.fontSize = '' // reset → reprend le clamp CSS
+      const wrap  = el.parentElement
+      const ws    = getComputedStyle(wrap)
+      const available = wrap.clientWidth
+        - parseFloat(ws.paddingLeft) - parseFloat(ws.paddingRight)
+      const widest = Math.max(
+        ...[...el.children].map(c => c.getBoundingClientRect().width)
+      )
+      if (widest > available) {
+        const current = parseFloat(getComputedStyle(el).fontSize)
+        el.style.fontSize = `${Math.floor(current * (available / widest) * 0.98)}px`
+      }
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [title])
+
   return (
-    <h1 className="pp-hero__title" aria-label={title}>
+    <h1 ref={ref} className="pp-hero__title" aria-label={title}>
       {words.map((word, i) => (
         <span key={i} className="pp-word-clip">
           <motion.span
@@ -28,6 +54,74 @@ function AnimatedTitle({ title }) {
         </span>
       ))}
     </h1>
+  )
+}
+
+/* ── Hero media — visuel principal, révélé en clip-path au scroll ── */
+function HeroMedia({ project }) {
+  const wrapRef  = useRef(null)
+  const videoRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+
+  /* Encadré arrondi → pleine largeur pendant le scroll */
+  const { scrollYProgress } = useScroll({
+    target: wrapRef,
+    offset: ['start 0.95', 'center 0.5'],
+  })
+  const smooth   = useSpring(scrollYProgress, { stiffness: 55, damping: 22, mass: 0.7 })
+  const clipPath = useTransform(smooth, [0, 1], ['inset(0% 5% round 14px)', 'inset(0% 0% round 0px)'])
+  const scale    = useTransform(smooth, [0, 1], [1.1, 1])
+
+  /* Autoplay tactile — la vidéo joue quand elle est visible */
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !window.matchMedia('(hover: none)').matches) return
+    const io = new IntersectionObserver(
+      ([e]) => { e.isIntersecting ? video.play().catch(() => {}) : video.pause() },
+      { threshold: 0.45 }
+    )
+    io.observe(video)
+    return () => io.disconnect()
+  }, [])
+
+  const enter = () => videoRef.current?.play().catch(() => {})
+  const leave = () => {
+    if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0 }
+  }
+
+  return (
+    <section ref={wrapRef} className="pp-hmedia" aria-label={project.title}>
+      <motion.div
+        className="pp-hmedia__clip"
+        style={{ clipPath }}
+        initial={{ opacity: 0, y: 70 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.15, ease, delay: 0.6 }}
+      >
+        <div className="pp-hmedia__frame" onMouseEnter={enter} onMouseLeave={leave}>
+          <motion.div className="pp-hmedia__layer" style={{ scale }}>
+            {project.screenshot
+              ? <img src={project.screenshot} alt={project.title} className="pp-hmedia__img" />
+              : <div className="pp-hmedia__img" style={{ background: project.gradient }} />
+            }
+            {project.video && (
+              <video
+                ref={videoRef}
+                src={project.video}
+                className={`pp-hmedia__video${playing ? ' pp-hmedia__video--on' : ''}`}
+                muted loop playsInline preload="metadata"
+                style={{
+                  ...(project.videoFit   ? { objectFit: project.videoFit } : {}),
+                  ...(project.videoScale ? { transform: `scale(${project.videoScale})` } : {}),
+                }}
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
+              />
+            )}
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
   )
 }
 
@@ -196,14 +290,16 @@ export default function ProjectPage() {
       ? project[field][lang] ?? project[field].en
       : project[field]
 
-  const gallery = [
-    ...(project.video
-      ? [{ src: project.video, poster: project.screenshot ?? null, label: lang === 'fr' ? 'Aperçu' : 'Preview' }]
-      : project.screenshot
-        ? [{ poster: project.screenshot, label: null }]
-        : []
-    ),
-    ...(project.clips ?? []).map(c => ({ src: c.src, poster: c.poster, label: c.label })),
+  /* Le visuel principal vit dans le hero — la gallery ne montre que les clips */
+  const gallery = (project.clips ?? []).map(c => ({ src: c.src, poster: c.poster, label: c.label }))
+
+  const projectType = typeof project.projectType === 'object'
+    ? project.projectType[lang] ?? project.projectType.en
+    : project.projectType
+
+  const metaItems = [
+    { label: lang === 'fr' ? 'Année' : 'Year', value: project.year },
+    ...(projectType ? [{ label: 'Type', value: projectType }] : []),
   ]
 
   const numLabel = `${String(idx + 1).padStart(2, '0')} / ${String(projects.length).padStart(2, '0')}`
@@ -242,6 +338,17 @@ export default function ProjectPage() {
         {/* ── HERO ──────────────────────────────────────────────── */}
         <section ref={heroRef} className="pp-hero">
 
+          {/* Index fantôme — motif outline de l'identité */}
+          <motion.span
+            className="pp-hero__index"
+            aria-hidden="true"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease, delay: 0.45 }}
+          >
+            {String(idx + 1).padStart(2, '0')}
+          </motion.span>
+
           {/* Top bar */}
           <motion.div
             className="pp-hero__top container"
@@ -256,43 +363,62 @@ export default function ProjectPage() {
             <span className="pp-hero__counter">{numLabel}</span>
           </motion.div>
 
-          {/* Giant title */}
+          {/* Eyebrow italique + titre géant */}
           <motion.div
             className="pp-hero__title-wrap"
             style={{ opacity: heroOpacity, y: heroY }}
           >
-            <AnimatedTitle title={project.title} />
-          </motion.div>
-
-          {/* Bottom strip */}
-          <motion.div
-            className="pp-hero__bottom container"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, ease, delay: 0.8 }}
-          >
             <motion.span
               className="pp-hero__cat"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease, delay: 0.22 }}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.2 }}
             >
               {get('category')}
             </motion.span>
+            <AnimatedTitle title={project.title} />
+          </motion.div>
 
-            <a
+          {/* Méta-barre : année / type + CTA magnétique */}
+          <motion.div
+            className="pp-hero__meta container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, ease, delay: 0.55 }}
+          >
+            <div className="pp-hero__meta-cols">
+              {metaItems.map(({ label, value }, i) => (
+                <motion.div
+                  key={label}
+                  className="pp-hero__meta-item"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease, delay: 0.62 + i * 0.08 }}
+                >
+                  <span className="pp-hero__meta-label">{label}</span>
+                  <span className="pp-hero__meta-value">{value}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <MagneticButton
+              as="a"
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
               className="pp-hero__cta"
+              strength={0.2}
             >
               <span className="pp-hero__cta-dot" />
               {lang === 'fr' ? 'Voir le site' : 'View live'}
-              <ArrowRight className="pp-hero__cta-arrow" />
-            </a>
+              <ArrowUpRight className="pp-hero__cta-arrow" />
+            </MagneticButton>
           </motion.div>
 
         </section>
+
+        {/* ── HERO MEDIA — visuel principal full-bleed ──────────── */}
+        <HeroMedia project={project} />
 
         {/* ── ABOUT ─────────────────────────────────────────────── */}
         <section className="pp-about container">

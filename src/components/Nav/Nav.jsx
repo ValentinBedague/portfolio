@@ -6,6 +6,8 @@ import { useContactDrawer } from '../ContactDrawer/ContactDrawerContext'
 import LangSwitcher  from '../LangSwitcher/LangSwitcher'
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher'
 import { ArrowRight } from '../ArrowIcon'
+import RollText from '../RollText'
+import MagneticButton from '../MagneticButton'
 import './Nav.css'
 
 const overlayVariants = {
@@ -88,9 +90,9 @@ export default function Nav() {
                 key={to}
                 to={to}
                 end={end}
-                className={({ isActive }) => isActive ? 'nav__link active' : 'nav__link'}
+                className={({ isActive }) => isActive ? 'nav__link roll-hover active' : 'nav__link roll-hover'}
               >
-                {label}
+                <RollText>{label}</RollText>
               </NavLink>
             ))}
           </nav>
@@ -98,9 +100,9 @@ export default function Nav() {
           <div className="nav__actions">
             <ThemeSwitcher />
             <LangSwitcher />
-            <button onClick={openDrawer} className="nav__cta btn-ghost">
+            <MagneticButton onClick={openDrawer} className="nav__cta btn-ghost" strength={0.2}>
               {t('nav_contact')}
-            </button>
+            </MagneticButton>
           </div>
 
           {/* Burger — 2 lines that cross */}

@@ -34,6 +34,31 @@
 .hero__line {
   display: block;
   will-change: transform;
+  /* État initial : caché sous le masque, révélé par app-loaded */
+  transform: translateY(112%);
+}
+
+/* ── Entrance — lignes qui montent du masque, staggered ─────── */
+@keyframes hero-line-up {
+  to { transform: translateY(0); }
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+body.app-loaded .hero__line {
+  animation: hero-line-up 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+body.app-loaded .hero__yw-pair .line-mask:nth-child(1) .hero__line { animation-delay: 0.05s; }
+body.app-loaded .hero__yw-pair .line-mask:nth-child(2) .hero__line { animation-delay: 0.14s; }
+body.app-loaded .hero__ie-pair .line-mask:nth-child(1) .hero__line { animation-delay: 0.23s; }
+body.app-loaded .hero__ie-pair .line-mask:nth-child(2) .hero__line { animation-delay: 0.32s; }
+
+/* Colonne droite : fade-up décalé */
+.hero__right { opacity: 0; }
+body.app-loaded .hero__right {
+  animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
 }
 .hero__line--outline {
   color: transparent;

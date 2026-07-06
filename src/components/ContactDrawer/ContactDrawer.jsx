@@ -92,6 +92,7 @@ export default function ContactDrawer() {
           {/* Panel */}
           <motion.aside
             className="cd-panel"
+            data-lenis-prevent
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}

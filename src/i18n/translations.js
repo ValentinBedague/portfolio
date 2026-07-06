@@ -123,7 +123,9 @@ export const translations = {
     // — Footer
     footer_lbl_brand:   'Brand',
     footer_lbl_nav:     'Navigation',
+    footer_lbl_socials: 'Socials',
     footer_lbl_status:  'Status',
+    footer_top:         'Back to top',
     footer_role:        'Web Designer & Full Stack Developer',
     footer_available:   'Available for new projects',
     footer_sleeping:    'Probably sleeping',
@@ -313,7 +315,9 @@ export const translations = {
     // — Footer
     footer_lbl_brand:   'Identité',
     footer_lbl_nav:     'Navigation',
+    footer_lbl_socials: 'Réseaux',
     footer_lbl_status:  'Statut',
+    footer_top:         'Haut de page',
     footer_role:        'Webdesigner & Développeur Full Stack',
     footer_available:   'Disponible pour de nouveaux projets',
     footer_sleeping:    'Sûrement en train de dormir',

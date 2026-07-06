@@ -5,10 +5,11 @@ import { LanguageProvider } from './i18n/LanguageContext'
 import { ThemeProvider }    from './i18n/ThemeContext'
 import { ContactDrawerProvider } from './components/ContactDrawer/ContactDrawerContext'
 import ContactDrawer from './components/ContactDrawer/ContactDrawer'
-import Nav         from './components/Nav/Nav'
-import Footer      from './components/Footer/Footer'
-import Preloader   from './components/Preloader/Preloader'
-import ContactFAB  from './components/ContactFAB/ContactFAB'
+import Nav          from './components/Nav/Nav'
+import Footer       from './components/Footer/Footer'
+import Preloader    from './components/Preloader/Preloader'
+import ContactFAB   from './components/ContactFAB/ContactFAB'
+import SmoothScroll from './components/SmoothScroll'
 
 // Code splitting — chaque page est un chunk séparé
 const HomePage      = lazy(() => import('./pages/HomePage'))
@@ -31,7 +32,10 @@ function isKnownRoute(pathname) {
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => {
+    if (window.lenis) window.lenis.scrollTo(0, { immediate: true })
+    else window.scrollTo(0, 0)
+  }, [pathname])
   return null
 }
 
@@ -61,8 +65,14 @@ function AppController() {
   // Si on atterrit directement sur une 404, on passe loaded à true d'emblée
   const [loaded, setLoaded] = useState(() => !isKnownRoute(pathname))
 
+  // La classe déclenche les animations d'entrée CSS (hero, etc.)
+  useEffect(() => {
+    if (loaded) document.body.classList.add('app-loaded')
+  }, [loaded])
+
   return (
     <>
+      <SmoothScroll />
       <ScrollToTop />
 
       {!loaded && <Preloader onDone={() => setLoaded(true)} />}
@@ -85,6 +95,9 @@ function AppController() {
       </motion.div>
 
       <ContactDrawer />
+
+      {/* Texture film au-dessus de tout le contenu */}
+      <div className="grain" aria-hidden="true" />
     </>
   )
 }

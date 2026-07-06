@@ -1,5 +1,7 @@
 .tech-section {
   padding: 160px 0 100px;
+  /* Requis par framer-motion useScroll (offset calculé correctement) */
+  position: relative;
 }
 
 /* ── Title (above band) ────────────────────────────────────── */
