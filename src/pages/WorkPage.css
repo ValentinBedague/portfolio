@@ -176,7 +176,8 @@
   z-index: 999;
   border-radius: 6px;
   overflow: hidden;
-  translate: 24px -58%;
+  /* position (coin haut-gauche) entièrement calculée en JS via x/y */
+  translate: none;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border);
 }
 

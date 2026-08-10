@@ -10,7 +10,6 @@ import './Footer.css'
 const EMAIL = 'contact@valentinbedague.com'
 
 const SOCIALS = [
-  { label: 'Instagram', href: 'https://www.instagram.com/valentinbedague' },
   { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/valentinbedague' },
 ]
 
@@ -104,7 +103,11 @@ export default function Footer() {
                 {t('footer_hl_2')}
               </span>
             </div>
-            <a href={`mailto:${EMAIL}`} className="footer-email">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="footer-email"
+              onClick={e => { e.preventDefault(); openDrawer() }}
+            >
               {EMAIL}
               <ArrowUpRight className="footer-email__arrow" />
             </a>

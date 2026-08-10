@@ -8,7 +8,9 @@
   /* Outline "ghost" — même motif que hero/footer */
   --pp-ghost: rgba(255, 255, 255, 0.14);
 }
-.project-page--404 { padding: 120px 0; }
+/* padding vertical en longhand — le raccourci écraserait le padding
+   horizontal du .container (le CSS de page charge après index.css) */
+.project-page--404 { padding-top: 120px; padding-bottom: 120px; }
 
 /* ── Scroll progress line (left edge, fixed) ────────────────────── */
 .pp-progress {
@@ -143,7 +145,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   gap: 22px;
-  padding: 0 40px 24px;
+  padding: 0 var(--gutter) 24px;
   will-change: transform, opacity;
 }
 
@@ -349,7 +351,8 @@
 
 /* ── ABOUT ──────────────────────────────────────────────────────── */
 .pp-about {
-  padding: 88px 0;
+  padding-top: 88px;
+  padding-bottom: 88px;
   border-bottom: 1px solid var(--border);
   position: relative;
   overflow: hidden;
@@ -555,8 +558,8 @@
 
 /* Override section-head margin inside gallery (it gets container padding) */
 .pp-gallery > .pp-section-head {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
 }
 
 .pp-gallery__list {
@@ -686,7 +689,8 @@
 
 /* ── DETAILS ────────────────────────────────────────────────────── */
 .pp-details {
-  padding: 80px 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -765,7 +769,8 @@
 
 /* Prev — rangée discrète au-dessus */
 .pp-prev-row {
-  padding: 24px 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
   border-top: 1px solid var(--border);
 }
 
@@ -947,7 +952,7 @@ body.site-light .pp-section-line {
 }
 
 @media (max-width: 768px) {
-  .pp-gallery > .pp-section-head { padding-left: 20px; padding-right: 20px; }
+  .pp-gallery > .pp-section-head { padding-left: var(--gutter); padding-right: var(--gutter); }
   .pp-breakdown__cols { grid-template-columns: 1fr; }
   .pp-breakdown__col + .pp-breakdown__col {
     border-left: none;
@@ -957,26 +962,26 @@ body.site-light .pp-section-line {
     margin-top: 32px;
   }
   .pp-hero__title { font-size: clamp(56px, 14vw, 120px); }
-  .pp-hero__title-wrap { padding: 0 20px 20px; gap: 16px; }
+  .pp-hero__title-wrap { padding: 0 var(--gutter) 20px; gap: 16px; }
   .pp-hero__index { top: max(var(--nav-h), 7vh); right: 3vw; font-size: clamp(120px, 30vw, 220px); -webkit-text-stroke-width: 1px; }
   .pp-hero__meta { padding-top: 20px; padding-bottom: 30px; }
   .pp-hmedia__frame { height: min(58vh, 560px); }
-  .pp-about { padding: 60px 0; }
+  .pp-about { padding-top: 60px; padding-bottom: 60px; }
   .pp-about__desc { font-size: clamp(18px, 4vw, 26px); }
   .pp-about__detail { font-size: 15px; }
   .pp-about__orb { width: 400px; height: 400px; opacity: 0.04; }
   .pp-gallery { padding: 56px 0; }
   .pp-gallery__list { gap: 48px; }
-  .pp-details { padding: 56px 0; }
+  .pp-details { padding-top: 56px; padding-bottom: 56px; }
   .pp-next { padding: 40px 0 56px; }
   .pp-next__title { font-size: clamp(44px, 12vw, 100px); }
 }
 
 @media (max-width: 480px) {
-  .pp-gallery > .pp-section-head { padding-left: 16px; padding-right: 16px; }
+  .pp-gallery > .pp-section-head { padding-left: var(--gutter); padding-right: var(--gutter); }
   .pp-service-row__name { font-size: 14px; }
   .pp-stack-item { font-size: 13px; }
-  .pp-hero__title-wrap { padding: 0 16px 16px; }
+  .pp-hero__title-wrap { padding: 0 var(--gutter) 16px; }
   .pp-hero__meta { flex-direction: column; align-items: flex-start; gap: 20px; }
   .pp-hero__meta-cols { gap: 40px; }
   .pp-hero__counter { display: none; }

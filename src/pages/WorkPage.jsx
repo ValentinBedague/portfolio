@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import PageTransition from '../components/PageTransition/PageTransition'
@@ -138,12 +139,17 @@ function ProjectRow({ project, index, lang }) {
   )
 }
 
+/* Dimensions de la preview flottante (doivent suivre le CSS .work-preview) */
+const PREVIEW_W = 360
+const PREVIEW_H = 270 // 360 × 3/4 (aspect-ratio 4/3)
+const PREVIEW_MARGIN = 16
+
 const JSON_LD_WORK = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: 'Selected Works — Valentin Bedague',
   url: `${SITE}/work`,
-  description: 'Web projects by Valentin Bedague — showcase sites, e-commerce, custom applications.',
+  description: 'Web projects by Valentin Bedague: showcase sites, e-commerce, custom applications.',
   creator: { '@type': 'Person', name: 'Valentin Bedague', url: SITE },
 }
 
@@ -164,8 +170,25 @@ export default function WorkPage() {
   }, [hovered])
 
   const onMouseMove = (e) => {
-    rawX.set(e.clientX)
-    rawY.set(e.clientY)
+    const GAP = 20
+
+    // Coin haut-gauche de la preview : juste à droite du curseur,
+    // centrée verticalement sur lui — donc très proche du curseur.
+    let left = e.clientX + GAP
+    let top  = e.clientY - PREVIEW_H / 2
+
+    // Bascule à gauche du curseur si ça déborderait à droite
+    if (left + PREVIEW_W + PREVIEW_MARGIN > window.innerWidth) {
+      left = e.clientX - GAP - PREVIEW_W
+    }
+
+    // Bornage viewport : ne jamais sortir de l'écran.
+    // Si trop haute, top est ramené à la marge → collée au bord supérieur.
+    left = Math.min(Math.max(left, PREVIEW_MARGIN), window.innerWidth  - PREVIEW_W - PREVIEW_MARGIN)
+    top  = Math.min(Math.max(top,  PREVIEW_MARGIN), window.innerHeight - PREVIEW_H - PREVIEW_MARGIN)
+
+    rawX.set(left)
+    rawY.set(top)
   }
 
   return (
@@ -189,7 +212,7 @@ export default function WorkPage() {
           >
             <span className="work-header__count">({String(projects.length).padStart(2, '0')})</span>
             <span className="work-header__sep" />
-            <span>Selected works — 2023 / 2025</span>
+            <span>Selected works — 2025 / 2026</span>
           </motion.div>
 
           <h1 className="work-header__title">
@@ -235,7 +258,13 @@ export default function WorkPage() {
         {/* ── Story scroll section ───────────────────────────── */}
         <WorkStory />
 
-        {/* ── Floating preview ───────────────────────────────── */}
+      </div>
+
+      {/* ── Floating preview ─────────────────────────────────────
+         Rendue via portail sur <body> : sinon un ancêtre avec
+         will-change/transform (PageTransition) devient le bloc
+         conteneur du position:fixed et la vignette dérive au scroll. */}
+      {createPortal(
         <AnimatePresence>
           {hovered && (
             <motion.div
@@ -270,9 +299,9 @@ export default function WorkPage() {
               />
             </motion.div>
           )}
-        </AnimatePresence>
-
-      </div>
+        </AnimatePresence>,
+        document.body,
+      )}
     </PageTransition>
   )
 }

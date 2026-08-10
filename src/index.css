@@ -20,6 +20,8 @@
   --radius:        3px;
   --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
   --nav-h:         88px;
+  /* Gouttière fluide — se calibre sur la largeur d'écran, tous breakpoints */
+  --gutter:        clamp(20px, 4vw, 40px);
 }
 
 /* ─── Reset ──────────────────────────────────────────────────── */
@@ -116,7 +118,7 @@ svg[aria-hidden="true"] {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--gutter);
 }
 
 /* ─── Section label ──────────────────────────────────────────── */
@@ -235,12 +237,10 @@ body.site-light .grain { opacity: 0.055; }
 @media (max-width: 768px) {
   :root      { --nav-h: 72px; }
   .section   { padding: 80px 0; }
-  .container { padding: 0 20px; }
 }
 @media (max-width: 480px) {
   :root      { --nav-h: 64px; }
   .section   { padding: 60px 0; }
-  .container { padding: 0 16px; }
   .btn-primary,
   .btn-ghost { padding: 11px 20px; font-size: 10px; }
 }

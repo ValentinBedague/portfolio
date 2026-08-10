@@ -18,7 +18,6 @@ const JSON_LD_PERSON = {
   email: 'contact@valentinbedague.com',
   sameAs: [
     'https://www.linkedin.com/in/valentin-bedague/',
-    'https://www.instagram.com/valentinbedague',
   ],
   address: {
     '@type': 'PostalAddress',
@@ -34,7 +33,7 @@ const JSON_LD_WEBSITE = {
   '@type': 'WebSite',
   name: 'Valentin Bedague',
   url: SITE,
-  description: 'Portfolio de Valentin Bedague — web designer & développeur full stack',
+  description: 'Portfolio de Valentin Bedague, web designer & développeur full stack',
   inLanguage: ['fr', 'en'],
 }
 

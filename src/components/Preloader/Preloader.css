@@ -36,15 +36,20 @@
   -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4);
 }
 
-.preloader__label {
+/* Meta bas de page — hors du flux flex (sinon il écrase le bloc titre) */
+.preloader__meta {
   position: absolute;
   bottom: 40px;
-  right: 48px;
+  left: 48px;
+}
+
+.preloader__tag {
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .preloader__counter {
@@ -70,13 +75,14 @@ body.site-light .preloader__counter {
 }
 
 @media (max-width: 768px) {
-  .preloader         { padding: 0 24px; }
-  .preloader__label  { right: 24px; bottom: 28px; }
+  .preloader          { padding: 0 24px; }
+  .preloader__meta    { left: 24px; bottom: 28px; }
   .preloader__counter { right: 24px; bottom: 20px; }
 }
 
 @media (max-width: 480px) {
   .preloader          { padding: 0 16px; }
+  .preloader__meta    { left: 16px; bottom: 20px; }
   .preloader__counter {
     right: 16px;
     bottom: 16px;
