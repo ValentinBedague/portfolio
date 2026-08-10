@@ -6,6 +6,8 @@
     <loc>https://valentinbedague.com/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valentinbedague.com/"/>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,6 +16,8 @@
     <loc>https://valentinbedague.com/work</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/work"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/work"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valentinbedague.com/work"/>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -22,36 +26,50 @@
     <loc>https://valentinbedague.com/about</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://valentinbedague.com/about"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://valentinbedague.com/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valentinbedague.com/about"/>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://valentinbedague.com/legal</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
+    <loc>https://valentinbedague.com/work/edible-table</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://valentinbedague.com/work/myshampouineuse</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://valentinbedague.com/work/undamassage</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://valentinbedague.com/work/tcxa</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://valentinbedague.com/work/sportofkings</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>

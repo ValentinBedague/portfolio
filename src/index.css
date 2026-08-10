@@ -112,6 +112,26 @@ svg[aria-hidden="true"] {
   font-variant-emoji: text;
 }
 
+/* ─── Skip link (a11y) — masqué hors focus, visible au clavier ── */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  padding: 10px 18px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transform: translateY(-150%);
+  transition: transform 0.2s var(--ease-out);
+}
+.skip-link:focus { transform: translateY(0); outline: 2px solid var(--text); }
+
 /* ─── Section shell ──────────────────────────────────────────── */
 .section { padding: 120px 0; position: relative; }
 

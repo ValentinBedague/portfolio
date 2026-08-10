@@ -75,6 +75,9 @@ function AppController() {
       <SmoothScroll />
       <ScrollToTop />
 
+      {/* Skip link — accessibilité clavier / lecteurs d'écran */}
+      <a href="#main" className="skip-link">Aller au contenu</a>
+
       {!loaded && <Preloader onDone={() => setLoaded(true)} />}
 
       {/* Nav & FAB hors du fade-in — visibles immédiatement après le preloader */}
@@ -88,10 +91,10 @@ function AppController() {
         style={{ pointerEvents: loaded ? 'auto' : 'none' }}
       >
         {!isProjectPage && <Footer />}
-        <div className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
+        <main id="main" className={`app-body${isProjectPage ? ' app-body--no-footer' : ''}`}>
           <AnimatedRoutes />
           <div className="footer-sentinel" aria-hidden="true" />
-        </div>
+        </main>
       </motion.div>
 
       <ContactDrawer />

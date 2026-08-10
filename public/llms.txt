@@ -1,0 +1,26 @@
+# Valentin Bedague
+
+> Web designer & full stack developer based in Biarritz, France. I build iconic, high-performance, bilingual (FR/EN) websites that convert visitors into customers, from the first brief to the last pixel.
+
+Valentin Bedague is an independent freelance web designer and developer. Services span design, custom development (React, Vite, Astro), SEO, e-commerce and long-term maintenance. Available for new projects. Reply guaranteed within 24h.
+
+## Pages
+
+- [Home](https://valentinbedague.com/): Introduction, featured projects and contact.
+- [Work](https://valentinbedague.com/work): Selected client projects (2025–2026).
+- [About](https://valentinbedague.com/about): Approach, services and value proposition.
+- [Legal](https://valentinbedague.com/legal): Legal notice and privacy information.
+
+## Projects
+
+- [Edible Table](https://valentinbedague.com/work/edible-table): Showcase & portfolio site for a private chef. Built with Astro 5 (static), vanilla HTML/CSS/JS, bilingual FR/EN, Web3Forms contact, SEO-optimised.
+- [My Shampouineuse](https://valentinbedague.com/work/myshampouineuse): Showcase site for a professional cleaning company in Corsica. Full stack: design, custom booking back-end and SEO.
+- [Unda Massage](https://valentinbedague.com/work/undamassage): Premium showcase site for a sports massage practitioner in Biarritz, with online booking.
+- [TCXA Agency](https://valentinbedague.com/work/tcxa): B2B customer-experience consulting agency site.
+- [Sport of Kings](https://valentinbedague.com/work/sportofkings): Sustainable fashion e-commerce store (Shopify), GOTS & OEKO-TEX certified.
+
+## Contact
+
+- Email: contact@valentinbedague.com
+- LinkedIn: https://www.linkedin.com/in/valentinbedague
+- Location: Biarritz, France (available everywhere)

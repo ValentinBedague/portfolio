@@ -34,6 +34,11 @@ const setProp = (property, content) => {
   el.setAttribute('content', content)
 }
 
+const removeProp = (property) => {
+  const el = document.querySelector(`meta[property="${CSS.escape(property)}"]`)
+  if (el) el.remove()
+}
+
 const setCanonical = (href) => {
   let el = document.querySelector('link[rel="canonical"]')
   if (!el) {
@@ -85,18 +90,31 @@ export default function SEO({
     setProp('og:title',       fullTitle)
     setProp('og:description', description)
     setProp('og:image',       fullImage)
-    setProp('og:image:width',  '1200')
-    setProp('og:image:height', '630')
+    setProp('og:image:alt',   fullTitle)
+    setProp('og:image:type',  'image/png')
+    // Dimensions connues uniquement pour l'OG image de marque (1200×630).
+    // Les pages projet utilisent un screenshot d'un autre format → on retire
+    // les dimensions plutôt que d'en annoncer de fausses.
+    if (image) {
+      removeProp('og:image:width')
+      removeProp('og:image:height')
+    } else {
+      setProp('og:image:width',  '1200')
+      setProp('og:image:height', '630')
+    }
     setProp('og:url',         fullUrl)
     setProp('og:type',        type)
     setProp('og:site_name',   'Valentin Bedague')
     setProp('og:locale',      locale)
+    setProp('og:locale:alternate', lang === 'fr' ? 'en_US' : 'fr_FR')
 
     // ── Twitter / X
     setMeta('twitter:card',        'summary_large_image')
+    setMeta('twitter:site',        '@valentinbedague')
     setMeta('twitter:title',       fullTitle)
     setMeta('twitter:description', description)
     setMeta('twitter:image',       fullImage)
+    setMeta('twitter:image:alt',   fullTitle)
     setMeta('twitter:creator',     '@valentinbedague')
 
     // ── Canonical

@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- ── SEO base (mis à jour dynamiquement par le composant SEO) ── -->
     <title>Valentin Bedague — Web Designer &amp; Développeur Full Stack</title>
-    <meta name="description" content="Valentin Bedague — Web designer &amp; développeur full stack à Biarritz. Je crée des sites web iconiques, performants et qui convertissent." />
+    <meta name="description" content="Valentin Bedague, Web designer &amp; développeur full stack à Biarritz. Je crée des sites web iconiques, performants et qui convertissent." />
     <meta name="author" content="Valentin Bedague" />
     <meta name="robots" content="index, follow" />
 
@@ -21,10 +23,14 @@
     <meta property="og:image"       content="https://valentinbedague.com/og-image.png" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type"  content="image/png" />
+    <meta property="og:image:alt"   content="Valentin Bedague — Web Designer &amp; Développeur Full Stack" />
     <meta property="og:locale"      content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
 
     <!-- ── Twitter / X Card ──────────────────────────────────────── -->
     <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@valentinbedague" />
     <meta name="twitter:title"       content="Valentin Bedague — Web Designer &amp; Développeur Full Stack" />
     <meta name="twitter:description" content="Web designer &amp; développeur full stack à Biarritz. Sites iconiques, performants et qui convertissent." />
     <meta name="twitter:image"       content="https://valentinbedague.com/og-image.png" />
@@ -39,10 +45,14 @@
     <!-- ── Google Fonts ──────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Chargement non bloquant : la feuille de style polices s'applique après le rendu (display=swap gère le fallback) -->
     <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@0,400;0,600&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@0,400;0,600&display=swap"
-      rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@0,400;0,600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@0,400;0,600&display=swap" />
+    </noscript>
   </head>
   <body>
     <!--
