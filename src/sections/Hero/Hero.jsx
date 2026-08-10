@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useContactDrawer } from '../../components/ContactDrawer/ContactDrawerContext'
-import MagneticButton from '../../components/MagneticButton'
 import './Hero.css'
 
 export default function Hero() {
@@ -38,23 +38,12 @@ export default function Hero() {
           </div>
 
           <div className="hero__cta">
-            <MagneticButton
-              as="a"
-              href="#projects"
-              className="btn-primary"
-              onClick={e => {
-                e.preventDefault()
-                const target = document.getElementById('projects')
-                if (!target) return
-                if (window.lenis) window.lenis.scrollTo(target)
-                else target.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
+            <Link to="/work" className="btn-primary">
               {t('hero_cta_work')}
-            </MagneticButton>
-            <MagneticButton className="btn-ghost" onClick={openDrawer}>
+            </Link>
+            <button className="btn-ghost" onClick={openDrawer}>
               {t('hero_cta_contact')}
-            </MagneticButton>
+            </button>
           </div>
         </div>
 

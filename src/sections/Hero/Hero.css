@@ -112,6 +112,24 @@ body.app-loaded .hero__right {
 
 .hero__cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
+/* ── Hover sobre — pas de mouvement, juste un changement de couleur ── */
+/* Primary : plein → contour au survol (bordure transparente au repos, pas de décalage) */
+.hero__cta .btn-primary {
+  border: 1px solid var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.hero__cta .btn-primary:hover {
+  background: transparent;
+  color: var(--text);
+  opacity: 1;
+}
+/* Ghost : léger fond + texte plein au survol */
+.hero__cta .btn-ghost:hover {
+  background: var(--bg-card-hover);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
 /* ── Tablet ────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .hero__inner    { grid-template-columns: 1fr; gap: 32px; }
