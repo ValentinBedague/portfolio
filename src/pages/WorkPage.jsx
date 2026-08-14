@@ -150,7 +150,7 @@ const JSON_LD_WORK = {
   name: 'Selected Works — Valentin Bedague',
   url: `${SITE}/work`,
   description: 'Web projects by Valentin Bedague: showcase sites, e-commerce, custom applications.',
-  creator: { '@type': 'Person', name: 'Valentin Bedague', url: SITE },
+  creator: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Valentin Bedague', url: SITE },
 }
 
 export default function WorkPage() {

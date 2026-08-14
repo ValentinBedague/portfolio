@@ -11,8 +11,9 @@ const JSON_LD = {
   url: `${SITE}/about`,
   mainEntity: {
     '@type': 'Person',
+    '@id': `${SITE}/#person`,
     name: 'Valentin Bedague',
-    jobTitle: 'Web Designer & Full Stack Developer',
+    jobTitle: 'Webdesigner & Développeur Web Full Stack',
     url: SITE,
   },
 }

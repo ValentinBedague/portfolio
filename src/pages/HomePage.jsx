@@ -1,47 +1,30 @@
-import { useEffect } from 'react'
 import PageTransition  from '../components/PageTransition/PageTransition'
 import Hero            from '../sections/Hero/Hero'
 import HomeProjectsRow from '../sections/Projects/HomeProjectsRow'
 import ScratchSection  from '../sections/Scratch/ScratchSection'
 import TechCarousel    from '../sections/Tech/TechCarousel'
 import ContactCTA      from '../sections/ContactCTA/ContactCTA'
-import SEO, { SITE, setJsonLd } from '../components/SEO/SEO'
+import SEO, { SITE } from '../components/SEO/SEO'
 import { useLanguage } from '../i18n/LanguageContext'
 import './HomePage.css'
 
-const JSON_LD_PERSON = {
+/* L'identité de marque (WebSite + Person + ProfessionalService, reliés par @id)
+   est déclarée en JSON-LD statique dans index.html → présente sur toutes les
+   pages et lue même sans exécution JS. La home référence ce graphe via une
+   entité WebPage rattachée par @id. */
+const JSON_LD_HOME = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Valentin Bedague',
-  jobTitle: 'Web Designer & Full Stack Developer',
-  url: SITE,
-  email: 'contact@valentinbedague.com',
-  sameAs: [
-    'https://www.linkedin.com/in/valentin-bedague/',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Biarritz',
-    addressRegion: 'Pyrénées-Atlantiques',
-    addressCountry: 'FR',
-  },
-  knowsAbout: ['Web Design', 'React', 'Full Stack Development', 'UI/UX', 'SEO', 'E-commerce'],
-}
-
-const JSON_LD_WEBSITE = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Valentin Bedague',
-  url: SITE,
-  description: 'Portfolio de Valentin Bedague, web designer & développeur full stack',
-  inLanguage: ['fr', 'en'],
+  '@type': 'WebPage',
+  '@id': `${SITE}/#webpage`,
+  url: `${SITE}/`,
+  name: 'Webdesigner & Développeur Web à Biarritz — Valentin Bedague',
+  isPartOf: { '@id': `${SITE}/#website` },
+  about: { '@id': `${SITE}/#business` },
+  inLanguage: 'fr',
 }
 
 export default function HomePage() {
   const { t, lang } = useLanguage()
-
-  // Injecte le second bloc JSON-LD (WebSite) une seule fois
-  useEffect(() => { setJsonLd('json-ld-website', JSON_LD_WEBSITE) }, [])
 
   return (
     <PageTransition>
@@ -50,7 +33,7 @@ export default function HomePage() {
         description={t('seo_home_desc')}
         url="/"
         lang={lang}
-        jsonLd={JSON_LD_PERSON}
+        jsonLd={JSON_LD_HOME}
       />
       <div className="home-fold">
         <Hero />

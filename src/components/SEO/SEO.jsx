@@ -80,6 +80,7 @@ export default function SEO({
 
     // ── Base
     document.title = fullTitle
+    document.documentElement.lang = lang
 
     // ── Standard meta
     setMeta('description', description)

@@ -176,19 +176,19 @@ export const translations = {
     story_cta: "Let's talk",
 
     // — Meta (SEO)
-    meta_title:        'Valentin Bedague — Web Designer & Full Stack Developer',
-    meta_desc:         'Valentin Bedague, Web designer & full stack developer based in Biarritz. I build iconic, high-performance websites that convert.',
+    meta_title:        'Web Designer & Web Developer in Biarritz — Valentin Bedague',
+    meta_desc:         'Valentin Bedague, freelance web designer & developer in Biarritz, France. Showcase sites, e-commerce and custom web apps — fast, SEO-optimised, built to convert.',
     // — 404
     nf_message: "This page seems to have gone missing in action.",
     nf_cta:     'Back to home',
     nf_hint:    'Watch the logo hit a corner',
 
-    seo_home_title:    'Web Designer & Full Stack Developer',
-    seo_home_desc:     'Valentin Bedague, Web designer & full stack developer based in Biarritz. Iconic, high-performance websites that convert visitors into customers.',
-    seo_work_title:    'Work — Selected Projects',
-    seo_work_desc:     'Web projects by Valentin Bedague: showcase sites, e-commerce platforms and custom web applications built with React.',
-    seo_about_title:   'About — Valentin Bedague',
-    seo_about_desc:    'Web designer & full stack developer based in Biarritz, France. Passionate about design, performance and user experience.',
+    seo_home_title:    'Web Designer & Web Developer in Biarritz',
+    seo_home_desc:     'Valentin Bedague, freelance web designer & developer in Biarritz, France. Showcase sites, e-commerce and custom web apps — fast, SEO-optimised and built to convert.',
+    seo_work_title:    'Work — Web Projects from Biarritz',
+    seo_work_desc:     'Web projects by Valentin Bedague, web designer in Biarritz: showcase sites, e-commerce and custom web applications built with React.',
+    seo_about_title:   'Freelance Web Designer in Biarritz',
+    seo_about_desc:    'Valentin Bedague, freelance web designer & developer based in Biarritz, France. Design, performance and SEO for businesses, founders and lifestyle brands.',
   },
 
   fr: {
@@ -368,18 +368,18 @@ export const translations = {
     story_cta: 'Contactez-moi',
 
     // — Meta (SEO)
-    meta_title:        'Valentin Bedague — Web Designer & Développeur Full Stack',
-    meta_desc:         'Valentin Bedague, Web designer & développeur full stack à Biarritz. Sites web iconiques, performants et qui convertissent.',
+    meta_title:        'Webdesigner & Développeur Web à Biarritz — Valentin Bedague',
+    meta_desc:         'Valentin Bedague, webdesigner & développeur web freelance à Biarritz. Sites vitrines, e-commerce et applications sur-mesure, performants et optimisés SEO.',
     // — 404
     nf_message: "Cette page semble s'être perdue quelque part.",
     nf_cta:     "Retour à l'accueil",
     nf_hint:    'Guettez le logo dans le coin',
 
-    seo_home_title:    'Web Designer & Développeur Full Stack',
-    seo_home_desc:     'Valentin Bedague, Web designer & développeur full stack à Biarritz. Sites iconiques, performants, qui convertissent les visiteurs en clients.',
-    seo_work_title:    'Travaux — Projets Sélectionnés',
-    seo_work_desc:     'Projets web réalisés par Valentin Bedague : sites vitrines, e-commerce et applications web sur-mesure développées avec React.',
-    seo_about_title:   'À Propos — Valentin Bedague',
-    seo_about_desc:    'Webdesigner & développeur full stack basé à Biarritz. Passionné par le design, la performance et l\'expérience utilisateur.',
+    seo_home_title:    'Webdesigner & Développeur Web à Biarritz',
+    seo_home_desc:     'Valentin Bedague, webdesigner & développeur web freelance à Biarritz. Création de sites vitrines, e-commerce et applications sur-mesure, rapides, optimisés SEO et qui convertissent.',
+    seo_work_title:    'Projets — Sites Web à Biarritz',
+    seo_work_desc:     'Projets web réalisés par Valentin Bedague, webdesigner à Biarritz : sites vitrines, e-commerce et applications sur-mesure développés avec React.',
+    seo_about_title:   'Webdesigner Freelance à Biarritz',
+    seo_about_desc:    'Valentin Bedague, webdesigner & développeur web freelance à Biarritz (Pays Basque). Design, performance et référencement pour PME, entrepreneurs et marques lifestyle.',
   },
 }

@@ -9,16 +9,22 @@
     <meta name="theme-color" content="#0a0a0a" />
 
     <!-- ── SEO base (mis à jour dynamiquement par le composant SEO) ── -->
-    <title>Valentin Bedague — Web Designer &amp; Développeur Full Stack</title>
-    <meta name="description" content="Valentin Bedague, Web designer &amp; développeur full stack à Biarritz. Je crée des sites web iconiques, performants et qui convertissent." />
+    <title>Webdesigner &amp; Développeur Web à Biarritz | Valentin Bedague</title>
+    <meta name="description" content="Valentin Bedague, webdesigner &amp; développeur web freelance à Biarritz (Pays Basque). Création de sites vitrines, e-commerce et applications sur-mesure, rapides et optimisés pour le référencement." />
     <meta name="author" content="Valentin Bedague" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+    <!-- ── Ciblage géographique local (Biarritz / Pays Basque) ─────── -->
+    <meta name="geo.region"    content="FR-64" />
+    <meta name="geo.placename" content="Biarritz" />
+    <meta name="geo.position"  content="43.4832;-1.5586" />
+    <meta name="ICBM"          content="43.4832, -1.5586" />
 
     <!-- ── Open Graph (fallback statique) ────────────────────────── -->
     <meta property="og:type"        content="website" />
     <meta property="og:site_name"   content="Valentin Bedague" />
-    <meta property="og:title"       content="Valentin Bedague — Web Designer &amp; Développeur Full Stack" />
-    <meta property="og:description" content="Web designer &amp; développeur full stack à Biarritz. Sites iconiques, performants et qui convertissent." />
+    <meta property="og:title"       content="Webdesigner &amp; Développeur Web à Biarritz — Valentin Bedague" />
+    <meta property="og:description" content="Webdesigner &amp; développeur web freelance à Biarritz. Sites vitrines, e-commerce et applications sur-mesure, performants et optimisés SEO." />
     <meta property="og:url"         content="https://valentinbedague.com/" />
     <meta property="og:image"       content="https://valentinbedague.com/og-image.png" />
     <meta property="og:image:width"  content="1200" />
@@ -31,8 +37,8 @@
     <!-- ── Twitter / X Card ──────────────────────────────────────── -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:site"        content="@valentinbedague" />
-    <meta name="twitter:title"       content="Valentin Bedague — Web Designer &amp; Développeur Full Stack" />
-    <meta name="twitter:description" content="Web designer &amp; développeur full stack à Biarritz. Sites iconiques, performants et qui convertissent." />
+    <meta name="twitter:title"       content="Webdesigner &amp; Développeur Web à Biarritz — Valentin Bedague" />
+    <meta name="twitter:description" content="Webdesigner &amp; développeur web freelance à Biarritz. Sites vitrines, e-commerce et applications sur-mesure, performants et optimisés SEO." />
     <meta name="twitter:image"       content="https://valentinbedague.com/og-image.png" />
     <meta name="twitter:creator"     content="@valentinbedague" />
 
@@ -53,6 +59,86 @@
       <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=IBM+Plex+Mono:wght@0,400;0,600&display=swap" />
     </noscript>
+
+    <!-- ── JSON-LD : identité de marque (statique, lue par tous les crawlers,
+         même sans exécution JS). Graphe relié par @id : Site + Personne +
+         Entreprise locale (ProfessionalService) pour le SEO local Biarritz. ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://valentinbedague.com/#website",
+          "url": "https://valentinbedague.com/",
+          "name": "Valentin Bedague",
+          "description": "Webdesigner & développeur web freelance à Biarritz",
+          "inLanguage": ["fr", "en"],
+          "publisher": { "@id": "https://valentinbedague.com/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://valentinbedague.com/#person",
+          "name": "Valentin Bedague",
+          "jobTitle": "Webdesigner & Développeur Web Full Stack",
+          "url": "https://valentinbedague.com/",
+          "image": "https://valentinbedague.com/og-image.png",
+          "email": "contact@valentinbedague.com",
+          "description": "Webdesigner et développeur web freelance basé à Biarritz, spécialisé dans la création de sites vitrines, e-commerce et applications web sur-mesure, performants et optimisés pour le référencement.",
+          "sameAs": ["https://www.linkedin.com/in/valentin-bedague/"],
+          "knowsAbout": ["Web Design", "Développement Web", "React", "SEO", "E-commerce", "UI/UX"],
+          "knowsLanguage": ["fr", "en"],
+          "worksFor": { "@id": "https://valentinbedague.com/#business" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Biarritz",
+            "postalCode": "64200",
+            "addressRegion": "Pyrénées-Atlantiques",
+            "addressCountry": "FR"
+          }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://valentinbedague.com/#business",
+          "name": "Valentin Bedague — Webdesigner & Développeur Web",
+          "image": "https://valentinbedague.com/og-image.png",
+          "url": "https://valentinbedague.com/",
+          "email": "contact@valentinbedague.com",
+          "priceRange": "€€",
+          "founder": { "@id": "https://valentinbedague.com/#person" },
+          "areaServed": [
+            { "@type": "City", "name": "Biarritz" },
+            { "@type": "City", "name": "Anglet" },
+            { "@type": "City", "name": "Bayonne" },
+            { "@type": "AdministrativeArea", "name": "Pays Basque" },
+            { "@type": "Country", "name": "France" }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "79 Avenue de la Marne",
+            "addressLocality": "Biarritz",
+            "postalCode": "64200",
+            "addressRegion": "Pyrénées-Atlantiques",
+            "addressCountry": "FR"
+          },
+          "geo": { "@type": "GeoCoordinates", "latitude": 43.4832, "longitude": -1.5586 },
+          "knowsLanguage": ["fr", "en"],
+          "serviceType": ["Création de site web", "Développement web", "Design UI/UX", "Référencement SEO", "E-commerce"],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Services de création web",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Création de site vitrine", "areaServed": "Biarritz" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Développement web sur-mesure (React)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Création de boutique e-commerce" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Référencement naturel (SEO)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Design & identité visuelle" } }
+            ]
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <!--

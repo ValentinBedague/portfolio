@@ -306,13 +306,25 @@ export default function ProjectPage() {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: project.title,
-    description: get('description'),
-    url: project.url,
-    image: project.screenshot ? `${SITE}${project.screenshot}` : undefined,
-    creator: { '@type': 'Person', name: 'Valentin Bedague', url: SITE },
-    keywords: get('tags').join(', '),
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        name: project.title,
+        description: get('description'),
+        url: project.url,
+        image: project.screenshot ? `${SITE}${project.screenshot}` : undefined,
+        creator: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Valentin Bedague', url: SITE },
+        keywords: get('tags').join(', '),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: lang === 'fr' ? 'Accueil' : 'Home', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: lang === 'fr' ? 'Projets' : 'Work', item: `${SITE}/work` },
+          { '@type': 'ListItem', position: 3, name: project.title, item: `${SITE}/work/${project.slug}` },
+        ],
+      },
+    ],
   }
 
   return (
