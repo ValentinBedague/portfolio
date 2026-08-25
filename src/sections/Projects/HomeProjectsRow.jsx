@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { projects } from '../../data/projects'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { ArrowUpRight } from '../../components/ArrowIcon'
@@ -7,15 +7,12 @@ import './HomeProjectsRow.css'
 
 /* ── Desktop card ──────────────────────────────────────────────── */
 function Card({ project, index, onEnter, onLeave }) {
-  const navigate  = useNavigate()
   const { lang }  = useLanguage()
   const videoRef  = useRef(null)
 
   const category = typeof project.category === 'object'
     ? project.category[lang] ?? project.category.en
     : project.category
-
-  const go = () => navigate(`/work/${project.slug}`)
 
   const handleEnter = () => {
     onEnter()
@@ -26,15 +23,13 @@ function Card({ project, index, onEnter, onLeave }) {
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0 }
   }
 
+  /* Vrai lien <a> (crawlable par les moteurs) plutôt qu'un onClick JS */
   return (
-    <article
+    <Link
+      to={`/work/${project.slug}`}
       className="hpr-card"
-      onClick={go}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => e.key === 'Enter' && go()}
       aria-label={project.title}
     >
       <div className="hpr-card__visual">
@@ -62,13 +57,12 @@ function Card({ project, index, onEnter, onLeave }) {
           <p className="hpr-card__title">{project.title}</p>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
 
 /* ── Mobile slider ─────────────────────────────────────────────── */
 function MobileSlider() {
-  const navigate      = useNavigate()
   const { lang }      = useLanguage()
   const rootRef       = useRef(null)
   const sliderRef     = useRef(null)
@@ -225,10 +219,10 @@ function MobileSlider() {
             : p.category
 
           return (
-            <article
+            <Link
               key={p.id}
+              to={`/work/${p.slug}`}
               className={`hpr-slide${i === 0 ? ' hpr-slide--active' : ''}`}
-              onClick={() => navigate(`/work/${p.slug}`)}
               aria-label={p.title}
             >
               {/* Visual */}
@@ -257,7 +251,7 @@ function MobileSlider() {
                   <ArrowUpRight className="hpr-slide__arrow" />
                 </div>
               </div>
-            </article>
+            </Link>
           )
         })}
       </div>

@@ -22,6 +22,8 @@
   height: clamp(200px, 36vh, 340px);
   display: flex;
   flex-direction: column;
+  color: inherit;          /* <a> : hérite la couleur du thème */
+  text-decoration: none;
   border-right: 1px solid var(--border);
   overflow: hidden;
   cursor: pointer;
@@ -186,6 +188,9 @@
 .hpr-slide {
   scroll-snap-align: center;
   flex-shrink: 0;
+  display: block;          /* <a> est inline par défaut */
+  color: inherit;
+  text-decoration: none;
   width: 82vw;
   height: 360px;
   border-radius: 6px;

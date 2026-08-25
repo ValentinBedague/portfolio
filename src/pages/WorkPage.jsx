@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import PageTransition from '../components/PageTransition/PageTransition'
 import { projects } from '../data/projects'
@@ -102,9 +102,10 @@ const maskReveal = {
   }),
 }
 
-function ProjectRow({ project, index, lang }) {
-  const navigate = useNavigate()
+/* motion() wrappe Link → vrai <a> crawlable, animations conservées */
+const MotionLink = motion(Link)
 
+function ProjectRow({ project, index, lang }) {
   const category = typeof project.category === 'object'
     ? project.category[lang] ?? project.category.en
     : project.category
@@ -114,12 +115,12 @@ function ProjectRow({ project, index, lang }) {
     : (project.tags ?? [])
 
   return (
-    <motion.div
+    <MotionLink
+      to={`/work/${project.slug}`}
       className="work-row"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.45 + index * 0.08 }}
-      onClick={() => navigate(`/work/${project.slug}`)}
     >
       <span className="work-row__num">0{index + 1}</span>
 
@@ -135,7 +136,7 @@ function ProjectRow({ project, index, lang }) {
       </div>
 
       <ArrowRight className="work-row__arrow" />
-    </motion.div>
+    </MotionLink>
   )
 }
 
