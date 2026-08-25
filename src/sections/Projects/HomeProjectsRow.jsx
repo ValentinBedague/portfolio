@@ -70,6 +70,7 @@ function Card({ project, index, onEnter, onLeave }) {
 function MobileSlider() {
   const navigate      = useNavigate()
   const { lang }      = useLanguage()
+  const rootRef       = useRef(null)
   const sliderRef     = useRef(null)
   const fillRef       = useRef(null)   // progress bar fill — updated via DOM
   const idxLabelRef   = useRef(null)   // "01" counter — updated via DOM
@@ -78,9 +79,15 @@ function MobileSlider() {
   const total = projects.length
 
   useEffect(() => {
-    const el = sliderRef.current
-    if (!el) return
+    const el   = sliderRef.current
+    const root = rootRef.current
+    if (!el || !root) return
     const slides = Array.from(el.querySelectorAll('.hpr-slide'))
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    /* Compteur autoplay (ms écoulées sur la slide courante) — déclaré ici
+       car setActive le remet à zéro à chaque changement de slide */
+    let elapsed = 0
 
     /* ── Direct DOM update — zero React re-renders during scroll ── */
     const setActive = (idx) => {
@@ -95,19 +102,7 @@ function MobileSlider() {
       if (idxLabelRef.current)
         idxLabelRef.current.textContent = String(idx + 1).padStart(2, '0')
       activeIdxRef.current = idx
-    }
-
-    /* ── Progress bar — updated on every scroll tick via rAF ────── */
-    let rafId = null
-    const onScroll = () => {
-      if (rafId) return
-      rafId = requestAnimationFrame(() => {
-        rafId = null
-        const max = el.scrollWidth - el.clientWidth
-        const p   = max > 0 ? el.scrollLeft / max : 0
-        if (fillRef.current)
-          fillRef.current.style.transform = `scaleX(${p})`
-      })
+      elapsed = 0 // nouvelle slide → le minuteur repart de zéro
     }
 
     /* ── IntersectionObserver — single threshold, fires rarely ─── */
@@ -124,12 +119,91 @@ function MobileSlider() {
       { root: el, threshold: 0.5 }
     )
     slides.forEach(s => io.observe(s))
-    el.addEventListener('scroll', onScroll, { passive: true })
+
+    /* ── prefers-reduced-motion : pas d'autoplay, la barre reflète
+         la position de scroll (comportement d'origine) ──────────── */
+    if (reduceMotion) {
+      let rafId = null
+      const onScroll = () => {
+        if (rafId) return
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          const max = el.scrollWidth - el.clientWidth
+          const p   = max > 0 ? el.scrollLeft / max : 0
+          if (fillRef.current)
+            fillRef.current.style.transform = `scaleX(${p})`
+        })
+      }
+      el.addEventListener('scroll', onScroll, { passive: true })
+      return () => {
+        io.disconnect()
+        el.removeEventListener('scroll', onScroll)
+        if (rafId) cancelAnimationFrame(rafId)
+      }
+    }
+
+    /* ── Autoplay — la barre se remplit en AUTOPLAY_MS puis passe à
+         la slide suivante (boucle). Toute interaction remet le
+         compteur à zéro : le défilement auto n'agit que si
+         l'utilisateur ne touche à rien. ──────────────────────────── */
+    const AUTOPLAY_MS = 5000
+    let touching = false   // doigt posé sur le carrousel
+    let inView   = false   // carrousel visible à l'écran (pause hors viewport / desktop)
+    let lastTs   = null
+    let rafId    = null
+
+    const centerOn = (idx) => {
+      const slide = slides[idx]
+      if (!slide) return
+      // Scroll horizontal du slider uniquement — jamais de scroll vertical
+      // de la page (contrairement à scrollIntoView)
+      const left = slide.getBoundingClientRect().left
+        - el.getBoundingClientRect().left + el.scrollLeft
+        - (el.clientWidth - slide.offsetWidth) / 2
+      el.scrollTo({ left, behavior: 'smooth' })
+    }
+
+    const tick = (now) => {
+      rafId = requestAnimationFrame(tick)
+      const dt = lastTs === null ? 0 : Math.min(now - lastTs, 100) // cap : onglet caché, gros lags
+      lastTs = now
+      if (touching || !inView || document.hidden) return
+      elapsed += dt
+      const p = Math.min(elapsed / AUTOPLAY_MS, 1)
+      if (fillRef.current)
+        fillRef.current.style.transform = `scaleX(${p})`
+      if (p >= 1) {
+        elapsed = 0
+        centerOn((activeIdxRef.current + 1) % slides.length)
+      }
+    }
+    rafId = requestAnimationFrame(tick)
+
+    // Interaction utilisateur (swipe, tap sur un dot…) → pause + reset
+    const onPointerDown = () => {
+      touching = true
+      elapsed = 0
+      if (fillRef.current) fillRef.current.style.transform = 'scaleX(0)'
+    }
+    const onPointerUp = () => { touching = false }
+    root.addEventListener('pointerdown', onPointerDown, { passive: true })
+    window.addEventListener('pointerup', onPointerUp, { passive: true })
+    window.addEventListener('pointercancel', onPointerUp, { passive: true })
+
+    // Pause quand le carrousel sort du viewport (ou display:none sur desktop)
+    const visIo = new IntersectionObserver(
+      ([entry]) => { inView = entry.isIntersecting },
+      { threshold: 0.5 }
+    )
+    visIo.observe(root)
 
     return () => {
       io.disconnect()
-      el.removeEventListener('scroll', onScroll)
+      visIo.disconnect()
       if (rafId) cancelAnimationFrame(rafId)
+      root.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerUp)
     }
   }, [])
 
@@ -141,7 +215,7 @@ function MobileSlider() {
   }, [])
 
   return (
-    <div className="hpr-mobile" id="projects">
+    <div ref={rootRef} className="hpr-mobile" id="projects">
 
       {/* ── Slider ─────────────────────────────────────────────── */}
       <div ref={sliderRef} className="hpr-mobile__slider">
